@@ -4,16 +4,17 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #
-
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# Desktop Config chage
 
 set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:inconsolata 8
+font pango:inconsolata 14
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -30,13 +31,13 @@ font pango:inconsolata 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec /usr/bin/termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym  XF86LaunchA exec --no-startup-id rofi -show drun  -display-drun 'App ' -window-format '{n}' -fake-transparency -theme $script/Rofi-Scripts/Rofi.rasi
+bindsym Super_L exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -44,32 +45,41 @@ bindsym  XF86LaunchA exec --no-startup-id rofi -show drun  -display-drun 'App ' 
 
 #Declare Colors Variable
 
+#for Statusbar
 set $bg-color 	         #000000
 set $inactive-bg-color   #000000
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
-set $urgent-bg-color     #000000
+set $urgent-bg-color     #ff0066
+
+#for client
+set $Cbg-color 	         #000000
+set $Cinactive-bg-color   #000000
+set $Ctext-color          #ff9966
+set $Cinactive-text-color #ffffff
+set $Curgent-bg-color     #e60000
+
+# Scrachpad Settings
+
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
 
 #Set Script Derecotry
 
-set $script /home/strixx/Scripts/
+set $script /home/strixx/Scripts/i3-scripts
 
+# Window Color
+#                       border              background         text                 indicator
+client.focused          $Cbg-color           $Cbg-color          $Ctext-color          #00ff00
+client.unfocused        $Cinactive-bg-color  $Cinactive-bg-color $Cinactive-text-color #00ff00
+client.focused_inactive $Cinactive-bg-color  $Cinactive-bg-color $Cinactive-text-color #00ff00
+client.urgent 		$Curgent-bg-color    $Curgent-bg-color   $Ctext-color 	    #00ff00
 # Rename Workspace With Dialog
 
+bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
 bindsym $mod+Shift+n exec i3-input -F \
 'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':%s"' \
 -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': '
-
-  # change focus
-  bindsym $mod+h focus left
-  bindsym $mod+j focus down
-  bindsym $mod+k focus up
-  bindsym $mod+l focus right
-
-  # bindsym --release $mod+h exec i3-msg border pixel 0
-  # bindsym --release $mod+j exec i3-msg border pixel 0
-  # bindsym --release $mod+k exec i3-msg border pixel 0
-  # bindsym --release $mod+l exec i3-msg border pixel 0
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -78,15 +88,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left; 
-bindsym $mod+Shift+j move down; 
-bindsym $mod+Shift+k move up;
-bindsym $mod+Shift+l move right;
-
-# bindsym --release $mod+Shift+h exec i3-msg border pixel 0
-# bindsym --release $mod+Shift+j exec i3-msg border pixel 0
-# bindsym --release $mod+Shift+k exec i3-msg border pixel 0
-# bindsym --release $mod+Shift+l exec i3-msg border pixel 0
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -117,19 +122,6 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# Colors
-
-# class                 border  backgr. text    indicator child_border
-client.focused          #ff0000 #ff0000 #ffffff #0077ff   #ff0000
-client.focused_inactive #ff0000 #5f676a #ffffff #484e50
-client.unfocused        #ff0000 #222222 #888888 #000000   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
-
-# Enable smart borders
-
-smart_borders on
-
 # focus the child container
 #bindsym $mod+d focus child
 
@@ -138,21 +130,21 @@ smart_borders on
 set $ws1 "1:Desktop"
 set $ws2 "2:Terminal"
 set $ws3 "3:Browser"
-set $ws4 "4:WebWork"
-set $ws5 "5:Email"
-set $ws9 "9:Notes"
+set $ws4 "4:NVIM"
+set $ws5 "5:WebWork"
+set $ws6 "6:Email"
+set $ws9 "9:Performance"
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1 ; exec $script/i3-scripts/i3/get-workspacename
-bindsym $mod+2 workspace $ws2 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+3 workspace $ws3 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+4 workspace $ws4 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+5 workspace $ws5 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+6 workspace number 6 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+7 workspace number 7 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+8 workspace number 8 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+9 workspace $ws9 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+0 workspace number 9 ; exec $script/i3-scripts/get-workspacename
+bindsym $mod+1 workspace $ws1 ; exec $script/get-workspacename
+bindsym $mod+2 workspace $ws2 ; exec $script/get-workspacename
+bindsym $mod+3 workspace $ws3 ; exec $script/get-workspacename
+bindsym $mod+4 workspace $ws4 ; exec $script/get-workspacename
+bindsym $mod+5 workspace $ws5 ; exec $script/get-workspacename
+bindsym $mod+6 workspace $ws6 ; exec $script/get-workspacename
+bindsym $mod+7 workspace number 7 ; exec $script/get-workspacename
+bindsym $mod+8 workspace number 8 ; exec $script/get-workspacename
+bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -160,28 +152,40 @@ bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 #i3-gaps
+
 gaps inner 10
 gaps outer 5
-#smart Gaps
+
+# Specific Workspace Gapps
+
+workspace $ws3 gaps inner 0
+workspace $ws3 gaps outer 0
 
 #Hide Borders and Title
+
 for_window [class="^.*"] border pixel 0
 
-
+# Enable Screenshot
 
 bindsym Mod1+BackSpace exec "scrot"
+
+# Sticky Window
+
+bindsym $mod+Shift+s sticky toggle
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+r mode "resize"
 
@@ -195,9 +199,8 @@ status_command py3status -c ~/.i3/i3status.conf
 height 30
 font pango:inconsolata 12, Awesome 10
 separator_symbol " "
-mode hide
 hidden_state hide
-modifier Mod1
+modifier $mod
 strip_workspace_numbers no
 colors {
 
@@ -215,10 +218,10 @@ bindsym $mod+b bar mode toggle
 
 focus_follows_mouse no
 
-# Toggle Sticky Floating Window
-bindsym $mod+Shift+s sticky toggle
 
+## Rules For Applications and Scripts
 # Floating Rules
+
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -226,31 +229,33 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [title="Set password for your browser"] floating enable
-for_window [class="Oblogout"] floating enable
 
-# Set Window Startup On specific Workspace
+## Set Window Startup On specific Workspace
 
-for_window [title="Notes"] move container to workspace 9:Notes
-for_window [title="mutt-specified"] move container to workspace 5:Email
+for_window [title="mutt-specified"] move container to workspace 6:Email
 
-#Startup Scripts
+#nvim specific Workspaces
+for_window [title="nvim_default"] move container to workspace 4:NVIM
+for_window [class="Firefox"] move container to workspace 3:Browser
 
-exec --no-startup-id nm-applet &
-exec --no-startup-id mpd &
-exec --no-startup-id volumeicon &
-exec --no-startup-id compton -b &
-exec --no-startup-id redshift &
+
+#Startup Scripts & Apllications
+
 exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
-exec --no-startup-id locate --null * | xargs -r0 sh -c 'for i do [ -d "$i" ] && printf "%s\n" "$i"; done' sh {} +. {} | egrep -v "cache|log|functions|icons|odules|help|fonts" > ~/.vifm/fzf-read/locate
+exec --no-startup-id nm-applet &
+exec --no-startup-id dunst &
+exec --no-startup-id mpd &
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id volumeicon &
+exec --no-startup-id compton -b & syncthing -no-browser &
+exec --no-startup-id redshift &
+exec --no-startup-id sleep 5 && nvimqt-call default
+exec --no-startup-id sleep 2 && firefox
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
 
 # Workspaces Layout
 
 #AutoStart Apps To Specific Workspace
-exec --no-startup-id termite -t 'Notes' -e "nvim -c 'edit ~/Documents/notes' -c 'startinsert'"
-exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/pasqyra3d<enter><change-folder>\!<enter>'"
-exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/novelepubs<enter><change-folder>\!<enter>'"
-exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/kidbuuu007<enter><change-folder>\!<enter>'"
 
 #Bind Functions Keys
 
@@ -258,10 +263,6 @@ exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-comman
 
     bindsym XF86LaunchB exec --no-startup-id "disableCore && i=$(< /sys/devices/system/cpu/cpu1/online) && if [ $i -eq 0 ]; then  notify-send.sh --replace-file=/tmp/mode 'PowerSave' -a 'Mode'; else notify-send.sh --replace-file=/tmp/mode 'Performance' -a 'Mode' ;fi &"
 
-  # Brightness Control Keys
-
-    bindsym XF86MonBrightnessUp exec --no-startup-id incrase-backlight
-    bindsym XF86MonBrightnessDown exec --no-startup-id decrase-backlight
 
   # Audio Bind
 
@@ -277,6 +278,11 @@ exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-comman
 
 # Vim Like Keybindings for i3
 
+  # change focus
+  bindsym $mod+h focus left
+  bindsym $mod+j focus down
+  bindsym $mod+k focus up
+  bindsym $mod+l focus right
 
   # resize window (you can also use the mouse for that)
   mode "resize" {
@@ -300,4 +306,3 @@ exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-comman
           bindsym Return mode "default"
           bindsym Escape mode "default"
   }
-bindsym $mod+Shift+e exec oblogout
