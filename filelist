@@ -1,8 +1,20 @@
 .config/compton.conf
 .config/dunst
 
+
 .i3:Strixx_Desktop
 .zshrc:Strixx_Desktop
+.config/nvim/init.vim:Strixx_Desktop
+.config/nvim/ginit.vim:Strixx_Desktop
+.config/nvim/bookmarks:Strixx_Desktop
+.config/nvim/Project-Path:Strixx_Desktop
+.config/nvim/plugins/local:Strixx_Desktop
+
 
 .i3:Strixx_Laptop
 .zshrc:Strixx_Laptop
+.config/nvim/init.vim:Strixx_Laptop
+.config/nvim/ginit.vim:Strixx_Laptop
+.config/nvim/bookmarks:Strixx_Laptop
+.config/nvim/Project-Path:Strixx_Laptop
+.config/nvim/plugins/local:Strixx_Laptop
