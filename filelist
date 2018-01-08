@@ -7,9 +7,9 @@ Scripts
 .config/nvim/plugins/local
 .config/nvim/init.vim
 .config/nvim/ginit.vim
+.zshrc
 
 .i3:Strixx_Desktop
-.zshrc:Strixx_Desktop
 .config/nvim/bookmarks:Strixx_Desktop
 .config/nvim/Project-Path:Strixx_Desktop
 .zprofile:Strixx_Desktop
@@ -17,7 +17,6 @@ Scripts
 
 
 .i3:Strixx_Laptop
-.zshrc:Strixx_Laptop
 .config/nvim/bookmarks:Strixx_Laptop
 .config/nvim/Project-Path:Strixx_Laptop
 .mpd:Strixx_Laptop

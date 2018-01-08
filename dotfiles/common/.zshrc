@@ -5,17 +5,12 @@
   export ZSH=~/.oh-my-zsh
   export VISUAL=nvim
   export EDITOR="$VISUAL"
-  export NVIM_SERVER
-  export PATH=$PATH':/home/strixx/.gem/ruby/2.4.0/bin'
-
-# Enable Vi Mode
 
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="geometry/geometry"
-# ZSH_THEME="ys"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -87,46 +82,11 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-source $ZSH/alias/zalias_default
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-### FTP Server Alias ###
-
-#Alphasolutions
-
-#alias ftpconnect-alphasolutions='lftp -u andrea@alphasolutions-al.com alphasolutions-al.com' #Connects to alphasolutions FTP server
-
-#              #Connect to alphasolutions FTP server and download to default folder (~/FTP/)
-#alias ftpconnect-alphasolutions-download="lftp -c ' open -u andrea@alphasolutions-al.com alphasolutions-al.com
-#                mirror -P5 -c -e -n / /home/strixx/FTP/alphasolutions
-#                bye
-#              '"
-#              #Connect to alphasolutions FTP server and upload from default folder (~/FTP/)
-#alias ftpconnect-alphasolutions-upload="lftp -c ' open -u andrea@alphasolutions-al.com alphasolutions-al.com
-#                mirror -R -P5 -c -e -n /home/strixx/FTP/alphasolutions /
-#                bye
-#              '"
-
-#alias ftpconnect-tregumakinave-upload="lftp -c 'open -u server179.web-hosting.com andrea@tregumakinave.al
-#mirror -R -P5 -n /home/strixx/Projects/Web-Projects/tregumakinave/understrap /public_html/wp-content/themes/understrap --ignore-time --exclude node_modules/ --exclude .git/
-#bye
-#'"
-##Novelepubs
-
-#alias ftpconnect-novelepubs='lftp -u andrea@novelepubs.com ftp.novelepubs.xyz' #Connects to novelepubs FTP server
-
-#              #Connect to novelepubs FTP server and download to default folder (~/FTP/)
-#alias ftpconnect-novelepubs-download="lftp -c ' open -u andrea@novelepubs.com ftp.novelepubs.xyz
-#                mirror -P5 --use-cache -c -e -n / /home/strixx/FTP/novelepubs
-#                bye
-#              '"
-#              #Connect to novelepubs FTP server and upload from default folder (~/FTP/)
-#alias ftpconnect-novelepubs-upload="lftp -c ' open -u andrea@novelepubs.com ftp.novelepubs.xyz
-#                mirror --exclude '.*/' --include 'wp-content/themes/' -R --parallel=5 -c -e -n /home/strixx/FTP/novelepubs /
-#                bye
-#              '"
-
-
+source ~/.oh-my-zsh/alias/zalias_default
 
 
 #
@@ -151,6 +111,7 @@ fh() {
 # fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
 
 # fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
+unalias z
 d() {
     [ $# -gt 0 ] && fasd_cd -d "$*" && return
     local dir
@@ -163,7 +124,6 @@ f() {
     local file
     file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && dir=$(dirname "$file") && cd $dir && Filex=$(echo $file | awk -F/ '{print $NF}' ) && echo $Filex
 }
-
 
 # MPD FZF Scripts
 # MPD FTW
@@ -227,6 +187,9 @@ fmC() {
   mpc -p 6699 clear
   fm
 }
+
+alias n='nvim'
+alias nb='nvim /home/strixx/.config/nvim/bookmarks'
 nf() {
   nvim $(cat /home/strixx/.vifm/fzf-read/locate-file | fzf)
 }
