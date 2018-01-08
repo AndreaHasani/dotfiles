@@ -4,7 +4,7 @@
 .ncmpcpp/bindings
 .ncmpcpp/config
 Scripts
-
+.config/nvim/plugins/local
 
 .i3:Strixx_Desktop
 .zshrc:Strixx_Desktop
@@ -12,7 +12,6 @@ Scripts
 .config/nvim/ginit.vim:Strixx_Desktop
 .config/nvim/bookmarks:Strixx_Desktop
 .config/nvim/Project-Path:Strixx_Desktop
-.config/nvim/plugins/local:Strixx_Desktop
 .zprofile:Strixx_Desktop
 .mpd:Strixx_Desktop
 
@@ -20,7 +19,7 @@ Scripts
 .i3:Strixx_Laptop
 .zshrc:Strixx_Laptop
 .config/nvim/init.vim:Strixx_Laptop
-.config/nvim/ginit.vim:Strixx_Laptop
+
 .config/nvim/bookmarks:Strixx_Laptop
 .config/nvim/Project-Path:Strixx_Laptop
-.config/nvim/plugins/local:Strixx_Laptop
+.mpd:Strixx_Laptop
