@@ -67,8 +67,9 @@ endif
 call dein#add('mattn/emmet-vim')
 call dein#add('Raimondi/delimitMate')
 call dein#add('jiangmiao/auto-pairs')
-call dein#add('maralla/completor.vim')
+" call dein#add('maralla/completor.vim')
 call dein#add('metakirby5/codi.vim')
+call dein#add('ervandew/supertab')
 
 " Automaticly Features Plugin
 call dein#add('jamessan/vim-gnupg')
@@ -128,10 +129,10 @@ endif
 
 """ Plugins Config
 
-" Completor Plugin Config
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+" " Completor Plugin Config
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " BufTabline Config
 let g:buftabline_show = 1
