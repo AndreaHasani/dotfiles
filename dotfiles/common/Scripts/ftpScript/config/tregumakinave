@@ -1,0 +1,6 @@
+USER=andrea@tregumakinave.al
+PASS=`pass multi-line/ftp/tregumakinave.al`
+HOST=server179.web-hosting.com
+Local=/home/strixx/Projects/Web-Projects/tregumakinave/understrap
+Remote=/public_html/wp-content/themes/understrap
+Working=/opt/lampp/htdocs/wordpress/wp-content/themes/understrap

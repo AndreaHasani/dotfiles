@@ -1,0 +1,33 @@
+#!/bin/bash
+echo "Script for sync between computers with syncthing"
+ac_adapter=$(acpi -a | cut -d' ' -f3 | cut -d- -f1)
+x=0
+# Check if server is pingable
+while [ $x -ne 1 ]; do
+    ping -q -c 5 192.168.0.11 2>&1 > /dev/null
+    if [ $? -eq 0 ]; then
+	echo "-----------------"
+	echo "Server Up";
+	x=1;
+    else
+	echo "-----------------"
+	echo "Server Down"
+	echo "Script Will Exit"
+	sleep 2s
+	exit 1
+    fi
+done
+
+# Check to see if computer is on battery
+battery=`acpi -b | sed 's/^[^,]*, \([0-9]*\).*$/\1/'`
+#Check if battery is below 15 and quits script if true
+if (( 0<=$battery && $battery<=15 )); then
+   echo "Battery Critic Level"
+   echo "Quiting sync scipt"
+  exit 1
+fi
+zip -r ~/Sync/StoringBackup/Backup.zip ~/Sync/Temp &
+sleep 2m
+syncthing &
+sleep 8m
+killall syncthing

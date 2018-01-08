@@ -1,0 +1,27 @@
+#! /bin/sh
+
+focus="nvim_$1"
+title="\"nvim_$1\""
+if [ ! -d "/tmp/nvim_servers" ];then
+    mkdir /tmp/nvim_servers
+fi
+if [ $# -eq 0 ];then
+    echo "File aruments missing, pass them like this"
+    echo "nvimqt-call file1 file2 file3 etc."
+    echo ""
+    echo "-- Avalible Servers --"
+    echo "$(ls /tmp/nvim_servers/)"
+    exit 1
+fi
+if [ ! -e /tmp/nvim_servers/$1 ]; then
+    nvim-qt -- -c "call serverstart('/tmp/nvim_servers/$1')" -c "let &titlestring='$title'" &>/dev/null
+    while [ ! -e /tmp/nvim_servers/$1 ];do
+	sleep 1
+    done
+fi
+nvr --servername /tmp/nvim_servers/$1 --remote "${@:2}" -c "set title" && i3-msg '[title='$focus'] focus' &>/dev/null
+if (( $# > 1 ));then
+    echo 'Opening' ${@:2} 'and switching to nvim-qt workspace.'
+else
+    echo 'Opening server' $1 'and switching to nvim-qt workspace.'
+fi

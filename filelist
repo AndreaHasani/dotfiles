@@ -1,5 +1,9 @@
 .config/compton.conf
 .config/dunst
+.oh-my-zsh/alias/zalias_default
+.ncmpcpp/bindings
+.ncmpcpp/config
+Scripts
 
 
 .i3:Strixx_Desktop
@@ -9,6 +13,8 @@
 .config/nvim/bookmarks:Strixx_Desktop
 .config/nvim/Project-Path:Strixx_Desktop
 .config/nvim/plugins/local:Strixx_Desktop
+.zprofile:Strixx_Desktop
+.mpd:Strixx_Desktop
 
 
 .i3:Strixx_Laptop

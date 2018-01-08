@@ -1,0 +1,8 @@
+#!/bin/sh
+
+#Kill Dunst First To remove notifications that are open
+workspacename="$(i3-msg -t get_workspaces \
+  | jq '.[] | select(.focused==true).name' \
+  | cut -d"\"" -f2 | cut -f 2 -d ':')"
+
+notify-send.sh --replace-file=/tmp/workspacename $workspacename -a 'Workspace' -t 1000

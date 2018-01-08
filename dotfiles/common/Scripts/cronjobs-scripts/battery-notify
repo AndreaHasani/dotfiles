@@ -1,0 +1,12 @@
+#! /bin/bash
+
+export DISPLAY=:0
+battery=`acpi -b | sed 's/^[^,]*, \([0-9]*\).*$/\1/'`
+if (( 80<=$battery && $battery<=100 )); then
+    notify-send.sh $battery -a Battery -u low -R /tmp/battery -t 5000
+elif (( 26<=$battery && $battery<=79 )); then
+    notify-send.sh $battery -a Battery -u normal -R /tmp/battery -t 5000
+elif (( 0<=$battery && $battery<=25 )); then
+    notify-send.sh $battery -a Battery -u critical -R /tmp/battery -t 5000
+fi
+

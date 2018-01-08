@@ -1,0 +1,5 @@
+#!/bin/bash
+
+i="$(amixer set Master toggle | awk '/[0-9]+%/ {print $6}' | head -n1 | tr -d [])" &&
+if [ $i = "on" ]; then notify-send.sh --replace-file=/tmp/volumenotification -a 'Volume' 'On';
+else  notify-send.sh --replace-file=/tmp/volumenotification -a 'Volume' 'Off';fi

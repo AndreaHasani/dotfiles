@@ -1,0 +1,12 @@
+#! /bin/sh
+
+pid=`ps -aux | grep nvim-qt | sed -nr "\/bin\/nvim-qt\ --nofork\ --\ -c\ call\ serverstart\('\/tmp\/default'\)/p"`
+if [[ -z $pid ]]; then
+if [ -e /tmp/default ];then
+    rm /tmp/default
+fi
+nvim-qt -- -c "call serverstart('/tmp/default')" &>/dev/null
+sleep 2
+else
+    echo "nvim-qt server up and running"
+fi

@@ -1,0 +1,3 @@
+#! /bin/sh
+
+nvimqt-call filezilla $1

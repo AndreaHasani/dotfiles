@@ -1,0 +1,3 @@
+#! /bin/sh
+pid="\"$1\""
+i3-msg '[class='$pid']' focus &>/dev/null

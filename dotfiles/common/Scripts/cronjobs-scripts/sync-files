@@ -1,0 +1,53 @@
+#!/bin/bash
+
+battery=`acpi -b | sed 's/^[^,]*, \([0-9]*\).*$/\1/'`
+#Check if battery is below 15 and quits script if true
+if (( 0<=$battery && $battery<=15 )); then
+   echo "Battery Critic Level"
+   echo "Quiting sync scipt"
+  exit 1
+fi
+Temp=/home/strixx/Sync/Temp
+SyncFolder=/home/strixx/Sync/SyncFolder
+GIT=/home/strixx/GIT/configs/
+
+# Backup Config
+rsync -avz --exclude 'undoHistory' --exclude '.git' --exclude '.cache' /home/strixx/.config/nvim $Temp/.config/ &
+rsync -avz /home/strixx/.config/compton.conf $Temp/.config/ &
+rsync -avz /home/strixx/.config/dunst $Temp/.config/ &
+rsync -avz /home/strixx/.config/syncthing $Temp/.config/ &
+
+rsync -avz /home/strixx/.zsh $Temp/ &
+rsync -avz /home/strixx/.zshrc $Temp/ &
+rsync -avz /home/strixx/.vifm $Temp/ &
+rsync -avz /home/strixx/.mpd $Temp/ &
+rsync -avz /home/strixx/.mutt $Temp/ &
+rsync -avz /home/strixx/.muttrc $Temp/ &
+rsync -avz /home/strixx/.i3 $Temp/ &
+rsync -avz /home/strixx/.password-store $Temp/ &
+
+#Git Config
+
+rsync -avz --exclude 'undoHistory' --exclude '.git' --exclude '.cache' /home/strixx/.config/nvim $GIT/.config/ &
+rsync -avz /home/strixx/.config/compton.conf $GIT/.config/ &
+rsync -avz /home/strixx/.config/dunst $GIT/.config/ &
+rsync -avz /home/strixx/.config/syncthing $GIT/.config/ &
+
+rsync -avz /home/strixx/.zsh $GIT/ &
+rsync -avz /home/strixx/.zshrc $GIT/ &
+rsync -avz /home/strixx/.vifm $GIT/ &
+rsync -avz /home/strixx/.mpd $GIT/ &
+rsync -avz /home/strixx/.mutt $GIT/ &
+rsync -avz /home/strixx/.muttrc $GIT/ &
+rsync -avz /home/strixx/.i3 $GIT/ &
+
+# Sync scripts
+rsync -avz /home/strixx/Documents/Scripts $Temp/Documents/ &
+
+# Sync On 3 devices
+rsync -avz /home/strixx/.password-store $SyncFolder/ &
+
+#Sync for git
+cd ~/Sync/Temp &&
+ls -la > ../StorBackup/Paths.txt
+exit 1

@@ -1,0 +1,19 @@
+#! /bin/sh
+
+if [ $# -eq 0 ];then
+    echo "File aruments missing, pass them like this"
+    echo "nr servername file1 file2 file3"
+echo ""
+echo "-- Avalible Servers --"
+cd /tmp/nvim_servers
+echo "$(ls /tmp/nvim_servers/)"
+    exit 1
+fi
+if [ ! -d "/tmp/nvim_servers" ];then
+    mkdir /tmp/nvim_servers
+fi
+focus="nvim_$1"
+title="\"nvim_$1\""
+nvr --servername /tmp/nvim_servers/$1 --remote-silent ${@:2} -c 'let &titlestring='$title''
+focus="nvim_$1"
+i3-msg '[title='$focus'] focus' &>/dev/null
