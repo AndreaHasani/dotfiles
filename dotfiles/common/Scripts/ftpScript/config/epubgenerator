@@ -1,0 +1,7 @@
+USER=andrea@tregumakinave.al
+PASS=`pass multi-line/ftp/tregumakinave.al | head -n1`
+HOST=server179.web-hosting.com
+Local=/home/strixx/Projects/Web-Projects/epubgenerator/
+Remote=/generator.novelepubs.com/
+Working=/srv/http/epubgenerator/
+
