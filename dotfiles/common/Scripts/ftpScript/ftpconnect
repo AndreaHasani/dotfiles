@@ -4,12 +4,13 @@ echo "---------------------------------------------------------------"
 cd /home/strixx/Scripts/ftpScript
 function passArguments () {
     local has_c=0
-    while getopts 'duc:l' opt "$@"; do
+    local sync=0
+    while getopts 'duc:sl' opt "$@"; do
 	case $opt in
 	    c)
 		# Config File Loading
 		has_c=1
-		source ./config/$OPTARG
+		source $OPTARG
 		echo ""
 		echo "Testing ftp response"
 		x=0
@@ -31,28 +32,32 @@ function passArguments () {
 			sleep 60s
 		    fi
 		done
-		shift
 		;;
 	    l)
 		echo "Avalible Configs for -c"
 		echo ""
 		echo "$(ls /home/strixx/Scripts/ftpScript/config | nl)"
-		# Config File Loading
 		exit 1
 		shift
+		;;
+	    s)
+		$sync=1
 		;;
 	    d)
 		if [ ! $has_c -ne 0 ];then
 		    return
 		fi
 		echo "----------------------------"
-		echo "Download Sync"
+		echo "Download "
 		python2 ~/Scripts/ftpScript/lftp_mirror.py shell $HOST $Remote $Local -l $USER $PASS -en -P 5 -q --no-email --exclude 'node_modules/' --exclude '.git/'
 		echo "Download Finished"
 		echo "----------------------------"
+		echo $sync
+		if [ ! $sync -eq 1 ]; then
 		echo "Running rsync";
 		rsync -avz -q --delete $Local $Working &&
 		    echo "RSync Finished";
+	    fi
 		exit 1
 		;;
 	    u)
@@ -60,10 +65,12 @@ function passArguments () {
 		    return
 		fi
 		echo "----------------------------"
+		if [ $sync -eq 1 ];then
 		echo "Running rsync";
 		rsync -avz -q --delete $Working $Local &&
 		    echo "RSync Finished";
-		echo "Upload Sync"
+	    fi
+		echo "Upload"
 		python2 ~/Scripts/ftpScript/lftp_mirror.py shell $HOST $Remote $Local -l $USER $PASS -enr -P 5 -q --no-email --exclude 'node_modules/' --exclude '.git/'
 		echo "Upload Finished"
 		exit 1

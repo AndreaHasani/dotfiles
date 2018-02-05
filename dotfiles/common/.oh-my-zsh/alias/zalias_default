@@ -3,6 +3,10 @@
 alias lfa="ls -la | egrep -v '^d' --color=auto"
 alias lda="ls -la | egrep '^d' --color=auto"
 
+# Poweroff and suspend alias
+
+alias suspend="systemctl suspend"
+alias shutdown="poweroff"
 
 
 ### Youtube Download Alias ###

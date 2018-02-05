@@ -1,5 +1,5 @@
 USER=andrea@tregumakinave.al
-PASS=`pass multi-line/ftp/tregumakinave.al`
+PASS=`pass multi-line/ftp/tregumakinave.al | head -n1`
 HOST=server179.web-hosting.com
 Local=/home/strixx/Projects/Web-Projects/tregumakinave/understrap
 Remote=/public_html/wp-content/themes/understrap
