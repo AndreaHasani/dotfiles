@@ -212,7 +212,7 @@ endfunction
 
 " " Lightline Plugin Config
 let g:lightline = {
-	    \ 'colorscheme': 'one',
+	    \ 'colorscheme': 'wombat',
 	    \ 'active': {
 	    \   'left': [ ['mode', 'paste'],
 	    \             ['fugitive', 'readonly', 'filename','bufnum', 'modified'] ],

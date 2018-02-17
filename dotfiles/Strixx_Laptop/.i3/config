@@ -30,7 +30,7 @@ font pango:inconsolata 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -50,38 +50,54 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #000000
 
+
+# Scrachpad Settings
+
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
+
 #Set Script Derecotry
 
 set $script /home/strixx/Scripts/
 
+
+# Window Color
+# class                 border  backgr. text    indicator child_border
+client.focused          #000000 #000000 #ff0000 #0077ff   #ff0000
+client.focused_inactive #000000 #5f676a #ffffff #484e50
+client.unfocused        #000000 #000000 #ffffff #000000   #222222
+client.urgent           #2f343a #ff0000 #ffffff #900000   #900000
+client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
+
 # Rename Workspace With Dialog
 
+bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
 bindsym $mod+Shift+n exec i3-input -F \
-'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':%s"' \
--P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': '
+	    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':%s"' \
+	    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': '
 
-  # change focus
-  bindsym $mod+h focus left
-  bindsym $mod+j focus down
-  bindsym $mod+k focus up
-  bindsym $mod+l focus right
+# change focus
+		    bindsym $mod+h focus left
+		    bindsym $mod+j focus down
+		    bindsym $mod+k focus up
+		    bindsym $mod+l focus right
 
-  # bindsym --release $mod+h exec i3-msg border pixel 0
-  # bindsym --release $mod+j exec i3-msg border pixel 0
-  # bindsym --release $mod+k exec i3-msg border pixel 0
-  # bindsym --release $mod+l exec i3-msg border pixel 0
+# bindsym --release $mod+h exec i3-msg border pixel 0
+# bindsym --release $mod+j exec i3-msg border pixel 0
+# bindsym --release $mod+k exec i3-msg border pixel 0
+# bindsym --release $mod+l exec i3-msg border pixel 0
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+		    bindsym $mod+Left focus left
+		    bindsym $mod+Down focus down
+		    bindsym $mod+Up focus up
+		    bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left;
-bindsym $mod+Shift+j move down;
-bindsym $mod+Shift+k move up;
-bindsym $mod+Shift+l move right;
+		    bindsym $mod+Shift+h move left;
+	    bindsym $mod+Shift+j move down;
+	    bindsym $mod+Shift+k move up;
+	    bindsym $mod+Shift+l move right;
 
 # bindsym --release $mod+Shift+h exec i3-msg border pixel 0
 # bindsym --release $mod+Shift+j exec i3-msg border pixel 0
@@ -89,125 +105,130 @@ bindsym $mod+Shift+l move right;
 # bindsym --release $mod+Shift+l exec i3-msg border pixel 0
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+	    bindsym $mod+Shift+Left move left
+	    bindsym $mod+Shift+Down move down
+	    bindsym $mod+Shift+Up move up
+	    bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+v split h
+	    bindsym $mod+Shift+v split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+	    bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+	    bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+	    bindsym $mod+s layout stacking
+	    bindsym $mod+w layout tabbed
+	    bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+	    bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+	    bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+	    bindsym $mod+a focus parent
 
 # Colors
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #ff0000 #ff0000 #ffffff #0077ff   #ff0000
-client.focused_inactive #ff0000 #5f676a #ffffff #484e50
-client.unfocused        #ff0000 #222222 #888888 #000000   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
+	    client.focused          #ff0000 #ff0000 #ffffff #0077ff   #ff0000
+	    client.focused_inactive #ff0000 #5f676a #ffffff #484e50
+	    client.unfocused        #ff0000 #222222 #888888 #000000   #222222
+	    client.urgent           #2f343a #900000 #ffffff #900000   #900000
+	    client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
 
 # Enable smart borders
 
-smart_borders on
+	    smart_borders on
 
 # focus the child container
 #bindsym $mod+d focus child
 
 # Workspace Variables
 
-set $ws1 "1:Desktop"
-set $ws2 "2:Terminal"
-set $ws3 "3:Browser"
-set $ws4 "4:WebWork"
-set $ws5 "5:Email"
-set $ws9 "9:Notes"
+	    set $ws1 "1:Desktop"
+	    set $ws2 "2:Terminal"
+	    set $ws3 "3:Browser"
+	    set $ws4 "4:WebWork"
+	    set $ws5 "5:Email"
+	    set $ws9 "9:Notes"
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1 ; exec $script/i3-scripts/i3/get-workspacename
-bindsym $mod+2 workspace $ws2 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+3 workspace $ws3 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+4 workspace $ws4 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+5 workspace $ws5 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+6 workspace number 6 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+7 workspace number 7 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+8 workspace number 8 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+9 workspace $ws9 ; exec $script/i3-scripts/get-workspacename
-bindsym $mod+0 workspace number 9 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+1 workspace $ws1 ; exec $script/i3-scripts/i3/get-workspacename
+	    bindsym $mod+2 workspace $ws2 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+3 workspace $ws3 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+4 workspace $ws4 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+5 workspace $ws5 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+6 workspace number 6 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+7 workspace number 7 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+8 workspace number 8 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+9 workspace $ws9 ; exec $script/i3-scripts/get-workspacename
+	    bindsym $mod+0 workspace number 9 ; exec $script/i3-scripts/get-workspacename
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace number 10
+	    bindsym $mod+Shift+1 move container to workspace $ws1
+	    bindsym $mod+Shift+2 move container to workspace $ws2
+	    bindsym $mod+Shift+3 move container to workspace $ws3
+	    bindsym $mod+Shift+4 move container to workspace $ws4
+	    bindsym $mod+Shift+5 move container to workspace $ws5
+	    bindsym $mod+Shift+6 move container to workspace number 6
+	    bindsym $mod+Shift+7 move container to workspace number 7
+	    bindsym $mod+Shift+8 move container to workspace number 8
+	    bindsym $mod+Shift+9 move container to workspace $ws9
+	    bindsym $mod+Shift+0 move container to workspace number 10
 
 #i3-gaps
-gaps inner 10
-gaps outer 5
-#smart Gaps
+	    gaps inner 10
+	    gaps outer 5
+
+
+# Specific Workspace Gapps
+
+	    workspace $ws3 gaps inner 0
+	    workspace $ws3 gaps outer 0
 
 #Hide Borders and Title
-for_window [class="^.*"] border pixel 0
+	    for_window [class="^.*"] border pixel 1
 
 
 
-bindsym Mod1+BackSpace exec "scrot"
+	    bindsym Mod1+BackSpace exec "scrot"
 # reload the configuration file
-bindsym $mod+Shift+c reload
+	    bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+	    bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 
-bindsym $mod+r mode "resize"
+	    bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
 
 
-bar {
-status_command py3status -c ~/.i3/i3status.conf
-height 30
-font pango:inconsolata 12, Awesome 10
-separator_symbol " "
-mode hide
-hidden_state hide
-modifier Mod1
-strip_workspace_numbers no
-colors {
+	    bar {
+		status_command py3status -c ~/.i3/i3status.conf
+		    height 30
+		    font pango:inconsolata 12, Awesome 10
+		    separator_symbol " "
+		    mode hide
+		    hidden_state hide
+		    modifier Mod1
+		    strip_workspace_numbers no
+		    colors {
 
-  	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
-}
+			separator #757575
+#                  border             background         text
+			    focused_workspace  $bg-color          $bg-color          $text-color
+			    inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+			    urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+		    }
+	    }
 # Hide Bar
 bindsym $mod+b bar mode toggle
 
@@ -238,6 +259,7 @@ for_window [title="mutt-specified"] move container to workspace 5:Email
 exec --no-startup-id nm-applet &
 exec --no-startup-id mpd &
 exec --no-startup-id volumeicon &
+exec --no-startup-id dunst &
 exec --no-startup-id compton -b &
 exec --no-startup-id redshift &
 exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
@@ -254,50 +276,50 @@ exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-comman
 
 #Bind Functions Keys
 
-  #Bind Control+F4 To Mode Change "Battery-Performance"
+#Bind Control+F4 To Mode Change "Battery-Performance"
 
-    bindsym XF86LaunchB exec --no-startup-id "disableCore && i=$(< /sys/devices/system/cpu/cpu1/online) && if [ $i -eq 0 ]; then  notify-send.sh --replace-file=/tmp/mode 'PowerSave' -a 'Mode'; else notify-send.sh --replace-file=/tmp/mode 'Performance' -a 'Mode' ;fi &"
+bindsym XF86LaunchB exec --no-startup-id "disableCore && i=$(< /sys/devices/system/cpu/cpu1/online) && if [ $i -eq 0 ]; then  notify-send.sh --replace-file=/tmp/mode 'PowerSave' -a 'Mode'; else notify-send.sh --replace-file=/tmp/mode 'Performance' -a 'Mode' ;fi &"
 
-  # Brightness Control Keys
+# Brightness Control Keys
 
-    bindsym XF86MonBrightnessUp exec --no-startup-id incrase-backlight
-    bindsym XF86MonBrightnessDown exec --no-startup-id decrase-backlight
+bindsym XF86MonBrightnessUp exec --no-startup-id incrase-backlight
+bindsym XF86MonBrightnessDown exec --no-startup-id decrase-backlight
 
-  # Audio Bind
+# Audio Bind
 
-    bindsym XF86AudioRaiseVolume exec --no-startup-id notify-send.sh --replace-file=/tmp/volumenotification -a "Volume" "$(amixer sset Master 5%+ | awk '/[0-9]+%/ {print $5}' | cut -c 2-4 | head -n1 | tr -d ] | tr -d % )%"
-    bindsym XF86AudioLowerVolume exec --no-startup-id notify-send.sh --replace-file=/tmp/volumenotification -a "Volume" "$(amixer sset Master 5%- | awk '/[0-9]+%/ {print $5}' | cut -c 2-4 | head -n1 | tr -d ] | tr -d % )%"
-    bindsym XF86AudioMute exec --no-startup-id $script/mute
+bindsym XF86AudioRaiseVolume exec --no-startup-id notify-send.sh --replace-file=/tmp/volumenotification -a "Volume" "$(amixer sset Master 5%+ | awk '/[0-9]+%/ {print $5}' | cut -c 2-4 | head -n1 | tr -d ] | tr -d % )%"
+bindsym XF86AudioLowerVolume exec --no-startup-id notify-send.sh --replace-file=/tmp/volumenotification -a "Volume" "$(amixer sset Master 5%- | awk '/[0-9]+%/ {print $5}' | cut -c 2-4 | head -n1 | tr -d ] | tr -d % )%"
+bindsym XF86AudioMute exec --no-startup-id $script/mute
 
-  # Player Control
+# Player Control
 
-    bindsym XF86AudioPlay exec --no-startup-id mpc -p 6699 toggle
-    bindsym XF86AudioNext exec --no-startup-id mpc -p 6699 next
-    bindsym XF86AudioPrev exec --no-startup-id mpc -p 6699 prev
+bindsym XF86AudioPlay exec --no-startup-id mpc -p 6699 toggle
+bindsym XF86AudioNext exec --no-startup-id mpc -p 6699 next
+bindsym XF86AudioPrev exec --no-startup-id mpc -p 6699 prev
 
 # Vim Like Keybindings for i3
 
 
-  # resize window (you can also use the mouse for that)
-  mode "resize" {
-          # These bindings trigger as soon as you enter the resize mode
+# resize window (you can also use the mouse for that)
+mode "resize" {
+# These bindings trigger as soon as you enter the resize mode
 
-          # Pressing left will shrink the window’s width.
-          # Pressing right will grow the window’s width.
-          # Pressing up will shrink the window’s height.
-          # Pressing down will grow the window’s height.
-          bindsym $mod+h resize shrink width 5 px or 5 ppt
-          bindsym $mod+j resize grow height 5 px or 5 ppt
-          bindsym $mod+k resize shrink height 5 px or 5 ppt
-          bindsym $mod+l resize grow width 5 px or 5 ppt
-          # same bindings, but for the arrow keys
-          bindsym Left resize shrink width 5 px or 5 ppt
-          bindsym Down resize grow height 5 px or 5 ppt
-          bindsym Up resize shrink height 5 px or 5 ppt
-          bindsym Right resize grow width 5 px or 5 ppt
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
+    bindsym $mod+h resize shrink width 5 px or 5 ppt
+	bindsym $mod+j resize grow height 5 px or 5 ppt
+	bindsym $mod+k resize shrink height 5 px or 5 ppt
+	bindsym $mod+l resize grow width 5 px or 5 ppt
+# same bindings, but for the arrow keys
+	bindsym Left resize shrink width 5 px or 5 ppt
+	bindsym Down resize grow height 5 px or 5 ppt
+	bindsym Up resize shrink height 5 px or 5 ppt
+	bindsym Right resize grow width 5 px or 5 ppt
 
-          # back to normal: Enter or Escape
-          bindsym Return mode "default"
-          bindsym Escape mode "default"
-  }
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
 bindsym $mod+Shift+e exec oblogout
