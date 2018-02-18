@@ -2,15 +2,19 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=~/.oh-my-zsh
-  export VISUAL=nvim
-  export EDITOR="$VISUAL"
+export ZSH=~/.oh-my-zsh
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+# Exporting paths
+
+export PATH=$PATH:$HOME/git/docker-helpers
 
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="hyperzsh/hyperzsh"
+ZSH_THEME="frisk"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -72,7 +76,7 @@ source $ZSH/oh-my-zsh.sh
 # fi
 
 # Compilation flags
- export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -95,17 +99,17 @@ source ~/.oh-my-zsh/alias/zalias_default
 # FZF Commands
 
 D() {
-  local dir
-  dir=$(cat ~/.vifm/fzf-read/locate-dir 2> /dev/null | fzf +m) &&
-  cd "$dir"
+    local dir
+    dir=$(cat ~/.vifm/fzf-read/locate-dir 2> /dev/null | fzf +m) &&
+	cd "$dir"
 }
 F() {
-  local file
-  local dir
-  file=$(cat ~/.vifm/fzf-read/locate-file | fzf +m ) && dir=$(dirname "$file")  && cd $dir && Filex=$(echo $file | awk -F/ '{print $NF}' ) && echo $Filex
+    local file
+    local dir
+    file=$(cat ~/.vifm/fzf-read/locate-file | fzf +m ) && dir=$(dirname "$file")  && cd $dir && Filex=$(echo $file | awk -F/ '{print $NF}' ) && echo $Filex
 }
 fh() {
-  print -z $( ( [ -n "$ZSH_NAME" ] && fc -1 1 || history ) | fzf +s --tac | sed 's/ *[0-9]* *//')
+    print -z $( ( [ -n "$ZSH_NAME" ] && fc -1 1 || history ) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
 # fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
@@ -130,66 +134,66 @@ f() {
 # This function will invoke a meny that lets you select What kind of search you wish to do.
 # It's an easy shortcut for the other methods, in case you're lazy to type them ;)
 m() {
-  local list
-  list=$(echo 'Any' && echo 'Genre' && echo 'Artist' && echo 'Albums' && echo 'Clear Playlist')
-  rm -f fileTypes
-  echo $list > fileTypes
+    local list
+    list=$(echo 'Any' && echo 'Genre' && echo 'Artist' && echo 'Albums' && echo 'Clear Playlist')
+    rm -f fileTypes
+    echo $list > fileTypes
 
-  type=$(cat fileTypes | \
-    fzf-tmux --query="$1" --reverse --select-1 --exit-0 ) || return 1
-  case `echo $type` in
-    'Genre') fmg;;
-    'Artist') fmaa;;
-    'Albums') fma;;
-    'Clear Playlist') fmc;;
-    *) fms;;
-  esac
+    type=$(cat fileTypes | \
+	fzf-tmux --query="$1" --reverse --select-1 --exit-0 ) || return 1
+    case `echo $type` in
+	'Genre') fmg;;
+	'Artist') fmaa;;
+	'Albums') fma;;
+	'Clear Playlist') fmc;;
+	*) fms;;
+    esac
 }
 
 # Function to show the current playlist
 fmc() {
-  local song_position
-  song_position=$(mpc -p 6699  -f "%position%) %time% - %artist% - %title%" playlist | \
-    fzf-tmux --query="$1" --reverse --select-1 --exit-0 | \
-    sed 's/).*//') || return 1
-  [ -n "$song_position" ] && mpc -p 6699 -q play $song_position
+    local song_position
+    song_position=$(mpc -p 6699  -f "%position%) %time% - %artist% - %title%" playlist | \
+	fzf-tmux --query="$1" --reverse --select-1 --exit-0 | \
+	sed 's/).*//') || return 1
+    [ -n "$song_position" ] && mpc -p 6699 -q play $song_position
 }
 
 # Search for any Song
 fms() {
-  local song
-  song=$(mpc -p 6699 search filename "" | \
-    fzf-tmux --query="$1" --reverse --select-1 --exit-0) || return 1
-  [ -n "$song" ] && mpc -p 6699 insert $song; mpc -p 6699 play; mpc -p 6699 next
+    local song
+    song=$(mpc -p 6699 search filename "" | \
+	fzf-tmux --query="$1" --reverse --select-1 --exit-0) || return 1
+    [ -n "$song" ] && mpc -p 6699 insert $song; mpc -p 6699 play; mpc -p 6699 next
 }
 
 # Search Genres
 fmg() {
-  local genre
-  genre=$(mpc -p 6699 list genre | \
-    fzf-tmux --query="$1" --reverse --select-1 --exit-0) || return 1
-  mpc -p 6699 clear;
-  [ -n "$genre" ] && mpc -p 6699 search genre $genre | mpc -p 6699 insert; mpc -p 6699 play
+    local genre
+    genre=$(mpc -p 6699 list genre | \
+	fzf-tmux --query="$1" --reverse --select-1 --exit-0) || return 1
+    mpc -p 6699 clear;
+    [ -n "$genre" ] && mpc -p 6699 search genre $genre | mpc -p 6699 insert; mpc -p 6699 play
 }
 
 # Search Artists
 fma() {
-  local artist
-  artist=$(mpc -p 6699 list artist | \
-    fzf-tmux --query="$1" --reverse --select-1 --exit-0) || return 1
-  mpc -p 6699 clear;
-  [ -n "$artist" ] && mpc -p 6699 search artist $artist | mpc -p 6699 insert; mpc -p 6699 play
+    local artist
+    artist=$(mpc -p 6699 list artist | \
+	fzf-tmux --query="$1" --reverse --select-1 --exit-0) || return 1
+    mpc -p 6699 clear;
+    [ -n "$artist" ] && mpc -p 6699 search artist $artist | mpc -p 6699 insert; mpc -p 6699 play
 }
 
 
 # Clear the playlist and invoke the fm()
 fmC() {
-  mpc -p 6699 clear
-  fm
+    mpc -p 6699 clear
+    fm
 }
 
 alias n='nvim'
 alias nb='nvim /home/strixx/.config/nvim/bookmarks'
 nf() {
-  nvim $(cat /home/strixx/.vifm/fzf-read/locate-file | fzf)
+    nvim $(cat /home/strixx/.vifm/fzf-read/locate-file | fzf)
 }

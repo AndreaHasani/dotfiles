@@ -251,7 +251,6 @@ for_window [class="Oblogout"] floating enable
 
 # Set Window Startup On specific Workspace
 
-for_window [title="Notes"] move container to workspace 9:Notes
 for_window [title="mutt-specified"] move container to workspace 5:Email
 
 #Startup Scripts
