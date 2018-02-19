@@ -6,10 +6,10 @@ echo -n "Is this a laptop (y/n)? "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
     echo Yes
-	laptop=1
+    laptop=1
 else
     echo No
-	laptop=0
+    laptop=0
 fi
 
 ln -sf /usr/share/zoneinfo/Europe/Tirane /etc/localtime
@@ -20,41 +20,42 @@ touch /etc/hostname
 echo Strixx_Laptop > /etc/hostname
 
 # Running Pacman
-pacman -S xorg-server termite xorg-xinit xorg xterm git xdg-user-dirs zsh ttf-inconsolata linux-headers unzip  networkmanager  network-manager-apple xclip  ttf-dejavu noto-fonts docker --noconfirm docker jq openssh keychain expect alsa-utils pass 
+pacman -S xorg-server termite xorg-xinit xorg xterm git xdg-user-dirs zsh ttf-inconsolata linux-headers unzip  networkmanager  network-manager-applet xclip  ttf-dejavu noto-fonts docker --noconfirm docker jq openssh keychain expect alsa-utils pass 
 
 # Getting pacaur 
 git clone https://aur.archlinux.org/cower.git &&
-cd cower && makepkg -i --skipinteg && cd .. &&
-git clone https://aur.archlinux.org/pacaur.git &&
-cd pacaur && makepkg -i --skipinteg &&
+    cd cower && makepkg -i --skipinteg && cd .. &&
+    git clone https://aur.archlinux.org/pacaur.git &&
+    cd pacaur && makepkg -i --skipinteg &&
 
 
-if [[ laptop = 1 ]]
-# Laptop Setup
-bootctl install
-touch /boot/loader/entries/arch.conf
-echo title Arch Linux >> /boot/loader/entries/arch.conf
-echo linux /vmlinuz-linux >> /boot/loader/entries/arch.conf
-echo initrd /initramfs-linux.img >> /boot/loader/entries/arch.conf
-echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sdb3) rw" >> /boot/loader/entries/arch.conf
+    if [[ laptop = 1 ]]
+	# Laptop Setup
+	bootctl install
+	touch /boot/loader/entries/arch.conf
+	echo title Arch Linux >> /boot/loader/entries/arch.conf
+	echo linux /vmlinuz-linux >> /boot/loader/entries/arch.conf
+	echo initrd /initramfs-linux.img >> /boot/loader/entries/arch.conf
+	echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sdb3) rw" >> /boot/loader/entries/arch.conf
 
-pacman -S broadcom-wl-dkms --noconfirm
+	pacman -S broadcom-wl-dkms --noconfirm
 
-pacaur -S hid-apple-patched-git-dkms py3status i3-gaps lxappearance b43-firmware --noconfirm
-else
+	pacaur -S hid-apple-patched-git-dkms py3status i3-gaps lxappearance b43-firmware --noconfirm
+    else
+	echo "Desktop"
 
-fi
-# Install Necessary package
+    fi
+    # Install Necessary package
 
- 
-#Running Pacaur
-pacaur -S neovim-git trizen rofi-git gtk-theme-arc-git dunst fasd-git fzf-git notify-send.sh compton volumeicon numix-icon-theme-git --noconfirm
 
-systemctl enable NetworkManger
+    #Running Pacaur
+    pacaur -S neovim-git trizen rofi-git gtk-theme-arc-git dunst fasd-git fzf-git notify-send.sh compton volumeicon numix-icon-theme-git --noconfirm
 
-# Add User
-useradd -m -s /bin/bash archie
-passwd strixx
-toor
-gpasswd -a strixx wheel
+    systemctl enable NetworkManger
+
+    # Add User
+    useradd -m -s /bin/bash archie
+    passwd strixx
+    toor
+    gpasswd -a strixx wheel
 

@@ -36,7 +36,7 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym  XF86LaunchA exec --no-startup-id rofi -show drun  -display-drun 'App ' -window-format '{n}' -fake-transparency -theme $script/Rofi-Scripts/Rofi.rasi
+bindsym  XF86LaunchA exec --no-startup-id "rofi -modi 'drun,window' -show drun  -display-drun 'App: ' -window-format '{n}' -fake-transparency -theme $script/Rofi-Scripts/Rofi.rasi"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -155,7 +155,7 @@ bindsym $mod+Shift+n exec i3-input -F \
 	    set $ws2 "2:Terminal"
 	    set $ws3 "3:Browser"
 	    set $ws4 "4:WebWork"
-	    set $ws5 "5:Email"
+	    set $ws5 "5:Docker"
 	    set $ws9 "9:Notes"
 
 # switch to workspace
@@ -248,14 +248,13 @@ for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [title="Set password for your browser"] floating enable
 for_window [class="Oblogout"] floating enable
+for_window [window_role="browser"] move container to workspace $ws3
 
 # Set Window Startup On specific Workspace
 
-for_window [title="mutt-specified"] move container to workspace 5:Email
 
 #Startup Scripts
 
-exec --no-startup-id nm-applet &
 exec --no-startup-id mpd &
 exec --no-startup-id volumeicon &
 exec --no-startup-id dunst &
@@ -268,7 +267,6 @@ exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
 # Workspaces Layout
 
 #AutoStart Apps To Specific Workspace
-exec --no-startup-id termite -t 'Notes' -e "nvim -c 'edit ~/Documents/notes' -c 'startinsert'"
 exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/pasqyra3d<enter><change-folder>\!<enter>'"
 exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/novelepubs<enter><change-folder>\!<enter>'"
 exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/kidbuuu007<enter><change-folder>\!<enter>'"

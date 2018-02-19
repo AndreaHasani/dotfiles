@@ -6,8 +6,15 @@ export ZSH=~/.oh-my-zsh
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+# Eval ssh
+# eval $(ssh-agent)
+
 # Exporting paths
 
+# Exporting ssh keys
+eval $(keychain --eval --quiet ~/.ssh/bitbucket)
+
+# Exporting paths for bin
 export PATH=$PATH:$HOME/git/docker-helpers
 
 

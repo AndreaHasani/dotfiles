@@ -21,6 +21,7 @@ alias clipboard-paste="xclip -o"
 alias n="nvim"
 alias nr="nvimqt-call "
 alias v="vifm"
+alias network="nmtui"
 alias pacaur="trizen"
 
 ## Unalias
