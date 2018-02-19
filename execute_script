@@ -38,7 +38,9 @@ echo linux /vmlinuz-linux >> /boot/loader/entries/arch.conf
 echo initrd /initramfs-linux.img >> /boot/loader/entries/arch.conf
 echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sdb3) rw" >> /boot/loader/entries/arch.conf
 
-pacaur -S hid-apple-patched-git-dkms py3status i3-gaps lxappearance
+pacman -S broadcom-wl-dkms --noconfirm
+
+pacaur -S hid-apple-patched-git-dkms py3status i3-gaps lxappearance b43-firmware --noconfirm
 else
 
 fi
