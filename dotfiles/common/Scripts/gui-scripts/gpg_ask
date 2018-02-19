@@ -1,0 +1,3 @@
+#! /bin/bash
+
+zenity --password --title="SuperUser Authentication" --timeout=30

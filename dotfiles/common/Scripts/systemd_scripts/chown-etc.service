@@ -1,0 +1,9 @@
+[Unit]
+Description=Chown etc Folder
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/rootscript
+
+[Install]
+WantedBy=multi-user.target

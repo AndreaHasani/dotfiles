@@ -15,47 +15,65 @@ fi
 ln -sf /usr/share/zoneinfo/Europe/Tirane /etc/localtime
 hwclock --systohc
 
-# Setting Hostname
-touch /etc/hostname
-echo Strixx_Laptop > /etc/hostname
+echo "Starting Installing dependency"
+sleep 1
+pacman -S xorg-server termite xorg-xinit xorg xterm git xdg-user-dirs zsh ttf-inconsolata linux-headers unzip  networkmanager  network-manager-applet xclip  ttf-dejavu noto-fonts docker --noconfirm docker jq openssh keychain expect alsa-utils pass &&
 
-# Running Pacman
-pacman -S xorg-server termite xorg-xinit xorg xterm git xdg-user-dirs zsh ttf-inconsolata linux-headers unzip  networkmanager  network-manager-applet xclip  ttf-dejavu noto-fonts docker --noconfirm docker jq openssh keychain expect alsa-utils pass 
+    # Prepering to install pacaur
+echo "Preparing to install pacaur"
+sleep 1
+## Add User
+useradd -m -s /bin/bash strixx
+gpasswd -a strixx wheel
 
-# Getting pacaur 
+## Switching to strixx
+su strixx
+
+## Getting pacaur and running makepkg as strixx
 git clone https://aur.archlinux.org/cower.git &&
     cd cower && makepkg -i --skipinteg && cd .. &&
     git clone https://aur.archlinux.org/pacaur.git &&
     cd pacaur && makepkg -i --skipinteg &&
 
-
-    if [[ laptop = 1 ]]
-	# Laptop Setup
-	bootctl install
-	touch /boot/loader/entries/arch.conf
-	echo title Arch Linux >> /boot/loader/entries/arch.conf
-	echo linux /vmlinuz-linux >> /boot/loader/entries/arch.conf
-	echo initrd /initramfs-linux.img >> /boot/loader/entries/arch.conf
-	echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sdb3) rw" >> /boot/loader/entries/arch.conf
-
-	pacman -S broadcom-wl-dkms --noconfirm
-
-	pacaur -S hid-apple-patched-git-dkms py3status i3-gaps lxappearance b43-firmware --noconfirm
-    else
-	echo "Desktop"
-
-    fi
-    # Install Necessary package
+    sleep 1
 
 
-    #Running Pacaur
-    pacaur -S neovim-git trizen rofi-git gtk-theme-arc-git dunst fasd-git fzf-git notify-send.sh compton volumeicon numix-icon-theme-git --noconfirm
 
-    systemctl enable NetworkManger
+if [[ $laptop = 1 ]]
+    echo "Laptop setup"
 
-    # Add User
-    useradd -m -s /bin/bash archie
-    passwd strixx
-    toor
-    gpasswd -a strixx wheel
 
+    # Setting Up Network
+    touch /etc/hostname
+    echo Strixx_Laptop > /etc/hostname
+    echo "127.0.1.1 strixx_laptop.localdomain strixx_laptop" >> /etc/hosts
+    # Laptop Setup
+    bootctl install
+    touch /boot/loader/entries/arch.conf
+    echo title Arch Linux >> /boot/loader/entries/arch.conf
+    echo linux /vmlinuz-linux >> /boot/loader/entries/arch.conf
+    echo initrd /initramfs-linux.img >> /boot/loader/entries/arch.conf
+    echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sdb3) rw" >> /boot/loader/entries/arch.conf
+
+    pacman -S broadcom-wl-dkms --noconfirm
+
+    pacaur -S hid-apple-patched-git-dkms py3status i3-gaps lxappearance b43-firmware --noconfirm
+
+else
+    echo "Desktop Setup"
+
+    # Setting Up Network
+    touch /etc/hostname
+    echo Strixx_Desktop > /etc/hostname
+    echo "127.0.1.1 strixx_desktop.localdomain strixx_desktop" >> /etc/hosts
+fi
+
+# Install Necessary package
+
+echo "Sleeping 3s"
+sleep 3
+
+#Running Pacaur
+pacaur -S neovim-git trizen rofi-git gtk-theme-arc-git dunst fasd-git fzf-git notify-send.sh compton volumeicon numix-icon-theme-git --noconfirm
+
+systemctl enable NetworkManger

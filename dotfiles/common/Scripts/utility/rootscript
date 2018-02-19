@@ -1,0 +1,5 @@
+#!/usr/bin/sh -
+sleep 5
+chown -R strixx /sys/class/backlight/nv_backlight
+chown strixx /sys/class/backlight/nv_backlight/*
+chown -R strixx /sys/devices/system/cpu/cpu1
