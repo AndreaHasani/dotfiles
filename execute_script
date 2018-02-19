@@ -19,6 +19,16 @@ hwclock --systohc
 touch /etc/hostname
 echo Strixx_Laptop > /etc/hostname
 
+# Running Pacman
+pacman -S xorg-server termite xorg-xinit xorg xterm git xdg-user-dirs zsh ttf-inconsolata linux-headers unzip  networkmanager  network-manager-apple xclip  ttf-dejavu noto-fonts docker --noconfirm docker jq openssh keychain expect alsa-utils pass 
+
+# Getting pacaur 
+git clone https://aur.archlinux.org/cower.git &&
+cd cower && makepkg -i --skipinteg && cd .. &&
+git clone https://aur.archlinux.org/pacaur.git &&
+cd pacaur && makepkg -i --skipinteg &&
+
+
 if [[ laptop = 1 ]]
 # Laptop Setup
 bootctl install
@@ -34,8 +44,8 @@ else
 fi
 # Install Necessary package
 
-pacman -S xorg-server termite xorg-xinit xorg xterm git xdg-user-dirs zsh ttf-inconsolata linux-headers unzip  networkmanager  network-manager-apple xclip  ttf-dejavu noto-fonts docker --noconfirm docker jq openssh keychain expect alsa-utils pass  
-
+ 
+#Running Pacaur
 pacaur -S neovim-git trizen rofi-git gtk-theme-arc-git dunst fasd-git fzf-git notify-send.sh compton volumeicon numix-icon-theme-git --noconfirm
 
 systemctl enable NetworkManger
