@@ -4,7 +4,10 @@
 .ncmpcpp/bindings
 .ncmpcpp/config
 Scripts
+.config/gtk-2.0
+.config/gtk-3.0
 .config/nvim/plugins/local
+.config/termite
 .config/nvim/init.vim
 .config/nvim/ginit.vim
 .zshrc

@@ -1,7 +1,10 @@
+
+
 ## Alias
 
 alias lfa="ls -la | egrep -v '^d' --color=auto"
 alias lda="ls -la | egrep '^d' --color=auto"
+alias name="title"
 
 # Poweroff and suspend alias
 
@@ -16,10 +19,10 @@ alias yt-a='youtube-dl --extract-audio -f bestaudio --audio-format mp3' #Downloa
 
 # Normal Alias
 
-alias clipboard-copy="xclip -selection clipboard"
-alias clipboard-paste="xclip -o"
+alias copy="xclip -selection clipboard"
+alias paste="xclip -o"
 alias n="nvim"
-alias nr="nvimqt-call "
+alias nr="nvim-remote"
 alias v="vifm"
 alias network="nmtui"
 alias pacaur="trizen"

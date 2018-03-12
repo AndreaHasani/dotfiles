@@ -36,7 +36,7 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym  XF86LaunchA exec --no-startup-id "rofi -modi 'drun,window' -show drun  -display-drun 'App: ' -window-format '{n}' -fake-transparency -theme $script/Rofi-Scripts/Rofi.rasi"
+bindsym  $mod+Shift+Return exec --no-startup-id "rofi -modi 'drun,window' -show drun  -display-drun 'App: ' -window-format '{n}' -fake-transparency -theme $script/Rofi-Scripts/Rofi.rasi"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -54,7 +54,7 @@ set $urgent-bg-color     #000000
 # Scrachpad Settings
 
 bindsym $mod+minus move scratchpad
-bindsym $mod+plus scratchpad show
+bindsym $mod+plus exec --no-startup-id "python $script/i3-scripts/i3-scratchpad-rofi.py"
 
 #Set Script Derecotry
 
@@ -94,10 +94,10 @@ bindsym $mod+Shift+n exec i3-input -F \
 		    bindsym $mod+Right focus right
 
 # move focused window
-		    bindsym $mod+Shift+h move left;
-	    bindsym $mod+Shift+j move down;
-	    bindsym $mod+Shift+k move up;
-	    bindsym $mod+Shift+l move right;
+		    bindsym $mod+Shift+h move left 25px;
+	    bindsym $mod+Shift+j move down 25px;
+	    bindsym $mod+Shift+k move up 25px;
+	    bindsym $mod+Shift+l move right 25px;
 
 # bindsym --release $mod+Shift+h exec i3-msg border pixel 0
 # bindsym --release $mod+Shift+j exec i3-msg border pixel 0
@@ -105,10 +105,10 @@ bindsym $mod+Shift+n exec i3-input -F \
 # bindsym --release $mod+Shift+l exec i3-msg border pixel 0
 
 # alternatively, you can use the cursor keys:
-	    bindsym $mod+Shift+Left move left
-	    bindsym $mod+Shift+Down move down
-	    bindsym $mod+Shift+Up move up
-	    bindsym $mod+Shift+Right move right
+	    bindsym $mod+Shift+Left move left 50px
+	    bindsym $mod+Shift+Down move down 50px
+	    bindsym $mod+Shift+Up move up 50px
+	    bindsym $mod+Shift+Right move right 50px
 
 # split in horizontal orientation
 	    bindsym $mod+Shift+v split h
@@ -192,6 +192,9 @@ bindsym $mod+Shift+n exec i3-input -F \
 	    workspace $ws3 gaps inner 0
 	    workspace $ws3 gaps outer 0
 
+	    # workspace $ws2 gaps inner 0
+	    # workspace $ws2 gaps outer 0
+
 #Hide Borders and Title
 	    for_window [class="^.*"] border pixel 1
 
@@ -239,19 +242,36 @@ focus_follows_mouse no
 # Toggle Sticky Floating Window
 bindsym $mod+Shift+s sticky toggle
 
-# Floating Rules
+# Open a dropdown terminal
+
+
+## Floating Rules
+
+# Window role
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
+for_window [window_role="browser"] move container to workspace $ws3
+
+# Type
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+
+#Title
 for_window [title="Set password for your browser"] floating enable
+
+
+#Class
 for_window [class="Oblogout"] floating enable
-for_window [window_role="browser"] move container to workspace $ws3
+for_window [class="Lxappearance"] floating enable
 
 # Set Window Startup On specific Workspace
 
+# Drop down terminal
+exec --no-startup-id termite --name="dropdown_terminal"
+for_window [instance="dropdown_terminal"] move scratchpad, move position 270 0, resize set 800 300,sticky toggle, scratchpad show
+bindsym $mod+Shift+t [instance="dropdown_terminal"] scratchpad show
 
 #Startup Scripts
 
@@ -269,7 +289,7 @@ exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
 #AutoStart Apps To Specific Workspace
 exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/pasqyra3d<enter><change-folder>\!<enter>'"
 exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/novelepubs<enter><change-folder>\!<enter>'"
-exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/kidbuuu007<enter><change-folder>\!<enter>'"
+exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/novelepubs<enter><change-folder>\!<enter>'"
 
 #Bind Functions Keys
 
@@ -279,8 +299,8 @@ bindsym XF86LaunchB exec --no-startup-id "disableCore && i=$(< /sys/devices/syst
 
 # Brightness Control Keys
 
-bindsym XF86MonBrightnessUp exec --no-startup-id incrase-backlight
-bindsym XF86MonBrightnessDown exec --no-startup-id decrase-backlight
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/Scripts/utility/incrase-backlight
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/Scripts/utility/decrase-backlight
 
 # Audio Bind
 

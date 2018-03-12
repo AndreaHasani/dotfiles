@@ -53,7 +53,7 @@ function passArguments () {
 		echo "Download Finished"
 		echo "----------------------------"
 		echo $sync
-		if [ ! $sync -eq 1 ]; then
+		if [ $sync -eq 1 ]; then
 		echo "Running rsync";
 		rsync -avz -q --delete $Local $Working &&
 		    echo "RSync Finished";
@@ -90,4 +90,5 @@ echo "-c	FTP Config (Neccesary)"
 echo "-l	List Configs (List Configs then exit script)"
 echo "-u	Upload Local to Remote"
 echo "-d	Download Remote to Local"
+echo "-s	Sync working to Local"
 exit 1

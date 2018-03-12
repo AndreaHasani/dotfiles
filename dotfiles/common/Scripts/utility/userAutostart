@@ -1,0 +1,7 @@
+#!/usr/bin/sh -
+
+sleep 5
+
+export SSH_ASKPASS=$HOME/Scripts/utility/ssh-add-pass
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+/home/strixx/Scripts/utility/ssh-add-pass ~/.ssh/bitbucket

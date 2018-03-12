@@ -12,10 +12,19 @@ export EDITOR="$VISUAL"
 # Exporting paths
 
 # Exporting ssh keys
-eval $(keychain --eval --quiet ~/.ssh/bitbucket)
 
 # Exporting paths for bin
 export PATH=$PATH:$HOME/git/docker-helpers
+export PATH=$PATH:$HOME/Scripts/utility
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/Scripts/i3-scripts/
+
+# Virtualenv 
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/git
+export VIRTUALENVWRAPPER_SCRIPT=~/.local/bin/virtualenvwrapper.sh
+source ~/.local/bin/virtualenvwrapper_lazy.sh
 
 
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -39,7 +48,7 @@ ZSH_THEME="frisk"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 #ENABLE_CORRECTION="true"

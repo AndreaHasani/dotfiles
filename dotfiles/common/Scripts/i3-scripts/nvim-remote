@@ -14,6 +14,6 @@ if [ ! -d "/tmp/nvim_servers" ];then
 fi
 focus="nvim_$1"
 title="\"nvim_$1\""
-nvr --servername /tmp/nvim_servers/$1 --remote-silent ${@:2} -c 'let &titlestring='$title''
+nvr -s --servername /tmp/nvim_servers/$1 --remote-silent ${@:2} -c 'let &titlestring='$title''
 focus="nvim_$1"
 i3-msg '[title='$focus'] focus' &>/dev/null

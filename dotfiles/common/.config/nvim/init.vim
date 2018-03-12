@@ -54,7 +54,7 @@ if has ('win32')
     call dein#add('~/.vim/plugins/local/restore_view')
     " call dein#add('~/.vim\plugins\local\statusline')
 else
-    call dein#add('~/.config/nvim/plugins/local/restore_view')
+    " call dein#add('~/.config/nvim/plugins/local/restore_view')
 endif
 
 " Local Unix Plugins
@@ -193,6 +193,7 @@ nmap <silent> S :<C-U>call sneak#wrap('',           2, 1, 2, 1)<CR>
 
 let g:dirvish_mode =':sort ,^.*[\/],'
 
+nmap _ :Dirvish<cr>
 function! DirvishMapping()
     nmap <buffer> l <cr>
     nmap <buffer> h -
@@ -324,7 +325,7 @@ filetype indent on
 set splitbelow
 set splitright
 set autoindent
-set title
+" set title
 set showcmd
 set hidden
 set lazyredraw
@@ -485,7 +486,7 @@ function! TermColor()
     " Using cat to add colors that vim uses
     silent execute '!cat ~/.config/termite/themes/'.g:colors_name.'.config >> ~/.config/termite/config'
     " Reload terminal config to use the new theme color
-    silent !killall -USR1 xterm
+    silent !killall -USR1 termite
 endfunction
 
 nnoremap <F8> :call ColorSchemeToggle()<cr>:call TermColor()<cr>:execute "colo"<cr>

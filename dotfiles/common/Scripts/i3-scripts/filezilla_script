@@ -1,3 +1,3 @@
 #! /bin/sh
 
-nvimqt-call filezilla $1
+termite -e "/home/strixx/Scripts/i3-scripts/nvim-remote filezilla '$1'" &> /home/strixx/Scripts/i3-scripts/logs.txt
