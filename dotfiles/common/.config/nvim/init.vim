@@ -40,9 +40,6 @@ endif
 call dein#add('Yggdroot/IndentLine')
 call dein#add('ap/vim-buftabline')
 call dein#add('justinmk/vim-dirvish')
-call dein#add("scrooloose/nerdtree", { 'on_cmd' : 'NERDTreeToggle',
-	    \ 'hook_add': 'nnoremap <leader>n
-	    \ :NERDTreeToggle<cr>'})
 call dein#add('mbbill/undotree', { 'on_cmd' : 'UndotreeToggle',
 	    \ 'hook_add': 'nnoremap <leader>u
 	    \                :UndotreeToggle<cr>'
@@ -64,20 +61,29 @@ if has ("unix")
 endif
 
 " Code Completion Plugin
+call dein#add('Shougo/echodoc.vim')
 call dein#add('mattn/emmet-vim')
+" call dein#add('ludovicchabant/vim-gutentags')
 call dein#add('Raimondi/delimitMate')
 call dein#add('jiangmiao/auto-pairs')
-" call dein#add('maralla/completor.vim')
+call dein#add('maralla/completor.vim')
+" call dein#add('Shougo/deoplete.nvim')
 call dein#add('metakirby5/codi.vim')
-call dein#add('ervandew/supertab')
+" call dein#add('ervandew/supertab')
+
 
 " Automaticly Features Plugin
 call dein#add('jamessan/vim-gnupg')
+" call dein#add('tmhedberg/SimpylFold')
 " call dein#add('b4b4r07/vim-sunset')
 call dein#add('pgdouyon/vim-evanesco')
 
 " Benchmark Plugin
 call dein#add('tweekmonster/startuptime.vim')
+
+" Tags
+call dein#add('majutsushi/tagbar')
+call dein#add('jsfaint/gen_tags.vim')
 
 " Commands Plugin
 if has ('unix')
@@ -98,13 +104,29 @@ call dein#add('keith/gist.vim')
 call dein#add('javier-lopez/sprunge.vim')
 
 " Language Plugin
-call dein#add('sheerun/vim-polyglot')
+" call dein#add('sheerun/vim-polyglot')
 call dein#add('2072/PHP-Indenting-for-VIm')
+
+"" Language Specific
+
+" call dein#add('autozimu/LanguageClient-neovim', {
+"     \ 'rev': 'next',
+"     \ 'build': 'bash install.sh',
+"     \ })
+
+
+" Python
+
+call dein#add('Vimjas/vim-python-pep8-indent')
+call dein#add('kh3phr3n/python-syntax')
+
+
 
 " Improvments Plugins
 call dein#add('bkad/camelcasemotion')
+call dein#add('vim-scripts/repeat-motion')
 call dein#add('vim-scripts/vis')
-call dein#add("andymass/vim-matchup")
+" call dein#add("andymass/vim-matchup")
 call dein#add('kana/vim-smartword')
 call dein#add('tpope/vim-sensible')
 call dein#add('tpope/vim-ragtag')
@@ -129,10 +151,31 @@ endif
 
 """ Plugins Config
 
-" " Completor Plugin Config
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+" Tagbar config
+
+nmap <F5> :TagbarToggle<cr>
+
+" Language server
+
+" let g:LanguageClient_serverCommands = {
+"     \ 'python': ['pyls'],
+"     \ }
+
+" nnoremap <silent> gd :call LanguageClient_textDocument_hover()<CR>
+
+
+"" Deoplete
+" Enable
+" let g:deoplete#enable_at_startup = 1
+
+""
+" Enable syntax plugins
+let python_highlight_all = 1
+
+"" Completor Plugin Config
+inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
 
 " BufTabline Config
 let g:buftabline_show = 1
@@ -141,10 +184,12 @@ let g:buftabline_indicators = 1
 
 " Matchup Config
 
-let g:matchup_matchparen_status_offscreen = 0
+let g:matchup_matchparen_status_offscreen = 1
 let g:matchup_transmute_enabled = 1
+let g:matchup_matchparen_stopline = 200
 let g:matchup_matchparen_deferred = 1
-let g:matchup_matchparen_timeout = 50
+let g:matchup_matchparen_timeout = 60
+let g:matchup_motion_enabled = 0
 
 """ Code Linters
 
@@ -155,25 +200,27 @@ let g:matchup_matchparen_timeout = 50
 " let g:neomake_echo_current_error = 0
 
 """ Ale Config
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_save = 0
+" let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+
+" Set linter delay in ms 
+let g:ale_lint_delay = 1000
 
 " if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 
 " Choose linters you want to run for that specific FileType
 let g:ale_linters = {
 	    \   'html': ['tidy'],
 	    \}
-let g:ale_set_signs=0
-let g:ale_open_list=1
-let g:ale_set_highlights=0
 
-  let g:ale_fixers = {
-  \   'scss': [
-  \       'stylelint',
-  \   ],
-  \}
+let g:ale_fixers = {
+	    \   'python': ['autopep8'],
+	    \}
+
+let g:ale_set_signs=1
+let g:ale_open_list=0
+let g:ale_set_highlights=0
 
 " Sneak Plugin Config
 map f <Plug>Sneak_f
@@ -192,6 +239,7 @@ nmap <silent> S :<C-U>call sneak#wrap('',           2, 1, 2, 1)<CR>
 " Configure dirvish Plugin
 
 let g:dirvish_mode =':sort ,^.*[\/],'
+let g:drivish_relative_paths = 1
 
 nmap _ :Dirvish<cr>
 function! DirvishMapping()
@@ -216,8 +264,8 @@ let g:lightline = {
 	    \ 'colorscheme': 'wombat',
 	    \ 'active': {
 	    \   'left': [ ['mode', 'paste'],
-	    \             ['fugitive', 'readonly', 'filename','bufnum', 'modified'] ],
-	    \   'right': [ ['filetype'], [ 'lineinfo' ], ['percent'] ]
+	    \             ['fugitive', 'readonly', 'absolutepath','bufnum', 'modified'] ],
+	    \   'right': [ [ 'lineinfo' ], ['percent'] ]
 	    \ },
 	    \ 'component': {
 	    \   'readonly': '%{&filetype=="help"?"":&readonly?"??":""}',
@@ -226,7 +274,6 @@ let g:lightline = {
 	    \   'ftString': "ft=",
 	    \ 'mode': '%{lightline#mode()}',
 	    \ 'paste': '%{&paste?"PASTE":""}',
-	    \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
 	    \ 'percent': '%3p%%',
 	    \ 'lineinfo': '%3l:%-2v',
 	    \ },
@@ -235,14 +282,13 @@ let g:lightline = {
 	    \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
 	    \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
 	    \   'mode': '&ft!="netrw"',
-	    \   'filetype': '&ft=="netrw"',
 	    \   'lineinfo': '&ft=="netrw"',
 	    \   'percent': '&ft=="netrw"',
 	    \ },
 	    \ 'separator': { 'left': ' ', 'right': ' ' },
 	    \ 'subseparator': { 'left': ' ', 'right': ' ' },
 	    \ }
-let g:lightline.component = {'filetype': 'FileType: %{&ft!=#""?&ft:"Null"}'}
+" let g:lightline.component = {'filetype': 'FileType: %{&ft!=#""?&ft:"Null"}'}
 
 " UndoTree Plugin
 let g:undotree_DiffAutoOpen = 0
@@ -331,9 +377,9 @@ set hidden
 set lazyredraw
 set history=5000
 set noswapfile
+set wrap
 set gdefault
 set re=1
-set nowrap
 set mouse=
 set viewdir=~/.vim/view/
 set viewoptions=cursor,folds,slash,unix
@@ -342,20 +388,22 @@ set ignorecase
 set linebreak
 set smartcase
 set noshowmode
-set nu
+" set nu
 set rnu
 set clipboard=unnamedplus
 let @/ = ""
 
 
 " Disable netrw
-let loaded_netrwPlugin = 0
+" let loaded_netrwPlugin = 0
 
 " Vim Color Settings
 set termguicolors
 syntax on
 colorscheme base16-flat
 
+" Syntax fix
+" set syntax synmaxcol=256
 
 " GUI Vim , Make it look like terminal
 

@@ -7,6 +7,6 @@ if (( 80<=$battery && $battery<=100 )); then
 elif (( 26<=$battery && $battery<=79 )); then
     notify-send.sh $battery -a Battery -u normal -R /tmp/battery -t 5000
 elif (( 0<=$battery && $battery<=25 )); then
-    notify-send.sh $battery -a Battery -u critical -R /tmp/battery -t 5000
+    notify-send.sh $battery -a Battery -u critical -R /tmp/battery -t 30000
 fi
 
