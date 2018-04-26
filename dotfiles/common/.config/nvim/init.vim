@@ -2,114 +2,100 @@
 let mapleader = " "
 let g:mapleader = " "
 
-""" Dein Config
+set nocompatible
+set packpath+=~/.config/nvim/vivid/
 
-" Specify runtimepath
 
-if has ("win32")
-    set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim
-else
-    set runtimepath+=~/.config/nvim/plugins/repos/github.com/Shougo/dein.vim
-endif
+""" Vivid Config
 
-" Add Plugins
-if has ("win32")
-    call dein#begin("~/.vim/plugins")
-else
-    call dein#begin("/home/strixx/.config/nvim/plugins")
-endif
-
-call dein#add('Shougo/dein.vim')
+packadd Vivid.vim
 
 " Window Split Plugins
-call dein#add('simeji/winresizer', {'on_map' : {'nv' : '<c-w>r' }})
+" call vivid#add('simeji/winresizer')
 
 " Align Plugins
-call dein#add('junegunn/vim-easy-align')
+call vivid#add('junegunn/vim-easy-align')
 
 " ColorScheme
-call dein#add('owickstrom/vim-colors-paramount', { 'script_type': 'color' })
+call vivid#add('owickstrom/vim-colors-paramount')
 
 " Interface Plugins
-call dein#add('itchyny/lightline.vim')
-" call dein#add('vim-airline/vim-airline')
-" call dein#add('vim-airline/vim-airline-themes')
+call vivid#add('itchyny/lightline.vim', {'enabled': 1, })
+" call vivid#add('vim-airline/vim-airline')
+" call vivid#add('vim-airline/vim-airline-themes')
 if has ('unix')
-    call dein#add('junegunn/fzf')
+    call vivid#add('junegunn/fzf', {'enabled': 1, })
 endif
-call dein#add('Yggdroot/IndentLine')
-call dein#add('ap/vim-buftabline')
-call dein#add('justinmk/vim-dirvish')
-call dein#add('mbbill/undotree', { 'on_cmd' : 'UndotreeToggle',
-	    \ 'hook_add': 'nnoremap <leader>u
-	    \                :UndotreeToggle<cr>'
-	    \})
-call dein#add('ferranpm/vim-isolate')
+call vivid#add('Yggdroot/IndentLine', {'enabled': 1, })
+call vivid#add('ap/vim-buftabline', {'enabled': 1, }) 
+call vivid#add('justinmk/vim-dirvish', {'enabled': 1, })
+call vivid#add('mbbill/undotree', {'enabled': 1, })
+call vivid#add('ferranpm/vim-isolate' )
 
 " Local Win Plugins
 if has ('win32')
-    call dein#add('~/.vim/plugins/local/restore_view')
-    " call dein#add('~/.vim\plugins\local\statusline')
+    call vivid#add('~/.vim/plugins/local/restore_view')
+    " call vivid#add('~/.vim\plugins\local\statusline')
 else
-    " call dein#add('~/.config/nvim/plugins/local/restore_view')
+    " call vivid#add('~/.config/nvim/plugins/local/restore_view')
 endif
 
 " Local Unix Plugins
-if has ("unix")
-    " Session Plugin Local
-    call dein#local('/home/strixx/.config/nvim/plugins/repos/github.com/vim-scripts/')
-endif
+" if has ("unix")
+"     " Session Plugin Local
+"     call vivid#local('/home/strixx/.config/nvim/plugins/repos/github.com/vim-scripts/')
+" endif
 
 " Code Completion Plugin
-call dein#add('Shougo/echodoc.vim')
-call dein#add('mattn/emmet-vim')
-call dein#add('ludovicchabant/vim-gutentags')
-call dein#add('Raimondi/delimitMate')
-call dein#add('jiangmiao/auto-pairs')
-" call dein#add('maralla/completor.vim')
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('metakirby5/codi.vim')
-" call dein#add('ervandew/supertab')
+call vivid#add('Shougo/echodoc.vim', {'enabled': 1, })
+call vivid#add('mattn/emmet-vim')
+call vivid#add('ludovicchabant/vim-gutentags', {'enabled': 1, })
+call vivid#add('Raimondi/delimitMate')
+call vivid#add('jiangmiao/auto-pairs')
+" call vivid#add('maralla/completor.vim')
+call vivid#add('Shougo/deoplete.nvim', {'enabled': 1, })
+call vivid#add('metakirby5/codi.vim', {'enabled': 1, })
+" call vivid#add('ervandew/supertab')
 
 
 " Automaticly Features Plugin
-call dein#add('jamessan/vim-gnupg')
-" call dein#add('tmhedberg/SimpylFold')
-" call dein#add('b4b4r07/vim-sunset')
-call dein#add('pgdouyon/vim-evanesco')
+call vivid#add('jamessan/vim-gnupg')
+" call vivid#add('tmhedberg/SimpylFold')
+" call vivid#add('b4b4r07/vim-sunset')
+call vivid#add('pgdouyon/vim-evanesco', {'enabled': 1, })
 
 " Benchmark Plugin
-call dein#add('tweekmonster/startuptime.vim')
+call vivid#add('tweekmonster/startuptime.vim', {'enabled': 1, })
 
 " Tags
-call dein#add('majutsushi/tagbar')
-" call dein#add('jsfaint/gen_tags.vim')
+call vivid#add('majutsushi/tagbar', {'enabled': 1, })
+" call vivid#add('jsfaint/gen_tags.vim')
 
 " Commands Plugin
 if has ('unix')
-    call dein#add('mhinz/vim-grepper')
+    call vivid#add('mhinz/vim-grepper', {'enabled': 1, })
 endif
-call dein#add('sbdchd/neoformat')
-call dein#add('ntpeters/vim-better-whitespace')
-call dein#add('andrewradev/splitjoin.vim', { 'on_ft' : [ 'html', 'css', 'htm', 'php', 'sass', 'scss', 'js' ] })
-call dein#add('wellle/targets.vim')
-call dein#add('justinmk/vim-sneak')
-call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}})
-call dein#add('tpope/vim-abolish')
+call vivid#add('sbdchd/neoformat', {'enabled': 1, })
+call vivid#add('ntpeters/vim-better-whitespace', {'enabled': 1, })
+" call vivid#add('andrewradev/splitjoin.vim', {'enabled': 1, })
+call vivid#add('wellle/targets.vim', {'enabled': 1, })
+call vivid#add('justinmk/vim-sneak', {'enabled': 1, })
+" call vivid#add('tpope/vim-surround', {'enabled': 1, })
+call vivid#add('tpope/vim-abolish', {'enabled': 1, })
 
 " Intergrations Plugin
-call dein#add('tpope/vim-commentary')
-call dein#add('mileszs/ack.vim')
-call dein#add('keith/gist.vim')
-call dein#add('javier-lopez/sprunge.vim')
+call vivid#add('tpope/vim-commentary', {'enabled': 1, })
+" call vivid#add('mileszs/ack.vim', {'enabled': 1, })
+call vivid#add('keith/gist.vim', {'enabled': 1, })
+call vivid#add('javier-lopez/sprunge.vim', {'enabled': 1, })
 
 " Language Plugin
-" call dein#add('sheerun/vim-polyglot')
-call dein#add('2072/PHP-Indenting-for-VIm')
+" call vivid#add('sheerun/vim-polyglot')
+call vivid#add('2072/PHP-Indenting-for-VIm', {'enabled': 1, })
 
 "" Language Specific
 
-" call dein#add('autozimu/LanguageClient-neovim', {
+" call vivid#add('autozimu/LanguageClient-neovim',, {
 "     \ 'rev': 'next',
 "     \ 'build': 'bash install.sh',
 "     \ })
@@ -117,34 +103,29 @@ call dein#add('2072/PHP-Indenting-for-VIm')
 
 " Python
 
-call dein#add('Vimjas/vim-python-pep8-indent')
-call dein#add('kh3phr3n/python-syntax')
-call dein#add('zchee/deoplete-jedi')
+call vivid#add('Vimjas/vim-python-pep8-indent', {'enabled': 1, })
+call vivid#add('kh3phr3n/python-syntax', {'enabled': 1, })
+call vivid#add('zchee/deoplete-jedi', {'enabled': 1, })
 
 
 
 " Improvments Plugins
-" call dein#add('bkad/camelcasemotion')
-" call dein#add("andymass/vim-matchup")
-call dein#add('kana/vim-smartword')
-call dein#add('tpope/vim-sensible')
-call dein#add('tpope/vim-ragtag')
-call dein#add('xtal8/traces.vim')
-call dein#add('seavan/BufOnly.vim')
+" call vivid#add('bkad/camelcasemotion')
+call vivid#add('chaoren/vim-wordmotion', {'enabled': 1, })
+call vivid#add('vim-scripts/vis', {'enabled': 1, })
+" call vivid#add("andymass/vim-matchup")
+call vivid#add('kana/vim-smartword', {'enabled': 1, })
+call vivid#add('tpope/vim-sensible', {'enabled': 1, })
+call vivid#add('tpope/vim-ragtag', {'enabled': 1, })
+call vivid#add('xtal8/traces.vim', {'enabled': 1, })
+call vivid#add('seavan/BufOnly.vim', {'enabled': 1, })
 
 
 " Syntax Check Plugin
-call dein#add('w0rp/ale')
+call vivid#add('w0rp/ale', {'enabled': 1, })
 " call dein#add('neomake/neomake')
 
-" End Dein
-call dein#end()
-
-" Automagically install new dein.vim plugins
-if dein#check_install()
-    call dein#install()
-endif
-
+" call vivid#enable()
 
 """ Dein Config End
 
@@ -188,6 +169,9 @@ let g:matchup_matchparen_stopline = 200
 let g:matchup_matchparen_deferred = 1
 let g:matchup_matchparen_timeout = 60
 let g:matchup_motion_enabled = 0
+
+" Undotree Config
+nmap <leader>u :UndotreeToggle<cr>
 
 """ Code Linters
 
@@ -646,7 +630,6 @@ let g:loaded_ruby_provider = 1
 
 "" Fix Python settings
 
-
 " Path to python 3
 if has ('win32')
     let g:python3_host_prog = 'C:\Program Files (x86)\Python36-32\python'
@@ -654,6 +637,7 @@ elseif has ('unix')
     let g:python3_host_prog = '/usr/bin/python3'
     let g:python_host_prog = '/usr/bin/python'
 endif
+
 
 """ Speed Config End
 
