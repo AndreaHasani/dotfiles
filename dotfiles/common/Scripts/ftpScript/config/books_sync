@@ -1,0 +1,6 @@
+USER=andrea@tregumakinave.al
+PASS=`pass multi-line/ftp/tregumakinave.al | head -n1`
+HOST=server179.web-hosting.com
+Local=/home/strixx/git/projects/Python/Scrapy/readlightnovel-scraper/uploads/books/
+Remote=/generator.novelepubs.com/uploads/books/
+Working=/srv/http/epubgenerator/

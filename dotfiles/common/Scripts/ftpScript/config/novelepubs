@@ -1,0 +1,6 @@
+USER=andrea@tregumakinave.al
+PASS=`pass multi-line/ftp/tregumakinave.al | head -n1`
+HOST=server179.web-hosting.com
+Local=/home/strixx/git/projects/Web-Projects/novelepubs/theme/mts_sociallyviral
+Remote=/novelepubs.com/wp-content/themes/mts_sociallyviral/
+Working=/srv/http/epubgenerator/
