@@ -63,11 +63,11 @@ endif
 " Code Completion Plugin
 call dein#add('Shougo/echodoc.vim')
 call dein#add('mattn/emmet-vim')
-" call dein#add('ludovicchabant/vim-gutentags')
+call dein#add('ludovicchabant/vim-gutentags')
 call dein#add('Raimondi/delimitMate')
 call dein#add('jiangmiao/auto-pairs')
-call dein#add('maralla/completor.vim')
-" call dein#add('Shougo/deoplete.nvim')
+" call dein#add('maralla/completor.vim')
+call dein#add('Shougo/deoplete.nvim')
 call dein#add('metakirby5/codi.vim')
 " call dein#add('ervandew/supertab')
 
@@ -83,7 +83,7 @@ call dein#add('tweekmonster/startuptime.vim')
 
 " Tags
 call dein#add('majutsushi/tagbar')
-call dein#add('jsfaint/gen_tags.vim')
+" call dein#add('jsfaint/gen_tags.vim')
 
 " Commands Plugin
 if has ('unix')
@@ -119,13 +119,12 @@ call dein#add('2072/PHP-Indenting-for-VIm')
 
 call dein#add('Vimjas/vim-python-pep8-indent')
 call dein#add('kh3phr3n/python-syntax')
+call dein#add('zchee/deoplete-jedi')
 
 
 
 " Improvments Plugins
-call dein#add('bkad/camelcasemotion')
-call dein#add('vim-scripts/repeat-motion')
-call dein#add('vim-scripts/vis')
+" call dein#add('bkad/camelcasemotion')
 " call dein#add("andymass/vim-matchup")
 call dein#add('kana/vim-smartword')
 call dein#add('tpope/vim-sensible')
@@ -166,7 +165,7 @@ nmap <F5> :TagbarToggle<cr>
 
 "" Deoplete
 " Enable
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 ""
 " Enable syntax plugins
@@ -175,7 +174,6 @@ let python_highlight_all = 1
 "" Completor Plugin Config
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
 
 " BufTabline Config
 let g:buftabline_show = 1
@@ -307,24 +305,24 @@ if has ("unix")
     let g:fzf_layout = { 'down': '~30%' }
 endif
 
-" Set Camelmotion default mappings
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
+" " Set Camelmotion default mappings
+" map <silent> w <Plug>CamelCaseMotion_w
+" map <silent> b <Plug>CamelCaseMotion_b
+" map <silent> e <Plug>CamelCaseMotion_e
+" map <silent> ge <Plug>CamelCaseMotion_ge
+" sunmap w
+" sunmap b
+" sunmap e
+" sunmap ge
 
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
+" omap <silent> iw <Plug>CamelCaseMotion_iw
+" xmap <silent> iw <Plug>CamelCaseMotion_iw
+" omap <silent> ib <Plug>CamelCaseMotion_ib
+" xmap <silent> ib <Plug>CamelCaseMotion_ib
+" omap <silent> ie <Plug>CamelCaseMotion_ie
+" xmap <silent> ie <Plug>CamelCaseMotion_ie
 
-let g:wordmotion_spaces = '#'
+" let g:wordmotion_spaces = '#'
 
 """ Plugins Config End
 
@@ -384,7 +382,7 @@ set mouse=
 set viewdir=~/.vim/view/
 set viewoptions=cursor,folds,slash,unix
 set foldmethod=manual
-set ignorecase
+" set ignorecase
 set linebreak
 set smartcase
 set noshowmode
@@ -709,3 +707,22 @@ cnoreabbrev ccd Ccd
 """ Gui Configs End
 """ Call Functions one time
 silent !touch /tmp/vim_running
+
+
+" Setting up cscope
+if has('cscope')
+  set cscopetag cscopeverbose
+
+  if has('quickfix')
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+  endif
+
+  cnoreabbrev csa cs add
+  cnoreabbrev csf cs find
+  cnoreabbrev csk cs kill
+  cnoreabbrev csr cs reset
+  cnoreabbrev css cs show
+  cnoreabbrev csh cs help
+
+  command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+endif

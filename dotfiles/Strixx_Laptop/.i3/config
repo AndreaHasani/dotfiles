@@ -260,12 +260,15 @@ for_window [window_type="menu"] floating enable
 
 #Title
 for_window [title="Set password for your browser"] floating enable
+for_window [title="Library"] floating enable, resize set 800 600, move position center
 
 
 #Class
 for_window [class="Oblogout"] floating enable
 for_window [class="Lxappearance"] floating enable
 
+#Instance
+for_window [instance="Devtools"] floating enable, resize set 1000 400, move position center
 # Set Window Startup On specific Workspace
 
 # Drop down terminal

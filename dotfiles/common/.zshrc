@@ -16,8 +16,11 @@ export EDITOR="$VISUAL"
 # Exporting paths for bin
 export PATH=$PATH:$HOME/git/docker-helpers
 export PATH=$PATH:$HOME/Scripts/utility
+export PATH=$PATH:$HOME/Downloads/dart-sass
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Scripts/i3-scripts/
+
+# Export vim path
 
 # Virtualenv 
 
@@ -132,10 +135,17 @@ fh() {
 
 # fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
 unalias z
+# unalias \r
 d() {
     [ $# -gt 0 ] && fasd_cd -d "$*" && return
     local dir
     dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
+
+ r() {
+    [ $# -gt 0 ] && fasd_cd -d "$*" && return
+    local dir
+    dir="$(fasd -tdl "$1" | fzf -1 -0 --tac --no-sort +m)" && cd "${dir}" || return 1
 }
 
 f() {
