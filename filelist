@@ -9,6 +9,7 @@ Scripts
 .config/nvim/plugins/local
 .config/termite
 .config/nvim/init.vim
+.config/nvim/colors
 .config/nvim/ginit.vim
 .zshrc
 
