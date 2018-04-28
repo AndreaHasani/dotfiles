@@ -6,6 +6,34 @@ set nocompatible
 set packpath+=~/.config/nvim/vivid/
 
 
+" Sane Defaults
+filetype on
+filetype plugin on
+filetype indent on
+set splitbelow
+set splitright
+set autoindent
+" set title
+set hidden
+set lazyredraw
+set history=5000
+set noswapfile
+set wrap
+set gdefault
+set re=1
+set mouse=
+set viewdir=~/.vim/view/
+set viewoptions=cursor,folds,slash,unix
+set foldmethod=manual
+set ignorecase
+set linebreak
+set smartcase
+set noshowmode
+" set nu
+set rnu
+set clipboard=unnamedplus
+let @/ = ""
+
 """ Vivid Config
 
 packadd Vivid.vim
@@ -51,9 +79,9 @@ call vivid#add('Shougo/echodoc.vim', {'enabled': 1, })
 call vivid#add('mattn/emmet-vim')
 call vivid#add('ludovicchabant/vim-gutentags', {'enabled': 1, })
 call vivid#add('Raimondi/delimitMate')
-call vivid#add('jiangmiao/auto-pairs')
-" call vivid#add('maralla/completor.vim')
-call vivid#add('Shougo/deoplete.nvim', {'enabled': 1, })
+call vivid#add('jiangmiao/auto-pairs', {'enabled': 1,})
+call vivid#add('maralla/completor.vim', {'enabled': 1,})
+" call vivid#add('Shougo/deoplete.nvim', {'enabled': 1, })
 call vivid#add('metakirby5/codi.vim', {'enabled': 1, })
 " call vivid#add('ervandew/supertab')
 
@@ -105,7 +133,7 @@ call vivid#add('2072/PHP-Indenting-for-VIm', {'enabled': 1, })
 
 call vivid#add('Vimjas/vim-python-pep8-indent', {'enabled': 1, })
 call vivid#add('kh3phr3n/python-syntax', {'enabled': 1, })
-call vivid#add('zchee/deoplete-jedi', {'enabled': 1, })
+" call vivid#add('zchee/deoplete-jedi', {'enabled': 1, })
 
 
 
@@ -146,11 +174,13 @@ nmap <F5> :TagbarToggle<cr>
 
 "" Deoplete
 " Enable
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
-""
 " Enable syntax plugins
 let python_highlight_all = 1
+
+" Echodoc Config
+call echodoc#enable()
 
 "" Completor Plugin Config
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -162,7 +192,6 @@ let g:buftabline_numbers = 1
 let g:buftabline_indicators = 1
 
 " Matchup Config
-
 let g:matchup_matchparen_status_offscreen = 1
 let g:matchup_transmute_enabled = 1
 let g:matchup_matchparen_stopline = 200
@@ -182,14 +211,14 @@ nmap <leader>u :UndotreeToggle<cr>
 " let g:neomake_echo_current_error = 0
 
 """ Ale Config
-" let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
+" let g:ale_lint_on_save = 1
 
 " Set linter delay in ms 
-let g:ale_lint_delay = 1000
+let g:ale_lint_delay = 200
 
 " if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 1
+" let g:ale_lint_on_enter = 1
 
 " Choose linters you want to run for that specific FileType
 let g:ale_linters = {
@@ -346,34 +375,6 @@ nnoremap J gJ
 " Map jj for fast exit
 imap jj <Esc>
 
-" Sane Defaults
-filetype on
-filetype plugin on
-filetype indent on
-set splitbelow
-set splitright
-set autoindent
-" set title
-set showcmd
-set hidden
-set lazyredraw
-set history=5000
-set noswapfile
-set wrap
-set gdefault
-set re=1
-set mouse=
-set viewdir=~/.vim/view/
-set viewoptions=cursor,folds,slash,unix
-set foldmethod=manual
-" set ignorecase
-set linebreak
-set smartcase
-set noshowmode
-" set nu
-set rnu
-set clipboard=unnamedplus
-let @/ = ""
 
 
 " Disable netrw
@@ -605,6 +606,7 @@ augroup END
 augroup Type
     au!
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    autocmd FileType python setlocal completeopt-=preview
 augroup END
 
 augroup EnterVim
