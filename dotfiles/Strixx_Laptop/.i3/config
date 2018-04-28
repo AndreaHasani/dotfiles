@@ -343,3 +343,185 @@ mode "resize" {
 	bindsym Escape mode "default"
 }
 bindsym $mod+Shift+e exec oblogout
+
+
+# Setting up modes
+
+bindsym Pause mode "Normal Mode"
+
+
+mode "Normal Mode" {
+
+    # start a terminal
+    bindsym $mod+Return exec /usr/bin/termite
+
+    # kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Scrachpad Settings
+    bindsym $mod+minus move scratchpad
+    bindsym $mod+plus scratchpad show
+
+    # Rename Workspace With Dialog
+    bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
+    bindsym $mod+Shift+n exec i3-input -F \
+    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':%s"' \
+    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': '
+
+    # change focus
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+
+    # alternatively, you can use the cursor keys:
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # split in horizontal orientation
+    bindsym $mod+Shift+v split h
+
+    # split in vertical orientation
+    bindsym $mod+v split v
+
+    # toggle tiling / floating
+    bindsym $mod+Shift+space floating toggle
+
+    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+    bindsym $mod+Shift+r restart
+
+    # Enable Screenshot
+    bindsym Print exec "scrot"
+
+    # Exec oblogout
+    bindsym $mod+Shift+e exec oblogout
+
+    # Hide Bar
+    bindsym $mod+b bar mode toggle
+
+    ## God Mode Commands
+    bindsym $mod+f fullscreen toggle
+    bindsym Super_L exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+    bindsym Super_R exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+
+    # switch to workspace
+    bindsym $mod+1 workspace $ws1 ; exec $script/get-workspacename
+    bindsym $mod+2 workspace $ws2 ; exec $script/get-workspacename
+    bindsym $mod+3 workspace $ws3 ; exec $script/get-workspacename
+    bindsym $mod+4 workspace $ws4 ; exec $script/get-workspacename
+    bindsym $mod+5 workspace $ws5 ; exec $script/get-workspacename
+    bindsym $mod+6 workspace $ws6 ; exec $script/get-workspacename
+    bindsym $mod+7 workspace number 7 ; exec $script/get-workspacename
+    bindsym $mod+8 workspace number 8 ; exec $script/get-workspacename
+    bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
+
+    # Other Modes
+    bindsym $mod+r mode "Resize Mode"
+    bindsym $mod+m mode "Move Mode"
+    bindsym $mod+q mode "Quick Mode"
+
+}
+
+mode "Resize Mode" {
+    bindsym h resize shrink width 15 px or 5 ppt
+    bindsym j resize grow height 15 px or 5 ppt
+    bindsym k resize shrink height 15 px or 5 ppt
+    bindsym l resize grow width 15 px or 5 ppt
+    bindsym Left resize shrink width 15 px or 5 ppt
+    bindsym Down resize grow height 15 px or 5 ppt
+    bindsym Up resize shrink height 15 px or 5 ppt
+    bindsym Right resize grow width 15 px or 5 ppt
+
+    # Escape Mode
+    bindsym Escape mode "Normal Mode"
+    bindsym Space mode "Normal Mode"
+    bindsym n mode "Normal Mode"
+    bindsym q mode "Quick Mode"
+    bindsym m mode "Move Mode"
+
+}
+
+mode "Move Mode" {
+    bindsym h move left 25px
+    bindsym j move down 25px
+    bindsym k move up 25px
+    bindsym l move right 25px
+
+    bindsym Left move left 25px
+    bindsym Down move down 25px
+    bindsym Up move up 25px
+    bindsym Right move right 25px
+
+    # Escape Mode
+    bindsym Escape mode "Normal Mode"
+    bindsym Space mode "Normal Mode"
+    bindsym n mode "Normal Mode"
+    bindsym q mode "Quick Mode"
+    bindsym r mode "Resize Mode"
+}
+
+mode "Quick Mode" {
+
+    # move focused container to workspace
+    bindsym 1 move container to workspace $ws1
+    bindsym 2 move container to workspace $ws2
+    bindsym 3 move container to workspace $ws3
+    bindsym 4 move container to workspace $ws4
+    bindsym 5 move container to workspace $ws5
+    bindsym 6 move container to workspace $ws6
+    bindsym 7 move container to workspace number 7
+    bindsym 8 move container to workspace number 8
+    bindsym 9 move container to workspace $ws9
+    bindsym 0 move container to workspace number 10
+
+    # change focus
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
+
+    # alternatively, you can use the cursor keys:
+    bindsym Left focus left
+    bindsym Down focus down
+    bindsym Up focus up
+    bindsym Right focus right
+
+    # enter fullscreen mode for the focused container
+    bindsym f fullscreen toggle
+
+    # change container layout (stacked, tabbed, toggle split)
+    bindsym w layout tabbed
+    bindsym e layout toggle split
+
+    # change focus between tiling / floating windows
+    bindsym space focus mode_toggle
+
+    # focus the parent container
+    bindsym p focus parent
+
+    # Sticky Window
+    bindsym s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
+
+    # Escape Mod
+    bindsym Escape mode "Normal Mode"
+    bindsym space mode "Normal Mode"
+    bindsym n mode "Normal Mode"
+    bindsym m mode "Move Mode"
+    bindsym r mode "Resize Mode"
+}
+
+# Making sure the default mode changes to Normal Mode
+exec_always --no-startup-id sleep 1 && xdotool key 127
+
+#Startup Scripts & Apllications
+exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
+exec --no-startup-id nm-applet &
+exec --no-startup-id dunst &
+exec --no-startup-id mpd &
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id volumeicon &
+exec --no-startup-id compton -b & syncthing -no-browser &
+exec --no-startup-id redshift &
+exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute

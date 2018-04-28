@@ -1,16 +1,15 @@
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
-!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
-!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
-!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
-!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
-!_TAG_PROGRAM_VERSION	0.0.0	/5010e849/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
 <C-j>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <C-j> :bd!<cr> :echo 'Buffer Deleted'<cr>$/;"	m
 <C-k>	dotfiles/common/.config/nvim/init.vim	/^inoremap <expr> <C-k> pumvisible() ? "\\<C-p>" : "\\<S-Tab>"$/;"	m
 <C-k>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <C-k> :set ro!<cr> :echo 'Set Readonly Toggle'<cr>$/;"	m
 <C-l>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <C-l> :bn<cr> :echo 'Buffer Next'<cr>$/;"	m
 <Esc>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>$/;"	m
-<F20>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <F20> :call ToggleContrast()<cr>:execute 'colorscheme ' . g:mylist[g:colorNumber]<cr>:c/;"	m
+<F20>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <F20> :call ToggleContrast()<cr>:execute 'colorscheme ' . g:mylist[g:colorNumber]<cr>:call TermColor()<cr>:execute "echom g:cc"<cr>$/;"	m
 <F2>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <F2> :buffers<CR>:buffer<space>$/;"	m
 <F3>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <F3> :let [&nu, &rnu] = [!&rnu, &nu+&rnu==1]<cr>$/;"	m
 <F5>	dotfiles/common/.config/nvim/init.vim	/^nmap <F5> :TagbarToggle<cr>$/;"	m
@@ -18,7 +17,7 @@
 <F8>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <F8> :call ColorSchemeToggle()<cr>:call TermColor()<cr>:execute "colo"<cr>$/;"	m
 <Leader><Leader>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <Leader><Leader> :e#<CR>$/;"	m
 <Leader>b	dotfiles/common/.config/nvim/init.vim	/^    nnoremap <silent> <Leader>b :call fzf#run({$/;"	m
-<S-F8>	dotfiles/common/.config/nvim/ginit.vim	/^nnoremap <S-F8> :call ToggleContrast()<cr>:execute 'colorscheme ' . g:mylist[g:colorNumber]<cr>:/;"	m
+<S-F8>	dotfiles/common/.config/nvim/ginit.vim	/^nnoremap <S-F8> :call ToggleContrast()<cr>:execute 'colorscheme ' . g:mylist[g:colorNumber]<cr>:execute "echom g:cc"<cr>$/;"	m
 <c-down>	dotfiles/common/.config/nvim/init.vim	/^noremap <silent> <c-down> :m '>+1<cr>gv=gv$/;"	m
 <c-h>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <c-h> :bp<cr> :echo 'Buffer Previous'<cr>$/;"	m
 <c-j>	dotfiles/common/.config/nvim/init.vim	/^inoremap <expr> <c-j> pumvisible() ? "\\<C-n>" : "\\<Tab>"$/;"	m
@@ -40,40 +39,27 @@
 <left>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <left> <c-w>h$/;"	m
 <right>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <right> <c-w>l$/;"	m
 <up>	dotfiles/common/.config/nvim/init.vim	/^nnoremap <up> <c-w>k$/;"	m
-@	dotfiles/common/.config/nvim/init.vim	/^xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>$/;"	m
-After	dotfiles/common/Scripts/systemd_scripts/chown-etc.service	/^After=multi-user.target$/;"	k	section:Unit
+ArgumentParser	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from argparse import ArgumentParser, SUPPRESS$/;"	i
+COMMASPACE	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from email.utils import COMMASPACE, formatdate$/;"	i
 ColorSchemeToggle	dotfiles/common/.config/nvim/init.vim	/^function! ColorSchemeToggle()$/;"	f
 Colorscheme	dotfiles/common/.config/nvim/init.vim	/^augroup Colorscheme$/;"	a
 Cscope	dotfiles/common/.config/nvim/init.vim	/^  command! -nargs=0 Cscope cs add $VIMSRC\/src\/cscope.out $VIMSRC\/src$/;"	c
 DefaultColors	dotfiles/common/.config/nvim/init.vim	/^function! DefaultColors()$/;"	f
-Description	dotfiles/common/Scripts/systemd_scripts/chown-etc.service	/^Description=Chown etc Folder$/;"	k	section:Unit
-Description	dotfiles/common/Scripts/systemd_scripts/ssh-agent.service	/^Description=SSH key agent$/;"	k	section:Unit
 DirvishMapping	dotfiles/common/.config/nvim/init.vim	/^function! DirvishMapping()$/;"	f
-EOF	dotfiles/common/Scripts/utility/ssh-add-pass	/^expect << EOF$/;"	h
 EnterVim	dotfiles/common/.config/nvim/init.vim	/^augroup EnterVim$/;"	a
-Environment	dotfiles/common/Scripts/systemd_scripts/ssh-agent.service	/^Environment=SSH_AUTH_SOCK=%t\/ssh-agent.socket$/;"	k	section:Service
-ExecStart	dotfiles/common/Scripts/systemd_scripts/chown-etc.service	/^ExecStart=\/usr\/bin\/rootscript$/;"	k	section:Service
-ExecStart	dotfiles/common/Scripts/systemd_scripts/ssh-agent.service	/^ExecStart=\/usr\/bin\/ssh-agent -D -a $SSH_AUTH_SOCK$/;"	k	section:Service
 ExecuteMacroOverVisualRange	dotfiles/common/.config/nvim/init.vim	/^function! ExecuteMacroOverVisualRange()$/;"	f
 F	dotfiles/common/.config/nvim/init.vim	/^map F <Plug>Sneak_F$/;"	m
-FZFBookmark	dotfiles/common/.config/nvim/init.vim	/^    command! FZFBookmark call fzf#run(fzf#wrap({'source': "cat ~\/.config\/nvim\/bookmarks | cut/;"	c
-FZFProject	dotfiles/common/.config/nvim/init.vim	/^    command! FZFProject call fzf#run(fzf#wrap({'source': 'cat ~\/.config\/nvim\/Project-Path ', /;"	c
-Filechooser Settings	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^[Filechooser Settings]$/;"	s
-FindAll	dotfiles/common/.config/nvim/init.vim	/^    command! FindAll call fzf#run(fzf#wrap({'source': 'cat ~\/.vifm\/fzf-read\/locate-file', 'si/;"	c
-FindHome	dotfiles/common/.config/nvim/init.vim	/^    command! FindHome call fzf#run(fzf#wrap({'source': 'find \/home\/strixx\/ -type f  ! \\( -pa/;"	c
-FindSession	dotfiles/common/.config/nvim/init.vim	/^    command! FindSession call fzf#run(fzf#wrap({'source': 'cd ~\/.config\/nvim\/session && readl/;"	c
-GeometryHeight	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^GeometryHeight=684$/;"	k	section:Filechooser Settings
-GeometryWidth	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^GeometryWidth=840$/;"	k	section:Filechooser Settings
-GeometryX	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^GeometryX=440$/;"	k	section:Filechooser Settings
-GeometryY	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^GeometryY=58$/;"	k	section:Filechooser Settings
-Install	dotfiles/common/Scripts/systemd_scripts/chown-etc.service	/^[Install]$/;"	s
-Install	dotfiles/common/Scripts/systemd_scripts/ssh-agent.service	/^[Install]$/;"	s
-J	dotfiles/common/.config/nvim/init.vim	/^    nmap <buffer> J <plug>UndotreeGoNextState$/;"	m
+FZFBookmark	dotfiles/common/.config/nvim/init.vim	/^    command! FZFBookmark call fzf#run(fzf#wrap({'source': "cat ~\/.config\/nvim\/bookmarks | cut -d ' ' -f 1", 'sink': 'e'}))$/;"	c
+FZFProject	dotfiles/common/.config/nvim/init.vim	/^    command! FZFProject call fzf#run(fzf#wrap({'source': 'cat ~\/.config\/nvim\/Project-Path ', 'sink': 'cd'}))$/;"	c
+FindAll	dotfiles/common/.config/nvim/init.vim	/^    command! FindAll call fzf#run(fzf#wrap({'source': 'cat ~\/.vifm\/fzf-read\/locate-file', 'sink': 'e'}))$/;"	c
+FindHome	dotfiles/common/.config/nvim/init.vim	/^    command! FindHome call fzf#run(fzf#wrap({'source': 'find \/home\/strixx\/ -type f  ! \\( -path "*cache*" -o -path "*fonts*" -o -path "*icons*" -o -path "*help*" -o -path "*log*" -o -path "afs" -o -path "var*" -o -path "lib*" -o -path "tmp*" -o -path "proc*" -o -path "*deps*" -o -path "*node*" -o -path "*\/src\/*" -o -path "*gem*" -o -path "*\/ruby\/*" \\) 2>&1 | grep -v "Permission denied"', 'sink': 'e'}))$/;"	c
+FindSession	dotfiles/common/.config/nvim/init.vim	/^    command! FindSession call fzf#run(fzf#wrap({'source': 'cd ~\/.config\/nvim\/session && readlink -f *', 'sink': function('s:LoadSession'), 'options': '-m +s'}))$/;"	c
 J	dotfiles/common/.config/nvim/init.vim	/^nnoremap J gJ$/;"	m
-K	dotfiles/common/.config/nvim/init.vim	/^    nmap <buffer> K <plug>UndotreeGoPreviousState$/;"	m
 K	dotfiles/common/.config/nvim/init.vim	/^nnoremap K i<cr><Esc>$/;"	m
-LocationMode	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^LocationMode=path-bar$/;"	k	section:Filechooser Settings
+LoadSession	dotfiles/common/.config/nvim/init.vim	/^function! s:LoadSession(session)$/;"	f
 Logger	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^class Logger():$/;"	c
+MIMEMultipart	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from email.mime.multipart import MIMEMultipart$/;"	i
+MIMEText	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from email.mime.text import MIMEText$/;"	i
 Mru	dotfiles/common/.config/nvim/init.vim	/^    command! Mru call fzf#run({$/;"	c
 NOTIFY_ERRORS	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^NOTIFY_ERRORS = []$/;"	v
 NOT_NOTIFY	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^        NOT_NOTIFY = False$/;"	v
@@ -82,18 +68,19 @@ NOT_NOTIFY	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^NOT_NOTIFY = True$
 NightsenseThemeSet	dotfiles/common/.config/nvim/colors/vrunchbang-dark.vim	/^augroup NightsenseThemeSet$/;"	a
 NightsenseThemeSet	dotfiles/common/.config/nvim/colors/vrunchbang-light.vim	/^augroup NightsenseThemeSet$/;"	a
 Notes	dotfiles/common/.config/nvim/init.vim	/^    command! Notes :10new ~\/Documents\/notes$/;"	c
+PIPE	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from subprocess import Popen, PIPE, STDOUT$/;"	i
+Popen	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from subprocess import Popen, PIPE, STDOUT$/;"	i
 ProjectFind	dotfiles/common/.config/nvim/init.vim	/^    command! ProjectFind call fzf#run(fzf#wrap({'source': 'find . -type f', 'sink': 'e'}))$/;"	c
+Q	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev Q q$/;"	m
+Q!	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev Q! q!$/;"	m
+Qall	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev Qall qall$/;"	m
+Qall!	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev Qall! qall!$/;"	m
 ReturnColorScheme	dotfiles/common/.config/nvim/init.vim	/^function! ReturnColorScheme()$/;"	f
 S	dotfiles/common/.config/nvim/init.vim	/^nmap <silent> S :<C-U>call sneak#wrap('',           2, 1, 2, 1)<CR>$/;"	m
-Service	dotfiles/common/Scripts/systemd_scripts/chown-etc.service	/^[Service]$/;"	s
-Service	dotfiles/common/Scripts/systemd_scripts/ssh-agent.service	/^[Service]$/;"	s
-Settings	dotfiles/common/.config/gtk-3.0/settings.ini	/^[Settings]$/;"	s
+STDOUT	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from subprocess import Popen, PIPE, STDOUT$/;"	i
+SUPPRESS	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from argparse import ArgumentParser, SUPPRESS$/;"	i
+SafeConfigParser	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from ConfigParser import SafeConfigParser$/;"	i
 Share	dotfiles/common/.config/nvim/init.vim	/^    command! -range=% Share exe <line1>. ','.<line2>.'w !vpaste ft='.&ft$/;"	c
-ShowHidden	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^ShowHidden=true$/;"	k	section:Filechooser Settings
-ShowSizeColumn	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^ShowSizeColumn=true$/;"	k	section:Filechooser Settings
-SortColumn	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^SortColumn=name$/;"	k	section:Filechooser Settings
-SortOrder	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^SortOrder=ascending$/;"	k	section:Filechooser Settings
-StartupMode	dotfiles/common/.config/gtk-2.0/gtkfilechooser.ini	/^StartupMode=recent$/;"	k	section:Filechooser Settings
 T	dotfiles/common/.config/nvim/init.vim	/^map T <Plug>Sneak_T$/;"	m
 TermColor	dotfiles/common/.config/nvim/init.vim	/^function! TermColor()$/;"	f
 ThemeSwitch	dotfiles/common/.config/nvim/init.vim	/^command! ThemeSwitch :call ColorSchemeToggle()$/;"	c
@@ -101,24 +88,28 @@ ToggleContrast	dotfiles/common/.config/nvim/init.vim	/^function! ToggleContrast(
 ToggleSyntax	dotfiles/common/.config/nvim/init.vim	/^function! ToggleSyntax()$/;"	f
 ToggleSyntaxLocal	dotfiles/common/.config/nvim/init.vim	/^function! ToggleSyntaxLocal()$/;"	f
 Type	dotfiles/common/.config/nvim/init.vim	/^augroup Type$/;"	a
-Type	dotfiles/common/Scripts/systemd_scripts/ssh-agent.service	/^Type=simple$/;"	k	section:Service
 Undotree_CustomMap	dotfiles/common/.config/nvim/init.vim	/^function! g:Undotree_CustomMap()$/;"	f
-Unit	dotfiles/common/Scripts/systemd_scripts/chown-etc.service	/^[Unit]$/;"	s
-Unit	dotfiles/common/Scripts/systemd_scripts/ssh-agent.service	/^[Unit]$/;"	s
-WantedBy	dotfiles/common/Scripts/systemd_scripts/chown-etc.service	/^WantedBy=multi-user.target$/;"	k	section:Install
-WantedBy	dotfiles/common/Scripts/systemd_scripts/ssh-agent.service	/^WantedBy=default.target$/;"	k	section:Install
+W!	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev W! w!$/;"	m
+WQ	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev WQ wq$/;"	m
+Wa	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev Wa wa$/;"	m
+Wq	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev Wq wq$/;"	m
 _	dotfiles/common/.config/nvim/init.vim	/^nmap _ :Dirvish<cr>$/;"	m
 __author__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^__author__ = "joe di castro - joe@joedicastro.com"$/;"	v
 __date__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^__date__ = "16\/9\/2012"$/;"	v
-__format__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def __format__(self, tit, cont, decor):$/;"	m	class:Logger
+__format__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def __format__(self, tit, cont, decor):$/;"	m	class:Logger	file:
 __init__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def __init__(self):$/;"	m	class:Logger
-__len__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def __len__(self):$/;"	m	class:Logger
+__len__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def __len__(self):$/;"	m	class:Logger	file:
 __license__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^__license__ = "GNU General Public License version 3"$/;"	v
 __version__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^__version__ = "0.15"$/;"	v
-antialias	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-xft-antialias=1$/;"	k	section:Settings
+arguments	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    cfg.add_argument("config_file", help="config file to import arguments")$/;"	i
 arguments	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def arguments():$/;"	f
+argv	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from sys import argv, exit$/;"	i
+base64	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import base64$/;"	i
 best_unit_size	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def best_unit_size(bytes_size):$/;"	f
 block	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def block(self, title, content):$/;"	m	class:Logger
+buflist	dotfiles/common/.config/nvim/init.vim	/^function! s:buflist()$/;"	f
+bufopen	dotfiles/common/.config/nvim/init.vim	/^function! s:bufopen(e)$/;"	f
+ccd	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev ccd Ccd$/;"	m
 changeWallpaper	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^def changeWallpaper(unused):$/;"	f
 check_execs_posix_win	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def check_execs_posix_win(*progs):$/;"	f
 colors_name	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let colors_name = "NeoSolarized"$/;"	v
@@ -133,13 +124,18 @@ colors_name	dotfiles/common/.config/nvim/colors/solarized8_light_low.vim	/^let c
 colors_name	dotfiles/common/.config/nvim/colors/vrunchbang-dark.vim	/^let colors_name = 'vrunchbang-dark'$/;"	v
 colors_name	dotfiles/common/.config/nvim/colors/vrunchbang-light.vim	/^let colors_name = 'vrunchbang-light'$/;"	v
 compress	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def compress(path):$/;"	f
-delta	dotfiles/common/.config/compton.conf	/^fade-delta = 4; # The time between steps in a fade in milliseconds. (default 10).$/;"	k
+csa	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csa cs add$/;"	m
+csf	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csf cs find$/;"	m
+csh	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csh cs help$/;"	m
+csk	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csk cs kill$/;"	m
+csr	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csr cs reset$/;"	m
+css	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev css cs show$/;"	m
 dirContents	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^    dirContents = listdir(runtime["path"])$/;"	v
-exclude	dotfiles/common/.config/compton.conf	/^shadow-exclude = [$/;"	k
+exists	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from os.path import isfile, join, exists$/;"	i
+exit	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from sys import argv, exit$/;"	i
 f	dotfiles/common/.config/nvim/init.vim	/^map f <Plug>Sneak_f$/;"	m
-fading	dotfiles/common/.config/compton.conf	/^fading = false; # Fade windows during opacity changes.$/;"	k
 filePath	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^        filePath = join(runtime["path"], fileName)$/;"	v
-focused	dotfiles/common/.config/compton.conf	/^mark-ovredir-focused = true;$/;"	k
+formatdate	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from email.utils import COMMASPACE, formatdate$/;"	i
 free	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def free(self, content):$/;"	m	class:Logger
 g:ale_fixers	dotfiles/common/.config/nvim/init.vim	/^let g:ale_fixers = {$/;"	v
 g:ale_lint_delay	dotfiles/common/.config/nvim/init.vim	/^let g:ale_lint_delay = 1000$/;"	v
@@ -152,10 +148,7 @@ g:ale_set_signs	dotfiles/common/.config/nvim/init.vim	/^let g:ale_set_signs=1$/;
 g:buftabline_indicators	dotfiles/common/.config/nvim/init.vim	/^let g:buftabline_indicators = 1$/;"	v
 g:buftabline_numbers	dotfiles/common/.config/nvim/init.vim	/^let g:buftabline_numbers = 1$/;"	v
 g:buftabline_show	dotfiles/common/.config/nvim/init.vim	/^let g:buftabline_show = 1$/;"	v
-g:cc	dotfiles/common/.config/nvim/init.vim	/^    let g:cc = g:contrastLevels[g:contrastVar]$/;"	v
 g:cc	dotfiles/common/.config/nvim/init.vim	/^let g:cc = g:contrastLevels[0]$/;"	v
-g:colorNumber	dotfiles/common/.config/nvim/init.vim	/^	let g:colorNumber = (g:colorNumber + 1) % len(g:mylist)$/;"	v
-g:colorNumber	dotfiles/common/.config/nvim/init.vim	/^    let g:colorNumber = 0$/;"	v
 g:colorNumber	dotfiles/common/.config/nvim/init.vim	/^let g:colorNumber = 0$/;"	v
 g:colors_name	dotfiles/common/.config/nvim/colors/base16-3024.vim	/^let g:colors_name = "base16-3024"$/;"	v
 g:colors_name	dotfiles/common/.config/nvim/colors/base16-apathy.vim	/^let g:colors_name = "base16-apathy"$/;"	v
@@ -264,7 +257,6 @@ g:colors_name	dotfiles/common/.config/nvim/colors/seoul256.vim	/^let g:colors_na
 g:colors_name	dotfiles/common/.config/nvim/colors/zenburn.vim	/^let g:colors_name="zenburn"$/;"	v
 g:contrast	dotfiles/common/.config/nvim/init.vim	/^let g:contrast = g:contrastLevels[0]$/;"	v
 g:contrastLevels	dotfiles/common/.config/nvim/init.vim	/^let g:contrastLevels = ['low', 'medium', 'high']$/;"	v
-g:contrastVar	dotfiles/common/.config/nvim/init.vim	/^    let g:contrastVar = (g:contrastVar + 1) % len(g:contrastLevels)$/;"	v
 g:contrastVar	dotfiles/common/.config/nvim/init.vim	/^let g:contrastVar = 0$/;"	v
 g:deoplete#enable_at_startup	dotfiles/common/.config/nvim/init.vim	/^let g:deoplete#enable_at_startup = 1$/;"	v
 g:dirvish_mode	dotfiles/common/.config/nvim/init.vim	/^let g:dirvish_mode =':sort ,^.*[\\\/],'$/;"	v
@@ -280,9 +272,6 @@ g:matchup_matchparen_stopline	dotfiles/common/.config/nvim/init.vim	/^let g:matc
 g:matchup_matchparen_timeout	dotfiles/common/.config/nvim/init.vim	/^let g:matchup_matchparen_timeout = 60$/;"	v
 g:matchup_motion_enabled	dotfiles/common/.config/nvim/init.vim	/^let g:matchup_motion_enabled = 0$/;"	v
 g:matchup_transmute_enabled	dotfiles/common/.config/nvim/init.vim	/^let g:matchup_transmute_enabled = 1$/;"	v
-g:mylist	dotfiles/common/.config/nvim/init.vim	/^	let g:mylist = ["base16-harmonic16-dark","base16-materia",]$/;"	v
-g:mylist	dotfiles/common/.config/nvim/init.vim	/^	let g:mylist = ["base16-material", "base16-flat", "base16-dracula"]$/;"	v
-g:mylist	dotfiles/common/.config/nvim/init.vim	/^	let g:mylist = ["base16-ocean"]$/;"	v
 g:neosolarized_bold	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let g:neosolarized_bold = get(g:, "neosolarized_bold", 1)$/;"	v
 g:neosolarized_contrast	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let g:neosolarized_contrast = get(g:, "neosolarized_contrast", "normal")$/;"	v
 g:neosolarized_diffmode	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let g:neosolarized_diffmode = get(g:, "neosolarized_diffmode", "normal")$/;"	v
@@ -302,11 +291,7 @@ g:sneak#absolute_dir	dotfiles/common/.config/nvim/init.vim	/^let g:sneak#absolut
 g:sneak#s_next	dotfiles/common/.config/nvim/init.vim	/^let g:sneak#s_next = 1$/;"	v
 g:sneak#target_labels	dotfiles/common/.config/nvim/init.vim	/^let g:sneak#target_labels = "123456789qwertasdfg"$/;"	v
 g:sneak#use_ic_scs	dotfiles/common/.config/nvim/init.vim	/^let g:sneak#use_ic_scs = 1$/;"	v
-g:syntaxLocalON	dotfiles/common/.config/nvim/init.vim	/^	let g:syntaxLocalON = 0$/;"	v
-g:syntaxLocalON	dotfiles/common/.config/nvim/init.vim	/^	let g:syntaxLocalON = 1$/;"	v
 g:syntaxLocalON	dotfiles/common/.config/nvim/init.vim	/^let g:syntaxLocalON = 1$/;"	v
-g:syntaxON	dotfiles/common/.config/nvim/init.vim	/^	let g:syntaxON = 0$/;"	v
-g:syntaxON	dotfiles/common/.config/nvim/init.vim	/^	let g:syntaxON = 1$/;"	v
 g:syntaxON	dotfiles/common/.config/nvim/init.vim	/^let g:syntaxON = 1$/;"	v
 g:terminal_color_0	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let g:terminal_color_0 = s:gui_base03$/;"	v
 g:terminal_color_0	dotfiles/common/.config/nvim/colors/base16-3024.vim	/^  let g:terminal_color_0 =  "#090300"$/;"	v
@@ -2421,9 +2406,13 @@ gF	dotfiles/common/.config/nvim/init.vim	/^nnoremap gF :cd <c-r><c-f><cr>$/;"	m
 get	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def get(self):$/;"	m	class:Logger
 get_scratchpad_windows	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def get_scratchpad_windows():$/;"	f
 get_size	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def get_size(the_path):$/;"	f
+getpass	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import getpass$/;"	i
+glob	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import glob$/;"	i
+gtk	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^        import gtk$/;"	i
+h	dotfiles/common/.config/nvim/colors/off.vim	/^function! s:h(group, style)$/;"	f
+h	dotfiles/common/.config/nvim/colors/paramount.vim	/^function! s:h(group, style)$/;"	f
 h	dotfiles/common/.config/nvim/colors/vrunchbang-dark.vim	/^fun! <sid>h(x, gf, gb, cf, cb, a, s)$/;"	f
 h	dotfiles/common/.config/nvim/colors/vrunchbang-light.vim	/^fun! <sid>h(x, gf, gb, cf, cb, a, s)$/;"	f
-h	dotfiles/common/.config/nvim/init.vim	/^    nmap <buffer> h -$/;"	m
 handleArguments	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^def handleArguments():$/;"	f
 header	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def header(self, url, msg):$/;"	m	class:Logger
 hi	dotfiles/common/.config/nvim/colors/base16-3024.vim	/^fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)$/;"	f
@@ -2522,43 +2511,40 @@ hi	dotfiles/common/.config/nvim/colors/base16-unikitty-dark.vim	/^fun <sid>hi(gr
 hi	dotfiles/common/.config/nvim/colors/base16-unikitty-light.vim	/^fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)$/;"	f
 hi	dotfiles/common/.config/nvim/colors/base16-woodland.vim	/^fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)$/;"	f
 hi	dotfiles/common/.config/nvim/colors/base16-zenburn.vim	/^fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)$/;"	f
-hinting	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-xft-hinting=1$/;"	k	section:Settings
-hintstyle	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-xft-hintstyle=hintfull$/;"	k	section:Settings
+hi	dotfiles/common/.config/nvim/colors/seoul256.vim	/^function! s:hi(item, fg, bg)$/;"	f
 hs_highlight_boolean	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let hs_highlight_boolean=1$/;"	v
 hs_highlight_delimiters	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let hs_highlight_delimiters=1$/;"	v
 i3	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^i3 = i3ipc.Connection()$/;"	v
-images	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-button-images=1$/;"	k	section:Settings
-images	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-menu-images=1$/;"	k	section:Settings
+i3ipc	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^import i3ipc$/;"	i
 isPicture	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^def isPicture(fileName):$/;"	f
+isfile	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from os.path import isfile, join, exists$/;"	i
 jj	dotfiles/common/.config/nvim/init.vim	/^imap jj <Esc>$/;"	m
-l	dotfiles/common/.config/nvim/init.vim	/^    nmap <buffer> l <cr>$/;"	m
+join	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from os.path import isfile, join, exists$/;"	i
 list	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def list(self, title, content):$/;"	m	class:Logger
+listdir	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from os import listdir$/;"	i
 main	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def main():$/;"	f
 main	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def main():$/;"	f
 mapleader	dotfiles/common/.config/nvim/init.vim	/^let mapleader = " "$/;"	v
 me	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^me = singleton.SingleInstance()$/;"	v
 mirror	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def mirror(args, log):$/;"	f
-name	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-cursor-theme-name=Adwaita$/;"	k	section:Settings
-name	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-font-name=Monospace 10$/;"	k	section:Settings
-name	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-icon-theme-name=Numix$/;"	k	section:Settings
-name	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-theme-name=Numix-Frost-Light$/;"	k	section:Settings
 netrw_mappings	dotfiles/common/.config/nvim/init.vim	/^augroup netrw_mappings$/;"	a
-not_found	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def not_found(app):$/;"	f	function:check_execs_posix_win	file:
+not_found	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def not_found(app):$/;"	f	function:check_execs_posix_win
+notes	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev notes Notes$/;"	m
 notify	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def notify(msg, status):$/;"	f
-o	dotfiles/common/.config/nvim/init.vim	/^    nmap <buffer> o <plug>UndotreeEnter$/;"	m
-opacity	dotfiles/common/.config/compton.conf	/^detect-client-opacity = true; # This prevents opacity being ignored for some apps. For example w/;"	k
-opacity	dotfiles/common/.config/compton.conf	/^inactive-opacity = 0.9$/;"	k
-overlay	dotfiles/common/.config/compton.conf	/^paint-on-overlay = true;$/;"	k
+os	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import os$/;"	i
 parse_parms	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def parse_parms(*parms):$/;"	f
 passArguments	dotfiles/common/Scripts/ftpScript/ftpconnect	/^function passArguments () {$/;"	f
-pixmap	dotfiles/common/.config/compton.conf	/^glx-no-rebind-pixmap = true;$/;"	k
+platform	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import platform$/;"	i
+pynotify	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^        import pynotify$/;"	i
 python_highlight_all	dotfiles/common/.config/nvim/init.vim	/^let python_highlight_all = 1$/;"	v
-radius	dotfiles/common/.config/compton.conf	/^shadow-radius = 7;		# The blur radius for shadows. (default 12)$/;"	k
+random	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from random import random$/;"	i
+re	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import re$/;"	i
+re	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^import re$/;"	i
 rofi_choose	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def rofi_choose(options):$/;"	f
 ruby_operators	dotfiles/common/.config/nvim/colors/seoul256.vim	/^let ruby_operators = 1$/;"	v
+run	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from subprocess import run$/;"	i
 runtime	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^runtime = {$/;"	v
 s	dotfiles/common/.config/nvim/init.vim	/^nmap <silent> s :<C-U>call sneak#wrap('',           2, 0, 2, 1)<CR>$/;"	m
-s:LoadSession	dotfiles/common/.config/nvim/init.vim	/^function! s:LoadSession(session)$/;"	f
 s:actual_white	dotfiles/common/.config/nvim/colors/off.vim	/^let s:actual_white    = { "gui": "#FFFFFF", "cterm": "231" }$/;"	v
 s:actual_white	dotfiles/common/.config/nvim/colors/paramount.vim	/^let s:actual_white    = { "gui": "#FFFFFF", "cterm": "231" }$/;"	v
 s:b	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^    let s:b           = ""$/;"	v
@@ -2584,8 +2570,6 @@ s:black	dotfiles/common/.config/nvim/colors/off.vim	/^let s:black           = { 
 s:black	dotfiles/common/.config/nvim/colors/paramount.vim	/^let s:black           = { "gui": "#000000", "cterm": "232" }$/;"	v
 s:blue	dotfiles/common/.config/nvim/colors/off.vim	/^let s:blue            = { "gui": "#20BBFC", "cterm": "12"  }$/;"	v
 s:blue	dotfiles/common/.config/nvim/colors/paramount.vim	/^let s:blue            = { "gui": "#20BBFC", "cterm": "12"  }$/;"	v
-s:buflist	dotfiles/common/.config/nvim/init.vim	/^function! s:buflist()$/;"	f
-s:bufopen	dotfiles/common/.config/nvim/init.vim	/^function! s:bufopen(e)$/;"	f
 s:c	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^    let s:c               = ",undercurl"$/;"	v
 s:colors_name	dotfiles/common/.config/nvim/colors/seoul256.vim	/^let s:colors_name = get(g:, 'colors_name', '')$/;"	v
 s:cterm00	dotfiles/common/.config/nvim/colors/base16-3024.vim	/^let s:cterm00 = "00"$/;"	v
@@ -6339,9 +6323,6 @@ s:gui_temp02	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^    let s:gu
 s:gui_temp03	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^    let s:gui_temp03    =   s:gui_base03$/;"	v
 s:gui_violet	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^    let s:gui_violet      = "#6c71c4"$/;"	v
 s:gui_yellow	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^    let s:gui_yellow      = "#b58900"$/;"	v
-s:h	dotfiles/common/.config/nvim/colors/off.vim	/^function! s:h(group, style)$/;"	f
-s:h	dotfiles/common/.config/nvim/colors/paramount.vim	/^function! s:h(group, style)$/;"	f
-s:hi	dotfiles/common/.config/nvim/colors/seoul256.vim	/^function! s:hi(item, fg, bg)$/;"	f
 s:i	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^    let s:i           = ""$/;"	v
 s:i	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^    let s:i           = ",italic"$/;"	v
 s:light	dotfiles/common/.config/nvim/colors/seoul256-light.vim	/^let s:light     = s:custom_bg >= 252 && s:custom_bg <= 256$/;"	v
@@ -6510,25 +6491,26 @@ s:yellow	dotfiles/common/.config/nvim/colors/off.vim	/^let s:yellow          = {
 s:yellow	dotfiles/common/.config/nvim/colors/paramount.vim	/^  let s:yellow          = s:dark_yellow$/;"	v
 s:yellow	dotfiles/common/.config/nvim/colors/paramount.vim	/^  let s:yellow          = s:light_yellow$/;"	v
 s:yellow	dotfiles/common/.config/nvim/colors/paramount.vim	/^let s:yellow          = { "gui": "#F3E430", "cterm": "11"  }$/;"	v
+sc	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev sc SessionClose$/;"	m
 send	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def send(self, subject, send_from='', dest_to='', mail_server='localhost',$/;"	m	class:Logger
 sessionman_save_on_exit	dotfiles/common/.config/nvim/init.vim	/^let sessionman_save_on_exit = 0$/;"	v
-shadow	dotfiles/common/.config/compton.conf	/^clear-shadow = true;		# Zero the part of the shadow's mask behind the window (experimental).$/;"	k
-shadow	dotfiles/common/.config/compton.conf	/^no-dnd-shadow = true;		# Don't draw shadows on DND windows.$/;"	k
-shadow	dotfiles/common/.config/compton.conf	/^no-dock-shadow = true;		# Avoid drawing shadows on dock\/panel windows.$/;"	k
-shadow	dotfiles/common/.config/compton.conf	/^shadow = true;			# Enabled client-side shadows on windows.$/;"	k
-size	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-cursor-theme-size=0$/;"	k	section:Settings
-size	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR$/;"	k	section:Settings
-sounds	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-enable-event-sounds=1$/;"	k	section:Settings
-sounds	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-enable-input-feedback-sounds=1$/;"	k	section:Settings
-stencil	dotfiles/common/.config/compton.conf	/^glx-no-stencil = true;$/;"	k
-step	dotfiles/common/.config/compton.conf	/^fade-in-step = 0.03; # Opacity change between steps while fading in. (default 0.028).$/;"	k
-step	dotfiles/common/.config/compton.conf	/^fade-out-step = 0.03; # Opacity change between steps while fading out. (default 0.03).$/;"	k
-style	dotfiles/common/.config/gtk-3.0/settings.ini	/^gtk-toolbar-style=GTK_TOOLBAR_BOTH$/;"	k	section:Settings
+share	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev share Share$/;"	m
+singleton	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from tendo import singleton$/;"	i
+sleep	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from time import sleep$/;"	i
+smtplib	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import smtplib$/;"	i
+socket	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import socket$/;"	i
+ss	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev ss SessionSave$/;"	m
+subprocess	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^import subprocess$/;"	i
+syn	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev syn call ToggleSyntax()<cr>:echom "Toggling Global Syntax"<cr>$/;"	m
+synL	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev synL call ToggleSyntaxLocal()<cr>:echom "Toggling Local Syntax"<cr>$/;"	m
+sys	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import sys$/;"	i
 t	dotfiles/common/.config/nvim/init.vim	/^map t <Plug>Sneak_t$/;"	m
+tarfile	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import tarfile$/;"	i
+tc	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev tc tabclose$/;"	m
 time	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def time(self, title):$/;"	m	class:Logger
+time	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import time$/;"	i
+tn	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev tn tabnew$/;"	m
 use_xprop	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def use_xprop(x):$/;"	f
-vte-terminal	dotfiles/common/.config/gtk-3.0/gtk.css	/^vte-terminal {$/;"	s
-wintypes	dotfiles/common/.config/compton.conf	/^wintypes:$/;"	k
+w	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev w w$/;"	m
+wQ	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev wQ wq$/;"	m
 write	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def write(self, append=False):$/;"	m	class:Logger
-x	dotfiles/common/.config/compton.conf	/^shadow-offset-x = -7;		# The left offset for shadows. (default -15)$/;"	k
-y	dotfiles/common/.config/compton.conf	/^shadow-offset-y = -7;		# The top offset for shadows. (default -15)$/;"	k

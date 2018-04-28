@@ -9,8 +9,8 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Desktop Config
-
 set $mod Mod1
+set $super = Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -30,18 +30,6 @@ font pango:inconsolata 14 bold
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec /usr/bin/termite
-
-# kill focused window
-bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym Super_L exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 #Declare Colors Variable
 
@@ -50,16 +38,10 @@ set $bg-color 	         #000000
 set $inactive-bg-color   #000000
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
-set $urgent-bg-color     #000000
-
-
-# Scrachpad Settings
-
-bindsym $mod+minus move scratchpad
-bindsym $mod+plus scratchpad show
+set $urgent-bg-color     #a6c10d
+set $urgent-fg-color     #000000
 
 #Set Script Derecotry
-
 set $script /home/strixx/Scripts/i3-scripts
 
 # Window Color
@@ -70,163 +52,55 @@ client.unfocused        #000000 #000000 #ffffff #000000   #222222
 client.urgent           #2f343a #ff0000 #ffffff #900000   #900000
 client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
 
-# Rename Workspace With Dialog
-
-bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
-bindsym $mod+Shift+n exec i3-input -F \
-	    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':%s"' \
-	    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': '
-
-# change focus
-		    bindsym $mod+h focus left
-		    bindsym $mod+j focus down
-		    bindsym $mod+k focus up
-		    bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
-		    bindsym $mod+Left focus left
-		    bindsym $mod+Down focus down
-		    bindsym $mod+Up focus up
-		    bindsym $mod+Right focus right
-
-# move focused window
-		    bindsym $mod+Shift+h move left
-		    bindsym $mod+Shift+j move down
-	    bindsym $mod+Shift+k move up
-	    bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys
-	    bindsym $mod+Shift+Left move left
-	    bindsym $mod+Shift+Down move down
-	    bindsym $mod+Shift+Up move up
-	    bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-	    bindsym $mod+Shift+v split h
-
-# split in vertical orientation
-	    bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-	    bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-	    bindsym $mod+s layout stacking
-	    bindsym $mod+w layout tabbed
-	    bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-	    bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-	    bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-	    bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
 # Workspace Variables
+set $ws1 "1:Desktop"
+set $ws2 "2:Terminal"
+set $ws3 "3:Browser"
+set $ws4 "4:NVIM"
+set $ws5 "5:WebWork"
+set $ws6 "6:Email"
+set $ws9 "9:Performance"
 
-	    set $ws1 "1:Desktop"
-	    set $ws2 "2:Terminal"
-	    set $ws3 "3:Browser"
-	    set $ws4 "4:NVIM"
-	    set $ws5 "5:WebWork"
-	    set $ws6 "6:Email"
-	    set $ws9 "9:Performance"
-
-# switch to workspace
-	    bindsym $mod+1 workspace $ws1 ; exec $script/get-workspacename
-	    bindsym $mod+2 workspace $ws2 ; exec $script/get-workspacename
-	    bindsym $mod+3 workspace $ws3 ; exec $script/get-workspacename
-	    bindsym $mod+4 workspace $ws4 ; exec $script/get-workspacename
-	    bindsym $mod+5 workspace $ws5 ; exec $script/get-workspacename
-	    bindsym $mod+6 workspace $ws6 ; exec $script/get-workspacename
-	    bindsym $mod+7 workspace number 7 ; exec $script/get-workspacename
-	    bindsym $mod+8 workspace number 8 ; exec $script/get-workspacename
-	    bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
-
-# move focused container to workspace
-	    bindsym $mod+Shift+1 move container to workspace $ws1
-	    bindsym $mod+Shift+2 move container to workspace $ws2
-	    bindsym $mod+Shift+3 move container to workspace $ws3
-	    bindsym $mod+Shift+4 move container to workspace $ws4
-	    bindsym $mod+Shift+5 move container to workspace $ws5
-	    bindsym $mod+Shift+6 move container to workspace $ws6
-	    bindsym $mod+Shift+7 move container to workspace number 7
-	    bindsym $mod+Shift+8 move container to workspace number 8
-	    bindsym $mod+Shift+9 move container to workspace $ws9
-	    bindsym $mod+Shift+0 move container to workspace number 10
 
 #i3-gaps
-
-	    gaps inner 10
-	    gaps outer 5
+gaps inner 10
+gaps outer 5
 
 # Specific Workspace Gapps
-
-	    workspace $ws3 gaps inner 0
-	    workspace $ws3 gaps outer 0
+workspace $ws3 gaps inner 0
+workspace $ws3 gaps outer 0
 
 #Hide Borders and Title
-
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1
 
 # Enable smart border
-
 smart_borders on
 
-# Enable Screenshot
+# Bar
+bar {
+    status_command py3status -c ~/.i3/i3status.conf
+    height 30
+    font pango:inconsolata 12, Awesome 10
+    separator_symbol " "
+    hidden_state hide
+    modifier $mod
+    strip_workspace_numbers no
+    colors {
 
-	    bindsym Mod1+BackSpace exec "scrot"
-
-# Sticky Window
-
-	    bindsym $mod+Shift+s sticky toggle
-
-# reload the configuration file
-	    bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-	    bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-
-	    bindsym $mod+r mode "resize"
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-
-
-
-	    bar {
-		status_command py3status -c ~/.i3/i3status.conf
-		    height 30
-		    font pango:inconsolata 12, Awesome 10
-		    separator_symbol " "
-		    hidden_state hide
-		    modifier $mod
-		    strip_workspace_numbers no
-		    colors {
-
-			separator #757575
-#                  border             background         text
-			    focused_workspace  $bg-color          $bg-color          $text-color
-			    inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-			    urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-		    }
-	    }
-# Hide Bar
-bindsym $mod+b bar mode toggle
+	separator #757575
+	#                  border             background         text
+	focused_workspace  $bg-color          $bg-color          $text-color
+	inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+	urgent_workspace   $urgent-bg-color   $urgent-bg-color   $urgent-fg-color
+}
+}
 
 # Disable Focus Follow Mouse
-
 focus_follows_mouse no
 
 
 ## Rules For Applications and Scripts
 # Floating Rules
-
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -237,18 +111,187 @@ for_window [title="Set password for your browser"] floating enable
 for_window [class="Oblogout"] floating enable
 
 ## Set Window Startup On specific Workspace
-
 for_window [title="mutt-specified"] move container to workspace 6:Email
 
 #nvim specific Workspaces
 for_window [title="nvim_default"] move container to workspace 4:NVIM
 for_window [class="Firefox"] move container to workspace 3:Browser
 
-# Set layout to tabbed 
+# Set layout to tabbed
 for_window [class = "Firefox"] layout tabbed
 
-#Startup Scripts & Apllications
 
+# Setting up modes
+
+bindsym Pause mode "Normal Mode"
+
+
+mode "Normal Mode" {
+
+    # start a terminal
+    bindsym $mod+Return exec /usr/bin/termite
+
+    # kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Scrachpad Settings
+    bindsym $mod+minus move scratchpad
+    bindsym $mod+plus scratchpad show
+
+    # Rename Workspace With Dialog
+    bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
+    bindsym $mod+Shift+n exec i3-input -F \
+    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':%s"' \
+    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': '
+
+    # change focus
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+
+    # alternatively, you can use the cursor keys:
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # split in horizontal orientation
+    bindsym $mod+Shift+v split h
+
+    # split in vertical orientation
+    bindsym $mod+v split v
+
+    # toggle tiling / floating
+    bindsym $mod+Shift+space floating toggle
+
+    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+    bindsym $mod+Shift+r restart
+
+    # Enable Screenshot
+    bindsym Print exec "scrot"
+
+    # Exec oblogout
+    bindsym $mod+Shift+e exec oblogout
+
+    # Hide Bar
+    bindsym $mod+b bar mode toggle
+
+    ## God Mode Commands
+    bindsym $mod+f fullscreen toggle
+    bindsym Super_L exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+    bindsym Super_R exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+
+    # switch to workspace
+    bindsym $mod+1 workspace $ws1 ; exec $script/get-workspacename
+    bindsym $mod+2 workspace $ws2 ; exec $script/get-workspacename
+    bindsym $mod+3 workspace $ws3 ; exec $script/get-workspacename
+    bindsym $mod+4 workspace $ws4 ; exec $script/get-workspacename
+    bindsym $mod+5 workspace $ws5 ; exec $script/get-workspacename
+    bindsym $mod+6 workspace $ws6 ; exec $script/get-workspacename
+    bindsym $mod+7 workspace number 7 ; exec $script/get-workspacename
+    bindsym $mod+8 workspace number 8 ; exec $script/get-workspacename
+    bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
+
+    # Other Modes
+    bindsym $mod+r mode "Resize Mode"
+    bindsym $mod+m mode "Move Mode"
+    bindsym $mod+q mode "Quick Mode"
+
+}
+
+mode "Resize Mode" {
+    bindsym h resize shrink width 15 px or 5 ppt
+    bindsym j resize grow height 15 px or 5 ppt
+    bindsym k resize shrink height 15 px or 5 ppt
+    bindsym l resize grow width 15 px or 5 ppt
+    bindsym Left resize shrink width 15 px or 5 ppt
+    bindsym Down resize grow height 15 px or 5 ppt
+    bindsym Up resize shrink height 15 px or 5 ppt
+    bindsym Right resize grow width 15 px or 5 ppt
+
+    # Escape Mode
+    bindsym Escape mode "Normal Mode"
+    bindsym Space mode "Normal Mode"
+    bindsym n mode "Normal Mode"
+    bindsym q mode "Quick Mode"
+    bindsym m mode "Move Mode"
+
+}
+
+mode "Move Mode" {
+    bindsym h move left 25px
+    bindsym j move down 25px
+    bindsym k move up 25px
+    bindsym l move right 25px
+
+    bindsym Left move left 25px
+    bindsym Down move down 25px
+    bindsym Up move up 25px
+    bindsym Right move right 25px
+
+    # Escape Mode
+    bindsym Escape mode "Normal Mode"
+    bindsym Space mode "Normal Mode"
+    bindsym n mode "Normal Mode"
+    bindsym q mode "Quick Mode"
+    bindsym r mode "Resize Mode"
+}
+
+mode "Quick Mode" {
+
+    # move focused container to workspace
+    bindsym 1 move container to workspace $ws1
+    bindsym 2 move container to workspace $ws2
+    bindsym 3 move container to workspace $ws3
+    bindsym 4 move container to workspace $ws4
+    bindsym 5 move container to workspace $ws5
+    bindsym 6 move container to workspace $ws6
+    bindsym 7 move container to workspace number 7
+    bindsym 8 move container to workspace number 8
+    bindsym 9 move container to workspace $ws9
+    bindsym 0 move container to workspace number 10
+
+    # change focus
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
+
+    # alternatively, you can use the cursor keys:
+    bindsym Left focus left
+    bindsym Down focus down
+    bindsym Up focus up
+    bindsym Right focus right
+
+    # enter fullscreen mode for the focused container
+    bindsym f fullscreen toggle
+
+    # change container layout (stacked, tabbed, toggle split)
+    bindsym w layout tabbed
+    bindsym e layout toggle split
+
+    # change focus between tiling / floating windows
+    bindsym space focus mode_toggle
+
+    # focus the parent container
+    bindsym p focus parent
+
+    # Sticky Window
+    bindsym s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
+
+    # Escape Mod
+    bindsym Escape mode "Normal Mode"
+    bindsym space mode "Normal Mode"
+    bindsym n mode "Normal Mode"
+    bindsym m mode "Move Mode"
+    bindsym r mode "Resize Mode"
+}
+
+# Making sure the default mode changes to Normal Mode
+exec_always --no-startup-id sleep 1 && xdotool key 127
+
+#Startup Scripts & Apllications
 exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
 exec --no-startup-id nm-applet &
 exec --no-startup-id dunst &
@@ -257,58 +300,4 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id volumeicon &
 exec --no-startup-id compton -b & syncthing -no-browser &
 exec --no-startup-id redshift &
-exec --no-startup-id sleep 5 && nvimqt-call default
-exec --no-startup-id sleep 2 && firefox
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
-
-# Workspaces Layout
-
-#AutoStart Apps To Specific Workspace
-
-#Bind Functions Keys
-
-#Bind Control+F4 To Mode Change "Battery-Performance"
-
-bindsym XF86LaunchB exec --no-startup-id "disableCore && i=$(< /sys/devices/system/cpu/cpu1/online) && if [ $i -eq 0 ]; then  notify-send.sh --replace-file=/tmp/mode 'PowerSave' -a 'Mode'; else notify-send.sh --replace-file=/tmp/mode 'Performance' -a 'Mode' ;fi &"
-
-
-# Audio Bind
-
-bindsym XF86AudioRaiseVolume exec --no-startup-id notify-send.sh --replace-file=/tmp/volumenotification -a "Volume" "$(amixer sset Master 5%+ | awk '/[0-9]+%/ {print $5}' | cut -c 2-4 | head -n1 | tr -d ] | tr -d % )%"
-bindsym XF86AudioLowerVolume exec --no-startup-id notify-send.sh --replace-file=/tmp/volumenotification -a "Volume" "$(amixer sset Master 5%- | awk '/[0-9]+%/ {print $5}' | cut -c 2-4 | head -n1 | tr -d ] | tr -d % )%"
-bindsym XF86AudioMute exec --no-startup-id $script/mute
-
-# Player Control
-
-bindsym XF86AudioPlay exec --no-startup-id mpc -p 6699 toggle
-bindsym XF86AudioNext exec --no-startup-id mpc -p 6699 next
-bindsym XF86AudioPrev exec --no-startup-id mpc -p 6699 prev
-
-# Vim Like Keybindings for i3
-
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-# These bindings trigger as soon as you enter the resize mode
-
-# Pressing left will shrink the window’s width.
-# Pressing right will grow the window’s width.
-# Pressing up will shrink the window’s height.
-# Pressing down will grow the window’s height.
-    bindsym $mod+h resize shrink width 5 px or 5 ppt
-	bindsym $mod+j resize grow height 5 px or 5 ppt
-	bindsym $mod+k resize shrink height 5 px or 5 ppt
-	bindsym $mod+l resize grow width 5 px or 5 ppt
-# same bindings, but for the arrow keys
-	bindsym Left resize shrink width 5 px or 5 ppt
-	bindsym Down resize grow height 5 px or 5 ppt
-	bindsym Up resize shrink height 5 px or 5 ppt
-	bindsym Right resize grow width 5 px or 5 ppt
-
-# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-
-bindsym $mod+Shift+e exec oblogout
