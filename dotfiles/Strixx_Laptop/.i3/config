@@ -7,6 +7,8 @@ font pango:inconsolata 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+### Variable
+
 #Declare Colors Variable
 set $bg-color 	         #000000
 set $inactive-bg-color   #000000
@@ -17,6 +19,15 @@ set $urgent-bg-color     #000000
 #Set Script Derecotry
 set $script /home/strixx/Scripts/i3-scripts
 
+# Workspace Variables
+set $ws1 "1:Desktop"
+set $ws2 "2:Terminal"
+set $ws3 "3:Browser"
+set $ws4 "4:WebWork"
+set $ws5 "5:Docker"
+set $ws9 "9:Notes"
+
+### Variable End
 
 ## Window Color
 # class                 border  backgr. text    indicator child_border
@@ -29,13 +40,6 @@ client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
 # Enable smart borders
 smart_borders on
 
-# Workspace Variables
-set $ws1 "1:Desktop"
-set $ws2 "2:Terminal"
-set $ws3 "3:Browser"
-set $ws4 "4:WebWork"
-set $ws5 "5:Docker"
-set $ws9 "9:Notes"
 
 #i3-gaps
 gaps inner 10
@@ -97,10 +101,6 @@ for_window [instance="Devtools"] floating enable, resize set 1000 400, move posi
 
 ### End Rules
 
-##AutoStart Apps To Specific Workspace
-#exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/pasqyra3d<enter><change-folder>\!<enter>'"
-#exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/novelepubs<enter><change-folder>\!<enter>'"
-#exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/novelepubs<enter><change-folder>\!<enter>'"
 
 ### Setting up modes
 bindsym $mod+Shift+F5 mode "Normal Mode"
@@ -305,6 +305,8 @@ mode "resize" {
 
 ### Ending Mode
 
+### Exec 
+
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key "Alt_R+Shift+F5"
 
@@ -320,3 +322,10 @@ exec --no-startup-id compton -b &
 exec --no-startup-id redshift &
 exec --no-startup-id locate --null * | xargs -r0 sh -c 'for i do [ -d "$i" ] && printf "%s\n" "$i"; done' sh {} +. {} | egrep -v "cache|log|functions|icons|odules|help|fonts" > ~/.vifm/fzf-read/locate
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
+
+##AutoStart Apps To Specific Workspace
+#exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/pasqyra3d<enter><change-folder>\!<enter>'"
+#exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/novelepubs<enter><change-folder>\!<enter>'"
+#exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/novelepubs<enter><change-folder>\!<enter>'"
+
+### Exec End
