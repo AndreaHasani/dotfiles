@@ -9,12 +9,19 @@ floating_modifier $mod
 
 ### Variable
 
+# Set Mode Names
+set $resize_mode Resize Mode
+set $quick_mode Quick Mode
+set $move_mode Move Mode
+set $screenshot_mode (c) Current Container | (f) Full Screen | (r) Region
+
 #Declare Colors Variable
 set $bg-color 	         #000000
 set $inactive-bg-color   #000000
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
-set $urgent-bg-color     #000000
+set $urgent-bg-color     #a6c10d
+set $urgent-fg-color     #000000
 
 #Set Script Derecotry
 set $script /home/strixx/Scripts/i3-scripts
@@ -40,7 +47,6 @@ client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
 # Enable smart borders
 smart_borders on
 
-
 #i3-gaps
 gaps inner 10
 gaps outer 5
@@ -49,8 +55,6 @@ gaps outer 5
 workspace $ws3 gaps inner 0
 workspace $ws3 gaps outer 0
 
-#Hide Borders and Title
-for_window [class="^.*"] border pixel 1
 
 bindsym Mod1+BackSpace exec "scrot"
 
@@ -59,7 +63,6 @@ bar {
     height 30
     font pango:inconsolata 12, Awesome 10
     separator_symbol " "
-    mode hide
     hidden_state hide
     modifier Mod1
     strip_workspace_numbers no
@@ -68,7 +71,7 @@ bar {
 	#                  border             background         text
 	focused_workspace  $bg-color          $bg-color          $text-color
 	inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-	urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	urgent_workspace   $urgent-bg-color   $urgent-bg-color   $urgent-fg-color
     }
 }
 
@@ -76,6 +79,8 @@ bar {
 focus_follows_mouse no
 
 ### Window role
+
+# Role
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -94,6 +99,7 @@ for_window [title = "dropdown_terminal"] move scratchpad, move position 270 0, r
 #Class
 for_window [class="Oblogout"] floating enable
 for_window [class="Lxappearance"] floating enable
+for_window [class="^.*"] border pixel 1
 for_window [class = "feh"] floating enable, resize set 600 600, move position center
 
 #Instance
@@ -101,8 +107,8 @@ for_window [instance="Devtools"] floating enable, resize set 1000 400, move posi
 
 ### End Rules
 
-
 ### Setting up modes
+
 bindsym $mod+Shift+F5 mode "Normal Mode"
 
 mode "Normal Mode" {
@@ -168,7 +174,7 @@ mode "Normal Mode" {
     bindsym $mod+Shift+r restart
 
     # Enable Screenshot
-    bindsym Print exec "scrot"
+    bindsym $mod+delete exec "scrot"
 
     # Exec oblogout
     bindsym $mod+Shift+e exec oblogout
@@ -193,18 +199,29 @@ mode "Normal Mode" {
     bindsym $mod+8 workspace number 8 ; exec $script/get-workspacename
     bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
 
+    # Move
+    bindsym $mod+Shift+h move left 25px
+    bindsym $mod+Shift+j move down 25px
+    bindsym $mod+Shift+k move up 25px
+    bindsym $mod+Shift+l move right 25px
+
+
     # Other Modes
-    bindsym $mod+r mode "Resize Mode"
-    bindsym $mod+m mode "Move Mode"
-    bindsym $mod+q mode "Quick Mode"
+    bindsym $mod+r mode "$resize_mode"
+    bindsym $mod+m mode "$move_mode"
+    bindsym $mod+q mode "$quick_mode"
+    bindsym $mod+Delete mode "$screenshot_mode"
 
 }
 
-mode "Resize Mode" {
+mode "$resize_mode" {
+
+    # Resize
     bindsym h resize shrink width 15 px or 5 ppt
     bindsym j resize grow height 15 px or 5 ppt
     bindsym k resize shrink height 15 px or 5 ppt
     bindsym l resize grow width 15 px or 5 ppt
+
     bindsym Left resize shrink width 15 px or 5 ppt
     bindsym Down resize grow height 15 px or 5 ppt
     bindsym Up resize shrink height 15 px or 5 ppt
@@ -212,33 +229,43 @@ mode "Resize Mode" {
 
     # Escape Mode
     bindsym Escape mode "Normal Mode"
-    bindsym Space mode "Normal Mode"
     bindsym n mode "Normal Mode"
     bindsym q mode "Quick Mode"
     bindsym m mode "Move Mode"
 
 }
 
-mode "Move Mode" {
+mode "$move_mode" {
+
+    # Move
     bindsym h move left 25px
     bindsym j move down 25px
     bindsym k move up 25px
     bindsym l move right 25px
 
-    bindsym Left move left 25px
-    bindsym Down move down 25px
-    bindsym Up move up 25px
-    bindsym Right move right 25px
+    # Move Center
+    bindsym space move position center
 
     # Escape Mode
     bindsym Escape mode "Normal Mode"
-    bindsym Space mode "Normal Mode"
     bindsym n mode "Normal Mode"
     bindsym q mode "Quick Mode"
     bindsym r mode "Resize Mode"
 }
 
-mode "Quick Mode" {
+mode "$screenshot_mode" {
+
+    # Screenshot
+    bindsym c exec maim -i $(xdotool getactivewindow) ~/Pictures/screenshots/Container\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
+    bindsym r exec maim -s ~/Pictures/screenshots/Region\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
+    bindsym f exec maim ~/Pictures/screenshots/Fullscreen\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
+
+    # Exit Mode
+    bindsym Escape mode "Normal Mode"
+
+}
+
+mode "$quick_mode" {
 
     # move focused container to workspace
     bindsym 1 move container to workspace $ws1
@@ -271,41 +298,30 @@ mode "Quick Mode" {
     bindsym w layout tabbed
     bindsym e layout toggle split
 
-    # change focus between tiling / floating windows
+    # # change focus between tiling / floating windows
+    bindsym $mod+space floating toggle
     bindsym space focus mode_toggle
 
     # focus the parent container
     bindsym p focus parent
 
+    #Kill
+    bindsym $mod+q kill
+
     # Sticky Window
     bindsym s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
 
     # Escape Mod
+
     bindsym Escape mode "Normal Mode"
-    bindsym space mode "Normal Mode"
     bindsym n mode "Normal Mode"
     bindsym m mode "Move Mode"
     bindsym r mode "Resize Mode"
 }
 
-mode "resize" {
-
-    bindsym $mod+h resize shrink width 5 px or 5 ppt
-    bindsym $mod+j resize grow height 5 px or 5 ppt
-    bindsym $mod+k resize shrink height 5 px or 5 ppt
-    bindsym $mod+l resize grow width 5 px or 5 ppt
-    bindsym Left resize shrink width 5 px or 5 ppt
-    bindsym Down resize grow height 5 px or 5 ppt
-    bindsym Up resize shrink height 5 px or 5 ppt
-    bindsym Right resize grow width 5 px or 5 ppt
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
 ### Ending Mode
 
-### Exec 
+### Exec
 
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key "Alt_R+Shift+F5"
