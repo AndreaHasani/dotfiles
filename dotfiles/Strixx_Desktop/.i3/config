@@ -177,9 +177,6 @@ mode "Normal Mode" {
     # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
     bindsym $mod+Shift+r restart
 
-    # Enable Screenshot
-    bindsym Print exec "scrot"
-
     # Exec oblogout
     bindsym $mod+Shift+e exec oblogout
 
@@ -209,7 +206,7 @@ mode "Normal Mode" {
     bindsym $mod+Shift+l move right 25px
 
     # Other Modes
-    bindsym $mod+r mode "$Resize_mode"
+    bindsym $mod+r mode "$resize_mode"
     bindsym $mod+m mode "$move_mode"
     bindsym $mod+q mode "$quick_mode"
     bindsym $mod+Delete mode "$screenshot_mode"
@@ -253,6 +250,18 @@ mode "$move_mode" {
     bindsym n mode "Normal Mode"
     bindsym q mode "$quick_mode"
     bindsym r mode "$Resize_mode"
+}
+
+mode "$screenshot_mode" {
+
+    # Screenshot
+    bindsym c exec maim -i $(xdotool getactivewindow) ~/Pictures/screenshots/Container\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
+    bindsym r exec maim -s ~/Pictures/screenshots/Region\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
+    bindsym f exec maim ~/Pictures/screenshots/Fullscreen\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
+
+    # Exit Mode
+    bindsym Escape mode "Normal Mode"
+
 }
 
 mode "$quick_mode" {

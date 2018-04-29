@@ -131,6 +131,7 @@ mode "Normal Mode" {
     bindsym $mod+k focus up
     bindsym $mod+l focus right
 
+    ## Laptop Only Bind
     #Bind Control+F4 To Mode Change "Battery-Performance"
     bindsym XF86LaunchB exec --no-startup-id "disableCore && i=$(< /sys/devices/system/cpu/cpu1/online) && if [ $i -eq 0 ]; then  notify-send.sh --replace-file=/tmp/mode 'PowerSave' -a 'Mode'; else notify-send.sh --replace-file=/tmp/mode 'Performance' -a 'Mode' ;fi &"
 
@@ -230,8 +231,8 @@ mode "$resize_mode" {
     # Escape Mode
     bindsym Escape mode "Normal Mode"
     bindsym n mode "Normal Mode"
-    bindsym q mode "Quick Mode"
-    bindsym m mode "Move Mode"
+    bindsym q mode "$quick_mode"
+    bindsym m mode "$move_mode"
 
 }
 
@@ -249,8 +250,8 @@ mode "$move_mode" {
     # Escape Mode
     bindsym Escape mode "Normal Mode"
     bindsym n mode "Normal Mode"
-    bindsym q mode "Quick Mode"
-    bindsym r mode "Resize Mode"
+    bindsym q mode "$quick_mode"
+    bindsym r mode "$resize_mode"
 }
 
 mode "$screenshot_mode" {
@@ -315,8 +316,8 @@ mode "$quick_mode" {
 
     bindsym Escape mode "Normal Mode"
     bindsym n mode "Normal Mode"
-    bindsym m mode "Move Mode"
-    bindsym r mode "Resize Mode"
+    bindsym m mode "$move_mode"
+    bindsym r mode "$resize_mode"
 }
 
 ### Ending Mode
