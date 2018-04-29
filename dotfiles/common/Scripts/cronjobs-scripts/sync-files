@@ -43,6 +43,7 @@ rsync -avz /home/strixx/.i3 $GIT/ &
 
 # Sync scripts
 rsync -avz /home/strixx/Documents/Scripts $Temp/Documents/ &
+rsync -avz /home/strixx/Scripts $Temp/ &
 
 # Sync On 3 devices
 rsync -avz /home/strixx/.password-store $SyncFolder/ &

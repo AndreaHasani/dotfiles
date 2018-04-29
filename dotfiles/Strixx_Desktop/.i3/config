@@ -30,6 +30,13 @@ font pango:inconsolata 14 bold
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+### Variable
+
+# Set Mode Names
+set $resize_mode Resize Mode
+set $quick_mode Quick Mode
+set $move_mode Move Mode
+set $screenshot_mode (c) Current Container | (f) Full Screen | (r) Region
 
 #Declare Colors Variable
 
@@ -46,10 +53,10 @@ set $script /home/strixx/Scripts/i3-scripts
 
 # Window Color
 # class                 border  backgr. text    indicator child_border
-client.focused          #000000 #000000 #ff0000 #0077ff   #ff0000
-client.focused_inactive #000000 #5f676a #ffffff #484e50
-client.unfocused        #000000 #000000 #ffffff #000000   #222222
-client.urgent           #2f343a #ff0000 #ffffff #900000   #900000
+client.focused          #ff0000 #ff0000 #ffffff #0077ff   #ff0000
+client.focused_inactive #ff0000 #5f676a #ffffff #484e50
+client.unfocused        #ff0000 #222222 #888888 #000000   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
 
 # Workspace Variables
@@ -158,6 +165,12 @@ mode "Normal Mode" {
     # split in vertical orientation
     bindsym $mod+v split v
 
+    # Scrachpad Settings
+    bindsym $mod+minus move scratchpad
+    bindsym $mod+plus exec --no-startup-id "python $script/i3-scripts/i3-scratchpad-rofi.py"
+
+    # Drop down terminal
+    bindsym $mod+Shift+t [title="dropdown_terminal"] scratchpad show
     # toggle tiling / floating
     bindsym $mod+Shift+space floating toggle
 
@@ -189,18 +202,28 @@ mode "Normal Mode" {
     bindsym $mod+8 workspace number 8 ; exec $script/get-workspacename
     bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
 
+    # Move
+    bindsym $mod+Shift+h move left 25px
+    bindsym $mod+Shift+j move down 25px
+    bindsym $mod+Shift+k move up 25px
+    bindsym $mod+Shift+l move right 25px
+
     # Other Modes
-    bindsym $mod+r mode "Resize Mode"
-    bindsym $mod+m mode "Move Mode"
-    bindsym $mod+q mode "Quick Mode"
+    bindsym $mod+r mode "$Resize_mode"
+    bindsym $mod+m mode "$move_mode"
+    bindsym $mod+q mode "$quick_mode"
+    bindsym $mod+Delete mode "$screenshot_mode"
 
 }
 
-mode "Resize Mode" {
+mode "$Resize_mode" {
+
+    # Resize
     bindsym h resize shrink width 15 px or 5 ppt
     bindsym j resize grow height 15 px or 5 ppt
     bindsym k resize shrink height 15 px or 5 ppt
     bindsym l resize grow width 15 px or 5 ppt
+
     bindsym Left resize shrink width 15 px or 5 ppt
     bindsym Down resize grow height 15 px or 5 ppt
     bindsym Up resize shrink height 15 px or 5 ppt
@@ -208,33 +231,31 @@ mode "Resize Mode" {
 
     # Escape Mode
     bindsym Escape mode "Normal Mode"
-    bindsym Space mode "Normal Mode"
     bindsym n mode "Normal Mode"
-    bindsym q mode "Quick Mode"
-    bindsym m mode "Move Mode"
+    bindsym q mode "$quick_mode"
+    bindsym m mode "$move_mode"
 
 }
 
-mode "Move Mode" {
+mode "$move_mode" {
+
+    # Move
     bindsym h move left 25px
     bindsym j move down 25px
     bindsym k move up 25px
     bindsym l move right 25px
 
-    bindsym Left move left 25px
-    bindsym Down move down 25px
-    bindsym Up move up 25px
-    bindsym Right move right 25px
+    # Move Center
+    bindsym space move position center
 
     # Escape Mode
     bindsym Escape mode "Normal Mode"
-    bindsym Space mode "Normal Mode"
     bindsym n mode "Normal Mode"
-    bindsym q mode "Quick Mode"
-    bindsym r mode "Resize Mode"
+    bindsym q mode "$quick_mode"
+    bindsym r mode "$Resize_mode"
 }
 
-mode "Quick Mode" {
+mode "$quick_mode" {
 
     # move focused container to workspace
     bindsym 1 move container to workspace $ws1
@@ -267,21 +288,25 @@ mode "Quick Mode" {
     bindsym w layout tabbed
     bindsym e layout toggle split
 
-    # change focus between tiling / floating windows
+    # # change focus between tiling / floating windows
+    bindsym $mod+space floating toggle
     bindsym space focus mode_toggle
 
     # focus the parent container
     bindsym p focus parent
 
+    #Kill
+    bindsym $mod+q kill
+
     # Sticky Window
     bindsym s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
 
     # Escape Mod
+
     bindsym Escape mode "Normal Mode"
-    bindsym space mode "Normal Mode"
     bindsym n mode "Normal Mode"
-    bindsym m mode "Move Mode"
-    bindsym r mode "Resize Mode"
+    bindsym m mode "$move_mode"
+    bindsym r mode "$Resize_mode"
 }
 
 # Making sure the default mode changes to Normal Mode
