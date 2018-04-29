@@ -61,7 +61,6 @@ set $ws5 "5:WebWork"
 set $ws6 "6:Email"
 set $ws9 "9:Performance"
 
-
 #i3-gaps
 gaps inner 10
 gaps outer 5
@@ -100,26 +99,23 @@ focus_follows_mouse no
 
 
 ## Rules For Applications and Scripts
-# Floating Rules
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+
 for_window [title="Set password for your browser"] floating enable
-for_window [class="Oblogout"] floating enable
-
-## Set Window Startup On specific Workspace
 for_window [title="mutt-specified"] move container to workspace 6:Email
-
-#nvim specific Workspaces
 for_window [title="nvim_default"] move container to workspace 4:NVIM
+for_window [title="Transmission"] floating enable. resize set 400 400, move position center
+
+for_window [class="Oblogout"] floating enable
 for_window [class="Firefox"] move container to workspace 3:Browser
-
-# Set layout to tabbed
 for_window [class = "Firefox"] layout tabbed
-
+for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
+for_window [class = "feh"] floating enable, resize set 500 500, move position center
 
 # Setting up modes
 
@@ -289,7 +285,7 @@ mode "Quick Mode" {
 }
 
 # Making sure the default mode changes to Normal Mode
-exec_always --no-startup-id sleep 1 && xdotool key 127
+exec_always --no-startup-id sleep 0.1 && xdotool key 127
 
 #Startup Scripts & Apllications
 exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
@@ -297,6 +293,7 @@ exec --no-startup-id nm-applet &
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id transmission-gtk -m &
 exec --no-startup-id volumeicon &
 exec --no-startup-id compton -b & syncthing -no-browser &
 exec --no-startup-id redshift &
