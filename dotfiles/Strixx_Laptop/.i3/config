@@ -64,6 +64,7 @@ bar {
     font pango:inconsolata 12, Awesome 10
     separator_symbol " "
     hidden_state hide
+    mode hide
     modifier Mod1
     strip_workspace_numbers no
     colors {
@@ -174,9 +175,6 @@ mode "Normal Mode" {
     # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
     bindsym $mod+Shift+r restart
 
-    # Enable Screenshot
-    bindsym $mod+delete exec "scrot"
-
     # Exec oblogout
     bindsym $mod+Shift+e exec oblogout
 
@@ -205,7 +203,6 @@ mode "Normal Mode" {
     bindsym $mod+Shift+j move down 25px
     bindsym $mod+Shift+k move up 25px
     bindsym $mod+Shift+l move right 25px
-
 
     # Other Modes
     bindsym $mod+r mode "$resize_mode"

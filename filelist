@@ -2,6 +2,7 @@
 .config/dunst
 .oh-my-zsh/alias/zalias_default
 .ncmpcpp/bindings
+.vifm
 .ncmpcpp/config
 Scripts
 .config/gtk-2.0
