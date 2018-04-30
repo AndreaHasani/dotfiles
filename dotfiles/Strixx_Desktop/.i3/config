@@ -209,7 +209,7 @@ mode "Normal Mode" {
     bindsym $mod+r mode "$resize_mode"
     bindsym $mod+m mode "$move_mode"
     bindsym $mod+q mode "$quick_mode"
-    bindsym $mod+Delete mode "$screenshot_mode"
+    bindsym Print mode "$screenshot_mode"
 
 }
 
@@ -217,8 +217,8 @@ mode "$Resize_mode" {
 
     # Resize
     bindsym h resize shrink width 15 px or 5 ppt
-    bindsym j resize grow height 15 px or 5 ppt
-    bindsym k resize shrink height 15 px or 5 ppt
+    bindsym j resize shrink height 15 px or 5 ppt
+    bindsym k resize grow height 15 px or 5 ppt
     bindsym l resize grow width 15 px or 5 ppt
 
     bindsym Left resize shrink width 15 px or 5 ppt
