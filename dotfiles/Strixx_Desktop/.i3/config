@@ -63,10 +63,10 @@ client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
 set $ws1 "1:Desktop"
 set $ws2 "2:Terminal"
 set $ws3 "3:Browser"
-set $ws4 "4:NVIM"
-set $ws5 "5:WebWork"
-set $ws6 "6:Email"
-set $ws9 "9:Performance"
+set $ws4 "4:WebWork"
+set $ws5 "5:Docker"
+set $ws8 "8:Chat"
+set $ws9 "9:File Manager"
 
 #i3-gaps
 gaps inner 10
@@ -104,25 +104,34 @@ bar {
 # Disable Focus Follow Mouse
 focus_follows_mouse no
 
+### Start Roles
 
-## Rules For Applications and Scripts
+# Role
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
+
+# Type
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
+# Title
 for_window [title="Set password for your browser"] floating enable
 for_window [title="mutt-specified"] move container to workspace 6:Email
 for_window [title="nvim_default"] move container to workspace 4:NVIM
 for_window [title="Transmission"] floating enable. resize set 400 400, move position center
 
+# Class
 for_window [class="Oblogout"] floating enable
 for_window [class="Firefox"] move container to workspace 3:Browser
 for_window [class = "Firefox"] layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
+
+### End Roles
+
+### Starting Modes
 
 # Setting up modes
 
@@ -196,7 +205,7 @@ mode "Normal Mode" {
     bindsym $mod+5 workspace $ws5 ; exec $script/get-workspacename
     bindsym $mod+6 workspace $ws6 ; exec $script/get-workspacename
     bindsym $mod+7 workspace number 7 ; exec $script/get-workspacename
-    bindsym $mod+8 workspace number 8 ; exec $script/get-workspacename
+    bindsym $mod+8 workspace $ws8 ; exec $script/get-workspacename
     bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
 
     # Move
@@ -274,7 +283,7 @@ mode "$quick_mode" {
     bindsym 5 move container to workspace $ws5
     bindsym 6 move container to workspace $ws6
     bindsym 7 move container to workspace number 7
-    bindsym 8 move container to workspace number 8
+    bindsym 8 move container to workspace $ws8
     bindsym 9 move container to workspace $ws9
     bindsym 0 move container to workspace number 10
 
@@ -318,17 +327,26 @@ mode "$quick_mode" {
     bindsym r mode "$Resize_mode"
 }
 
+### End Modes
+
+### Start Exec
+
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key 127
 
-#Startup Scripts & Apllications
-exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
-exec --no-startup-id nm-applet &
+## Startup Daemouns
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec --no-startup-id transmission-gtk -m &
-exec --no-startup-id volumeicon &
 exec --no-startup-id compton -b & syncthing -no-browser &
 exec --no-startup-id redshift &
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
+
+## Startup Icons
+exec --no-startup-id nm-applet &
+exec --no-startup-id transmission-gtk -m &
+exec --no-startup-id volumeicon &
+
+
+### End Exec

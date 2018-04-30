@@ -1,0 +1,34 @@
+" Default keys
+nmap <Space>r :restart<cr>
+nmap <Space>ud :unzipTo<cr>
+nmap <Space>uu :unzip<cr>
+map w :view <cr>
+nmap <Space>bg :wallpaperScale <cr>
+map s t
+nmap v av
+vmap v <cr>
+map S :invert s<cr>
+
+" Map Sort Commands to S
+
+nmap <Space>St :set sort=ctime<space>dir<cr>     "Sort By time (Dir Included)
+nmap <Space>Ss :set sort=size<space>dir<cr>     "Sort By size (Dir Included)
+nmap <Space>Sn :set sort=iname<space>dir<cr>     "Sort By name (Dir Included)
+nmap <Space>d za
+nmap <Space>Sa :set sortorder=descending<cr>     "Sort order descending (Dir Included)
+nmap <Space>Sd :set sortorder=ascending<cr>     "Sort order ascending (Dir Included)
+
+" Map Sync commands to leader s
+
+
+" Map E to edit on terminal instance and E to open another terminal instance and edit
+
+nmap E :nvimInstance
+
+" FZF Mappings
+
+nmap <Space>fr :fzfrecent<cr>
+nmap <Space>fd :fzfalldir<cr>
+nmap <Space>fc :fzfcurrentdir<cr>
+nmap <Space>fb :fzfbookmarks<cr>
+
