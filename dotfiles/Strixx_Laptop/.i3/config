@@ -32,7 +32,10 @@ set $ws2 "2:Terminal"
 set $ws3 "3:Browser"
 set $ws4 "4:WebWork"
 set $ws5 "5:Docker"
-set $ws9 "9:Notes"
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:Chat"
+set $ws9 "9:File Manager"
 
 ### Variable End
 
@@ -55,6 +58,11 @@ gaps outer 5
 workspace $ws3 gaps inner 0
 workspace $ws3 gaps outer 0
 
+workspace $ws9 gaps inner 0
+workspace $ws9 gaps outer 0
+
+workspace $ws8 gaps inner 0
+workspace $ws8 gaps outer 0
 
 bindsym Mod1+BackSpace exec "scrot"
 
@@ -96,6 +104,8 @@ for_window [window_type="menu"] floating enable
 for_window [title="Set password for your browser"] floating enable
 for_window [title="Library"] floating enable, resize set 800 600, move position center
 for_window [title = "dropdown_terminal"] move scratchpad, move position 270 0, resize set 800 300,sticky toggle, scratchpad show
+for_window [title = "vifm_startup"] move container to workspace $ws9
+
 
 #Class
 for_window [class="Oblogout"] floating enable
@@ -194,8 +204,8 @@ mode "Normal Mode" {
     bindsym $mod+4 workspace $ws4 ; exec $script/get-workspacename
     bindsym $mod+5 workspace $ws5 ; exec $script/get-workspacename
     bindsym $mod+6 workspace $ws6 ; exec $script/get-workspacename
-    bindsym $mod+7 workspace number 7 ; exec $script/get-workspacename
-    bindsym $mod+8 workspace number 8 ; exec $script/get-workspacename
+    bindsym $mod+7 workspace $ws7 ; exec $script/get-workspacename
+    bindsym $mod+8 workspace $ws8 ; exec $script/get-workspacename
     bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
 
     # Move
@@ -272,8 +282,8 @@ mode "$quick_mode" {
     bindsym 4 move container to workspace $ws4
     bindsym 5 move container to workspace $ws5
     bindsym 6 move container to workspace $ws6
-    bindsym 7 move container to workspace number 7
-    bindsym 8 move container to workspace number 8
+    bindsym 7 move container to workspace $ws7
+    bindsym 8 move container to workspace $ws8
     bindsym 9 move container to workspace $ws9
     bindsym 0 move container to workspace number 10
 
@@ -324,18 +334,23 @@ mode "$quick_mode" {
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key "Alt_R+Shift+F5"
 
-#Startup Scripts & Apllications
-exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
-exec --no-startup-id nm-applet &
-exec --no-startup-id dunst &
-exec --no-startup-id termite --title="dropdown_terminal"
+# Startup daemon
 exec --no-startup-id mpd &
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec --no-startup-id volumeicon &
-exec --no-startup-id compton -b &
+exec --no-startup-id dunst &
+exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
 exec --no-startup-id redshift &
-exec --no-startup-id locate --null * | xargs -r0 sh -c 'for i do [ -d "$i" ] && printf "%s\n" "$i"; done' sh {} +. {} | egrep -v "cache|log|functions|icons|odules|help|fonts" > ~/.vifm/fzf-read/locate
+exec --no-startup-id compton -b &
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id locate --null * | xargs -r0 sh -c 'for i do [ -d "$i" ] && printf "%s\n" "$i"; done' sh {} +. {} | egrep -v "cache|log|functions|icons|odules|help|fonts" > ~/.vifm/fzf-read/locate &
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
+
+# Startup Apps
+exec --no-startup-id termite --title="dropdown_terminal"
+exec --no-startup-id termite --title="vifm_startup" -e "vifm"
+
+# Startup Icons
+exec --no-startup-id nm-applet &
+exec --no-startup-id volumeicon &
 
 ##AutoStart Apps To Specific Workspace
 #exec --no-startup-id termite -t 'mutt-specified' -e "mutt -e 'push <enter-command>source\ ~/.mutt/accounts/pasqyra3d<enter><change-folder>\!<enter>'"
