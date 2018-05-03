@@ -1,0 +1,242 @@
+Apr 30 18:25 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Apr 30 18:25 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Apr 30 18:25 : client: [0] opened from 127.0.0.1:45328
+Apr 30 18:25 : exception: Failed to read mixer for 'default detected output': no such mixer control: PCM
+Apr 30 18:26 : client: [0] closed
+Apr 30 18:26 : client: [1] opened from 127.0.0.1:45330
+Apr 30 18:26 : client: [1] closed
+Apr 30 18:26 : client: [2] opened from 127.0.0.1:45338
+Apr 30 18:26 : client: [2] closed
+Apr 30 18:26 : update: added /Wonderful Tonight - Eric Clapton (Cover).mp3
+Apr 30 18:26 : update: added /fate／zero op2-to the beginning.mp3
+Apr 30 18:26 : update: added /abingdon boys school - strength.mp3
+Apr 30 18:26 : update: added /Wisin & Yandel - Dime Que Te Pasó.mp3
+Apr 30 18:26 : update: added /Ylli Baka - Vallja e hajduteve (Official Video).mp3
+Apr 30 18:26 : update: added /Ylli Baka - Sa e dua Shqiperine (Official Video HD).mp3
+Apr 30 18:26 : update: added /Vojsava Alia & Mikel Rapaj - Nuse te percjellim sot (Official Video HD).mp3
+Apr 30 18:26 : update: added /Yuna Ito - Alone Again.mp3
+Apr 30 18:26 : update: added /Ylli Baka - Fisnik dem baba dem (Official Video).mp3
+Apr 30 18:26 : update: added /Wisin & Yandel - Gracias A Ti (Remix) ft. Enrique Iglesias.mp3
+Apr 30 18:26 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Apr 30 18:26 : client: [0] opened from 127.0.0.1:45340
+Apr 30 18:26 : exception: Failed to read mixer for 'default detected output': no such mixer control: PCM
+Apr 30 18:27 : client: [0] closed
+Apr 30 18:28 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Apr 30 18:28 : client: [0] opened from 127.0.0.1:45348
+Apr 30 18:28 : client: [0] closed
+Apr 30 18:28 : client: [1] opened from 127.0.0.1:45360
+Apr 30 18:29 : client: [1] closed
+Apr 30 18:29 : client: [2] opened from 127.0.0.1:45368
+Apr 30 18:30 : player: played "Wisin & Yandel - Dime Que Te Pasó.mp3"
+Apr 30 18:31 : client: [2] closed
+Apr 30 18:31 : client: [3] opened from 127.0.0.1:45396
+Apr 30 18:34 : client: [3] closed
+Apr 30 18:35 : player: played "Wisin & Yandel - Dime Que Te Pasó.mp3"
+Apr 30 18:36 : client: [4] opened from 127.0.0.1:45486
+Apr 30 18:39 : player: played "Wisin & Yandel - Dime Que Te Pasó.mp3"
+Apr 30 18:46 : update: removing abingdon boys school - strength.mp3
+Apr 30 18:46 : update: removing Wonderful Tonight - Eric Clapton (Cover).mp3
+Apr 30 18:46 : update: removing Wisin & Yandel - Gracias A Ti (Remix) ft. Enrique Iglesias.mp3
+Apr 30 18:46 : update: removing Wisin & Yandel - Dime Que Te Pasó.mp3
+Apr 30 18:46 : update: removing Vojsava Alia & Mikel Rapaj - Nuse te percjellim sot (Official Video HD).mp3
+Apr 30 18:46 : update: removing fate／zero op2-to the beginning.mp3
+Apr 30 18:46 : update: removing Ylli Baka - Vallja e hajduteve (Official Video).mp3
+Apr 30 18:46 : update: removing Ylli Baka - Sa e dua Shqiperine (Official Video HD).mp3
+Apr 30 18:46 : update: removing Ylli Baka - Fisnik dem baba dem (Official Video).mp3
+Apr 30 18:46 : update: removing Yuna Ito - Alone Again.mp3
+Apr 30 18:48 : client: [4] closed
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/30_L'arcobaleno_99.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/04_Qua La Mano_79.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/07_L'orologio_80.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/55_Dormi Amore_07.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/13_Splende La Notte_83.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/58_I Tuoi Artigli_07.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/31_Una Rosa Pericolosa_99.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/45_Dimenticare E Ricominciare_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/15_Splendida E Nuda_85.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/25_Cosi Come Sei_97.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/37_Quello Che Non Ti Ho Detto Mai_00.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/56_La Situazione Non E' Buona_07.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/52_Verita Da Marciapiede_04.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/03_Amore No_79.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/51_Valeva La Pena_04.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/17_La Plщ Migliore_91.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/06_Un Poґ Artista Un Poґno_80.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/09_Una Parola Non Ci Scappa Mai_80.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/57_Ragazzo Del Sud_07.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/11_Uh... Uh_82.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/42_Per Sempre_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/38_Ti Prendero_00.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/02_Pay,Pay,Pay_79.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/22_I Want To Know_94.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/01_Soli_79.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/28_Vento D'estate_97.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/60_Facciamo Finta Che Sia Vero_11.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/48_Per Vivere_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/24_Ja Tebia Liubliu_94.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/49_Ancora Vivo_04.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/32_Angel_99.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/36_Apri Il Cuore_00.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/23_La Trappola_94.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/46_Pensieri Nascosti_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/16_Veronica Verrai_85.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/26_Arrivano Gli Uomini_97.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/12_Uomo_82.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/20_La Casa Dell'Amore_94.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/19_Quel Punto_94.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/40_Mi Fa Male_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/41_Piu Di Un Sogno_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/43_Una Luce Intermittente_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/21_Attraverso Me_94.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/39_Confessa_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/14_Madonna Mia_83.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/53_In Quale Vita_04.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/47_I Passi Che Facciamo_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/05_Stivali E Colbacco_79.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/18_Fuoco_91.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/33_L'uomo Di Cartone_99.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/44_Respiri Di Vita_02.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/34_Senza Amore_99.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/50_Mari Mari_04.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/27_Solo Da Un Quarto D'ora_97.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/29_Gelosia_99.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/54_Aria... Non Sei Piu' Tu_07.mp3
+Apr 30 18:49 : update: added Flac/A.Celentano.Best.Hits.1979-2011..mp3/10_Conto Su Di Te_82.mp3
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/06 - The End of the Dream.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/15 - The In‐Between (piano solo).flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/13 - Your Star.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/05 - Lacrymosa.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/16 - Imperfection.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/10 - Secret Door.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/14 - My Immortal.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/11 - Lithium.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/12 - Lost in Paradise.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/01 - Overture.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/09 - Imaginary.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/03 - Hi‐Lo.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/08 - Unraveling (interlude).flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/04 - My Heart Is Broken.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/02 - Never Go Back.flac
+Apr 30 18:49 : update: added Flac/Evanescence - 2017 - Synthesis [FLAC] [CD]/07 - Bring Me to Life.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/08. Drawing (''Breaking The Habit'' Demo 2002) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/03. Sad (''By Myself'' Demo 1999) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/04. Fear (''Leave Out All The Rest'' Demo 2006) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/09. Drum Song (''Little Things Give You Away'' D 2006) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/07. Across The Line (Unreleased Demo 2007) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/02. Faint (Demo 2002) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/06. Stick and Move (''Runaway'' Demo 1998) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/05. Figure.09 (Demo 2002) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Underground 9 Demos 2009/01. A-Six (Original Long Version 2002) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/02. The Radiance - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/01. The Requiem - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/12. Iridescent - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/04. Empty Spaces - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/13. Fallout - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/07. Jornada Del Muerto - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/05. When They Come For Me - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/06. Robot Boy - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/09. Blackout - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/03. Burning In The Skies - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/08. Waiting For The End - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/10. Wretches And Kings - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/15. The Messenger - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/14. The Catalyst - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - A Thousand Suns 2010/11. Wisdom, Justice, And Love - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/13. In The End - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/18. Bleed It Out - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/10. Breaking The Habit - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/14. Pushing Me Away - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/06. Hands Held High - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/09. The Little Things Give You Away - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/17. Jigga What,Faint (With Jay-Z) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/04. Given Up - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/05. Lying From You - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/01. One Step Closer - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/11. Shadow Of The Day - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/02. From The Inside - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/08. Numb - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/03. No More Sorrow - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/07. Leave Out All The Rest - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/16. Numb,Encore (With Jay-Z) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/12. Crawling - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Road To Revolution 2008 (burst mode)/15. What I've Done - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/13. Numb - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/05. Hit The Floor - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/08. Figure.09 - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/06. Easier To Run - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/10. From The Inside - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/12. Session - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/04. Lying From You - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/03. Somewhere I Belong - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/11. Nobody's Listening - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/07. Faint - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/01. Foreword - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/02. Don't Stay - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Meteora 2003/09. Breaking The Habit - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/16. [Stef] - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/18. Kyur4 Th ich (Chairman Hahn) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/09. H! Vltg3 (Evidence feat. Pharoahe Monch & DJ Babu) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/13. Ppr-Kut (Cheapshot & Jubacca feat. Rasco & Planet Asia) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/14. Rnw@y (Backyard Bangers feat. Phoenix Orion) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/07. Plc.4 Mie HÆd (Amp Live feat. Zion) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/17. By_Myself (Josh Abraham & Mike Shinoda) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/06. P5hng Me Axwy (Mike Shinoda feat. Stephen Richards) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/05. Frgt,10 (Alchemist feat. Chali 2NA) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/19. 1Stp Klosr (The Humble Brothers feat. Jonathan Davis) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/02. Pts.of.Athrty (Jay Gordon) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/04. [Chali] - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/08. X-ecutioner Style (The X-Ecutioners feat. Black Thought) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/20. Krwlng (Mike Shinoda feat. Aaron Lewis) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/11. Wth]You (Chairman Hahn feat. Aceyalone) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/10. [Riff Raff] - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/15. My[Dsmbr (Mickey P. feat. Kelli Ali) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/12. Ntr--Mssion - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/01. Opening - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Reanimation 2002/03. Enth E Nd (KutMasta Kurt feat. Motion Man) - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/12. Powerless - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/07. Victimized - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/06. Castle Of Glass - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/10. Until It Breaks - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/11. Tinfoil - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/03. Burn It Down - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/01. Lost In The Echo - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/09. Skin To Bone - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/04. Lies Greed Misery - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/02. In My Remains - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/08. Roads Untraveled - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Living Things 2012/05. I'll Be Gone - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/01. Papercut - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/02. One Step Closer - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/12. Pushing Me Away - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/10. Forgotten - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/11. Cure For The Itch - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/07. By Myself - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/08. In The End - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/04. Points Of Authority - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/09. A Place For My Head - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/06. Runaway - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/03. With You - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Hybrid Theory 2000/05. Crawling - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/06. What I've Done - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/01. Wake - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/03. Leave out all the Rest - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/05. Shadow of the Day - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/02. Given Up - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/09. Valentine's Day - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/10. In Between - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/07. Hands Held High - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/11. In Pieces - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/08. No More Sorrow - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/12. The Little Things Give You Away - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park - Discography 2000 - 2012 [FLAC] [h33t] - Kitlope/Linkin Park - Minutes to Midnight 2007/04. Bleed it out - Linkin Park.flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/06-linkin_park-heavy_(feat._kiiara).flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/04-linkin_park-battle_symphony.flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/02-linkin_park-good_goodbye_(feat._pusha_t_and_stormzy).flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/08-linkin_park-halfway_right.flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/01-linkin_park-nobody_can_save_me.flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/07-linkin_park-sorry_for_now.flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/03-linkin_park-talking_to_myself.flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/09-linkin_park-one_more_light.flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/10-linkin_park-sharp_edges.flac
+Apr 30 18:49 : update: added Flac/Linkin Park One More Light [2017] FLAC CD/Linkin_Park-One_More_Light-CD-FLAC-2017-RiBS/05-linkin_park-invisible.flac
+May 01 11:25 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted

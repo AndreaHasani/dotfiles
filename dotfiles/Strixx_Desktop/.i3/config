@@ -34,7 +34,7 @@ floating_modifier $mod
 
 # Set Mode Names
 set $resize_mode Resize Mode
-set $quick_mode Quick Mode
+set $scratchpad_mode Scratchpad Mode: 1-9 based on workspace names
 set $move_mode Move Mode
 set $screenshot_mode (c) Current Container | (f) Full Screen | (r) Region
 
@@ -65,6 +65,8 @@ set $ws2 "2:Terminal"
 set $ws3 "3:Browser"
 set $ws4 "4:WebWork"
 set $ws5 "5:Docker"
+set $ws6 "6:"
+set $ws7 "7:"
 set $ws8 "8:Chat"
 set $ws9 "9:File Manager"
 
@@ -77,7 +79,7 @@ workspace $ws3 gaps inner 0
 workspace $ws3 gaps outer 0
 
 #Hide Borders and Title
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 1, title_format "  %title  "
 
 # Enable smart border
 smart_borders on
@@ -104,32 +106,39 @@ bar {
 # Disable Focus Follow Mouse
 focus_follows_mouse no
 
-### Start Roles
+# Disable marks on title
+show_marks no
 
-# Role
+### Start Rules
+
+## Role
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move position center
+for_window [window_role="toolbox"] floating enable. resize set 400 400, move position center
 
-# Type
+## Type
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-# Title
+## Title
 for_window [title="Set password for your browser"] floating enable
 for_window [title="mutt-specified"] move container to workspace 6:Email
 for_window [title="nvim_default"] move container to workspace 4:NVIM
-for_window [title="Transmission"] floating enable. resize set 400 400, move position center
+for_window [title="^Transmission"] floating enable. resize set 400 400, move position center
 
-# Class
+## Class
 for_window [class="Oblogout"] floating enable
-for_window [class="Firefox"] move container to workspace 3:Browser
-for_window [class = "Firefox"] layout tabbed
+for_window [class="Firefox"] move container to workspace 3:Browser, layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
 
-### End Roles
+## Scratchpad Mode Rules
+
+
+### End Rules
 
 ### Starting Modes
 
@@ -141,14 +150,10 @@ bindsym Pause mode "Normal Mode"
 mode "Normal Mode" {
 
     # start a terminal
-    bindsym $mod+Return exec /usr/bin/termite
+    bindsym $mod+Return exec /usr/bin/urxvt
 
     # kill focused window
     bindsym $mod+Shift+q kill
-
-    # Scrachpad Settings
-    bindsym $mod+minus move scratchpad
-    bindsym $mod+plus scratchpad show
 
     # Rename Workspace With Dialog
     bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
@@ -175,8 +180,8 @@ mode "Normal Mode" {
     bindsym $mod+v split v
 
     # Scrachpad Settings
-    bindsym $mod+minus move scratchpad
-    bindsym $mod+plus exec --no-startup-id "python $script/i3-scripts/i3-scratchpad-rofi.py"
+    bindsym $mod+minus exec $script/scratchpad/set_marks
+    bindsym $mod+plus exec $script/scratchpad/i3-scratchpad-rofi.py
 
     # Drop down terminal
     bindsym $mod+Shift+t [title="dropdown_terminal"] scratchpad show
@@ -208,16 +213,38 @@ mode "Normal Mode" {
     bindsym $mod+8 workspace $ws8 ; exec $script/get-workspacename
     bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
 
+    # Mode Toggle
+    bindsym $mod+space focus mode_toggle
+
+    # move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace $ws1
+    bindsym $mod+Shift+2 move container to workspace $ws2
+    bindsym $mod+Shift+3 move container to workspace $ws3
+    bindsym $mod+Shift+4 move container to workspace $ws4
+    bindsym $mod+Shift+5 move container to workspace $ws5
+    bindsym $mod+Shift+6 move container to workspace $ws6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace $ws8
+    bindsym $mod+Shift+9 move container to workspace $ws9
+    bindsym $mod+Shift+0 move container to workspace number 10
+
+
+    # Sticky Window
+    bindsym $mod+s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
+
     # Move
     bindsym $mod+Shift+h move left 25px
     bindsym $mod+Shift+j move down 25px
     bindsym $mod+Shift+k move up 25px
     bindsym $mod+Shift+l move right 25px
 
+    # change container layout (stacked, tabbed, toggle split)
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
     # Other Modes
     bindsym $mod+r mode "$resize_mode"
     bindsym $mod+m mode "$move_mode"
-    bindsym $mod+q mode "$quick_mode"
     bindsym Print mode "$screenshot_mode"
 
 }
@@ -238,7 +265,6 @@ mode "$Resize_mode" {
     # Escape Mode
     bindsym Escape mode "Normal Mode"
     bindsym n mode "Normal Mode"
-    bindsym q mode "$quick_mode"
     bindsym m mode "$move_mode"
 
 }
@@ -251,80 +277,43 @@ mode "$move_mode" {
     bindsym k move up 25px
     bindsym l move right 25px
 
+
     # Move Center
     bindsym space move position center
 
     # Escape Mode
     bindsym Escape mode "Normal Mode"
     bindsym n mode "Normal Mode"
-    bindsym q mode "$quick_mode"
     bindsym r mode "$Resize_mode"
 }
 
 mode "$screenshot_mode" {
 
     # Screenshot
-    bindsym c exec maim -i $(xdotool getactivewindow) ~/Pictures/screenshots/Container\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
-    bindsym r exec maim -s ~/Pictures/screenshots/Region\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
-    bindsym f exec maim ~/Pictures/screenshots/Fullscreen\ $(date '+%Y-%m-%d_%H:%M').png, mode "Normal Mode"
+    bindsym c exec "maim -i $(xdotool getactivewindow) /tmp/screenshot.png;imgur /tmp/screenshot.png", mode "Normal Mode"
+    bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png", mode "Normal Mode"
+    bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png", mode "Normal Mode"
 
     # Exit Mode
     bindsym Escape mode "Normal Mode"
 
 }
 
-mode "$quick_mode" {
+mode "$scratchpad_mode" {
 
-    # move focused container to workspace
-    bindsym 1 move container to workspace $ws1
-    bindsym 2 move container to workspace $ws2
-    bindsym 3 move container to workspace $ws3
-    bindsym 4 move container to workspace $ws4
-    bindsym 5 move container to workspace $ws5
-    bindsym 6 move container to workspace $ws6
-    bindsym 7 move container to workspace number 7
-    bindsym 8 move container to workspace $ws8
-    bindsym 9 move container to workspace $ws9
-    bindsym 0 move container to workspace number 10
+    bindsym 1 [con_mark="^Desktop_"] scratchpad show
+    bindsym 2 [con_mark="^Terminal_"] scratchpad show
+    bindsym 3 [con_mark="^Browser_"] scratchpad show
+    bindsym 4 [con_mark="^WebWork_"] scratchpad show
+    bindsym 5 [con_mark="^Docker_"] scratchpad show
+    bindsym 6 [con_mark="^_"] scratchpad show
+    bindsym 7 [con_mark="^_"] scratchpad show
+    bindsym 8 [con_mark="^Chat_"] scratchpad show
+    bindsym 9 [con_mark="^File Manager_"] scratchpad show
 
-    # change focus
-    bindsym h focus left
-    bindsym j focus down
-    bindsym k focus up
-    bindsym l focus right
-
-    # alternatively, you can use the cursor keys:
-    bindsym Left focus left
-    bindsym Down focus down
-    bindsym Up focus up
-    bindsym Right focus right
-
-    # enter fullscreen mode for the focused container
-    bindsym f fullscreen toggle
-
-    # change container layout (stacked, tabbed, toggle split)
-    bindsym w layout tabbed
-    bindsym e layout toggle split
-
-    # # change focus between tiling / floating windows
-    bindsym $mod+space floating toggle
-    bindsym space focus mode_toggle
-
-    # focus the parent container
-    bindsym p focus parent
-
-    #Kill
-    bindsym $mod+q kill
-
-    # Sticky Window
-    bindsym s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
-
-    # Escape Mod
 
     bindsym Escape mode "Normal Mode"
-    bindsym n mode "Normal Mode"
-    bindsym m mode "$move_mode"
-    bindsym r mode "$Resize_mode"
+
 }
 
 ### End Modes
@@ -334,10 +323,13 @@ mode "$quick_mode" {
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key 127
 
+# Loading xresource
+exec -no-startup-id xrdb -load ~/.Xresources 
+
 ## Startup Daemouns
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
-exec --no-startup-id compton -b & syncthing -no-browser &
+exec --no-startup-id compton -b &
 exec --no-startup-id redshift &
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -345,7 +337,7 @@ exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
 
 ## Startup Icons
 exec --no-startup-id nm-applet &
-exec --no-startup-id transmission-gtk -m &
+exec --no-startup-id transmission-gtk -m &&
 exec --no-startup-id volumeicon &
 
 

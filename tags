@@ -104,6 +104,7 @@ __version__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^__version__ = "0.
 arguments	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    cfg.add_argument("config_file", help="config file to import arguments")$/;"	i
 arguments	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def arguments():$/;"	f
 argv	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from sys import argv, exit$/;"	i
+base16colorspace	dotfiles/common/.config/nvim/init.vim	/^let base16colorspace=256$/;"	v
 base64	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import base64$/;"	i
 best_unit_size	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def best_unit_size(bytes_size):$/;"	f
 block	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def block(self, title, content):$/;"	m	class:Logger
@@ -130,16 +131,19 @@ csh	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csh cs help$/;"	m
 csk	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csk cs kill$/;"	m
 csr	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csr cs reset$/;"	m
 css	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev css cs show$/;"	m
+current_workspace	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^current_workspace = find_focused_work(scratchpad_workspace)$/;"	v
 dirContents	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^    dirContents = listdir(runtime["path"])$/;"	v
 exists	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from os.path import isfile, join, exists$/;"	i
 exit	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from sys import argv, exit$/;"	i
 f	dotfiles/common/.config/nvim/init.vim	/^map f <Plug>Sneak_f$/;"	m
 filePath	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^        filePath = join(runtime["path"], fileName)$/;"	v
+find_focused_work	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def find_focused_work(workspace):$/;"	f
 formatdate	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from email.utils import COMMASPACE, formatdate$/;"	i
 free	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def free(self, content):$/;"	m	class:Logger
+g:ale_completion_enabled	dotfiles/common/.config/nvim/init.vim	/^let g:ale_completion_enabled = 1$/;"	v
 g:ale_fixers	dotfiles/common/.config/nvim/init.vim	/^let g:ale_fixers = {$/;"	v
-g:ale_lint_delay	dotfiles/common/.config/nvim/init.vim	/^let g:ale_lint_delay = 200$/;"	v
-g:ale_lint_on_text_changed	dotfiles/common/.config/nvim/init.vim	/^let g:ale_lint_on_text_changed = 'always'$/;"	v
+g:ale_lint_delay	dotfiles/common/.config/nvim/init.vim	/^let g:ale_lint_delay = 50$/;"	v
+g:ale_lint_on_insert_leave	dotfiles/common/.config/nvim/init.vim	/^let g:ale_lint_on_insert_leave = 1$/;"	v
 g:ale_linters	dotfiles/common/.config/nvim/init.vim	/^let g:ale_linters = {$/;"	v
 g:ale_open_list	dotfiles/common/.config/nvim/init.vim	/^let g:ale_open_list=0$/;"	v
 g:ale_set_highlights	dotfiles/common/.config/nvim/init.vim	/^let g:ale_set_highlights=0$/;"	v
@@ -254,6 +258,7 @@ g:colors_name	dotfiles/common/.config/nvim/colors/seoul256-light.vim	/^    let g
 g:colors_name	dotfiles/common/.config/nvim/colors/seoul256-light.vim	/^    let g:colors_name = 'seoul256'$/;"	v
 g:colors_name	dotfiles/common/.config/nvim/colors/seoul256.vim	/^let g:colors_name = 'seoul256'$/;"	v
 g:colors_name	dotfiles/common/.config/nvim/colors/zenburn.vim	/^let g:colors_name="zenburn"$/;"	v
+g:completor_python_binary	dotfiles/common/.config/nvim/init.vim	/^let g:completor_python_binary = '\/home\/strixx\/.local\/lib\/python3.6\/site-packages'$/;"	v
 g:contrast	dotfiles/common/.config/nvim/init.vim	/^let g:contrast = g:contrastLevels[0]$/;"	v
 g:contrastLevels	dotfiles/common/.config/nvim/init.vim	/^let g:contrastLevels = ['low', 'medium', 'high']$/;"	v
 g:contrastVar	dotfiles/common/.config/nvim/init.vim	/^let g:contrastVar = 0$/;"	v
@@ -6490,6 +6495,7 @@ s:yellow	dotfiles/common/.config/nvim/colors/paramount.vim	/^  let s:yellow     
 s:yellow	dotfiles/common/.config/nvim/colors/paramount.vim	/^  let s:yellow          = s:light_yellow$/;"	v
 s:yellow	dotfiles/common/.config/nvim/colors/paramount.vim	/^let s:yellow          = { "gui": "#F3E430", "cterm": "11"  }$/;"	v
 sc	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev sc SessionClose$/;"	m
+scratchpad_workspace	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^scratchpad_workspace = i3.get_workspaces()$/;"	v
 send	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def send(self, subject, send_from='', dest_to='', mail_server='localhost',$/;"	m	class:Logger
 sessionman_save_on_exit	dotfiles/common/.config/nvim/init.vim	/^let sessionman_save_on_exit = 0$/;"	v
 share	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev share Share$/;"	m

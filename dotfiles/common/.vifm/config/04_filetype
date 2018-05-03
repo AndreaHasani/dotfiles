@@ -15,12 +15,18 @@ filetype *.zip,*.jar,*.war,*.ear
          \ tar -xf %c,
 
 filetype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-         \ feh %px %py %pw %ph %c
-         \ %pc
+         \ feh %c &
 
 " Audio
+
 filextype *.wav,*.mp3,*.flac,*.ogg,*.m4a
 	\ {Open with deadbeef}
         \ deadbeef %f &
+
 fileviewer *.mp3 mp3info
 fileviewer *.flac soxi
+
+filextype *.mkv
+	\ {Open with mpv}
+        \ mpv %c %i &
+

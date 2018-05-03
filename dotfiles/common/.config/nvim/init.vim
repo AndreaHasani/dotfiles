@@ -36,10 +36,10 @@ let @/ = ""
 
 """ Vivid Config
 
-call plug#begin('~/.config/nvim/plugins_test')
+call plug#begin('~/.config/nvim/plugins')
 
 " Window Split Plugins
-" call vivid#add('simeji/winresizer')
+Plug 'simeji/winresizer'
 
 " Align Plugins
 Plug 'junegunn/vim-easy-align'
@@ -108,7 +108,7 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'andrewradev/splitjoin.vim'
 Plug 'wellle/targets.vim'
 Plug 'justinmk/vim-sneak'
-" Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
 
 " Intergrations Plugin
@@ -172,6 +172,8 @@ nmap <F5> :TagbarToggle<cr>
 
 " nnoremap <silent> gd :call LanguageClient_textDocument_hover()<CR>
 
+let base16colorspace=256
+
 
 "" Deoplete
 " Enable
@@ -186,6 +188,9 @@ call echodoc#enable()
 "" Completor Plugin Config
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Jedi Path
+let g:completor_python_binary = '/home/strixx/.local/lib/python3.6/site-packages'
 
 " BufTabline Config
 let g:buftabline_show = 1
@@ -212,11 +217,14 @@ nmap <leader>u :UndotreeToggle<cr>
 " let g:neomake_echo_current_error = 0
 
 """ Ale Config
-let g:ale_lint_on_text_changed = 'always'
 " let g:ale_lint_on_save = 1
+let g:ale_lint_on_insert_leave = 1
+
+" Enable completion
+let g:ale_completion_enabled = 1
 
 " Set linter delay in ms 
-let g:ale_lint_delay = 200
+let g:ale_lint_delay = 50
 
 " if you don't want linters to run on opening a file
 " let g:ale_lint_on_enter = 1
@@ -382,7 +390,7 @@ imap jj <Esc>
 " let loaded_netrwPlugin = 0
 
 " Vim Color Settings
-set termguicolors
+" set termguicolors
 syntax on
 colorscheme base16-flat
 

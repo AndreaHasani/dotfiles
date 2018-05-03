@@ -3,6 +3,7 @@
 .oh-my-zsh/alias/zalias_default
 .ncmpcpp/bindings
 .vifm
+.Xresources
 .ncmpcpp/config
 Scripts
 .config/gtk-2.0

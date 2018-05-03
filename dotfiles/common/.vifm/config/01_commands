@@ -3,7 +3,7 @@
 command wallpaperScale cp %f ~/.i3/wall.png && feh --bg-scale %f &
 command syncthing syncthing --no-browser & sleep 300 && killall syncthing &
 command nvimInstance ~/Documents/Scripts/nvim-client/vifm-openNvim-Instance &
-command xclip :!%a | xclip -selection clipboard
+nnoremap yd :!echo -n %d | xclip -selection clipboard %i<cr>
 
 " FZF Commands
 
