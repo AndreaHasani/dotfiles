@@ -128,10 +128,12 @@ for_window [title="Set password for your browser"] floating enable
 for_window [title="mutt-specified"] move container to workspace 6:Email
 for_window [title="nvim_default"] move container to workspace 4:NVIM
 for_window [title="^Transmission"] floating enable. resize set 400 400, move position center
+for_window [title="^Task Manager"] floating enable, move container to workspace 3:Browser, resize set 800 600, move position center
 
 ## Class
 for_window [class="Oblogout"] floating enable
 for_window [class="Firefox"] move container to workspace 3:Browser, layout tabbed
+for_window [class="Google-chrome"] move container to workspace 3:Browser, layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
 
@@ -290,9 +292,9 @@ mode "$move_mode" {
 mode "$screenshot_mode" {
 
     # Screenshot
-    bindsym c exec "maim -i $(xdotool getactivewindow) /tmp/screenshot.png;imgur /tmp/screenshot.png", mode "Normal Mode"
-    bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png", mode "Normal Mode"
-    bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png", mode "Normal Mode"
+    bindsym c exec "maim -i $(xdotool getactivewindow) /tmp/screenshot.png;imgur /tmp/screenshot.png";, mode "Normal Mode"
+    bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "Normal Mode"
+    bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "Normal Mode"
 
     # Exit Mode
     bindsym Escape mode "Normal Mode"
@@ -324,7 +326,7 @@ mode "$scratchpad_mode" {
 exec_always --no-startup-id sleep 0.1 && xdotool key 127
 
 # Loading xresource
-exec -no-startup-id xrdb -load ~/.Xresources 
+exec -no-startup-id xrdb -load ~/.Xresources
 
 ## Startup Daemouns
 exec --no-startup-id dunst &

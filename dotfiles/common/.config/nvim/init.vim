@@ -77,7 +77,7 @@ endif
 " Code Completion Plugin
 Plug 'Shougo/echodoc.vim'
 " Plug 'mattn/emmet-vim'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'maralla/completor.vim'
@@ -164,7 +164,9 @@ call plug#end()
 
 nmap <F5> :TagbarToggle<cr>
 
-" Language server
+
+" Config Tags
+" let g:gutentags_cache_dir="/home/strixx/hdd/"
 
 " let g:LanguageClient_serverCommands = {
 "     \ 'python': ['pyls'],
