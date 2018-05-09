@@ -11,7 +11,7 @@ URxvt.font: xft:inconsolata:size=12
 URxvt.saveLines: 2000
 URxvt.scrollBar: False
 
-URxvt.perl-ext-common: default,clipboard,keyboard-select,url-select,resize-font
+URxvt.perl-ext-common: default,keyboard-select,resize-font
 URxvt.urlLauncher: xdg-open
 URxvt.urlButton: 1
 URxvt.underlineURLs: True
@@ -27,9 +27,9 @@ URxvt.resize-font.smaller:	C-Down
 URxvt.resize-font.bigger:	C-Up
 
 URxvt.keysym.C-Shift-space: perl:keyboard-select:activate
-/* URxvt.keyboard-select.clipboard: True */
+URxvt.keyboard-select.clipboard: True
 
-URxvt.keysym.Control-V: perl:clipboard:paste
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 
 URxvt.clipboard.autocopy: true
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard

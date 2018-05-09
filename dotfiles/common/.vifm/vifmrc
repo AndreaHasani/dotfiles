@@ -19,8 +19,6 @@ set viewcolumns=-{name},5%{size},10{uname},15{ctime}
 set rnu
 set dotfiles
 set nu
-vsplit
-view
 
 " Set highlighting
 highlight CurrLine cterm=bold,reverse ctermfg=white ctermbg=bold,reverse

@@ -14,6 +14,7 @@ Scripts
 .config/nvim/colors
 .config/nvim/ginit.vim
 .zshrc
+.urxvt/ext
 
 .i3:Strixx_Desktop
 .config/nvim/bookmarks:Strixx_Desktop

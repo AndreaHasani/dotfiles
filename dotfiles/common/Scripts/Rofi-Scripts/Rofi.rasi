@@ -28,7 +28,7 @@
     selected-active-background:  #1E272B;
     active-background:           #1E272B;
     fullscreen:                  true;
-    font: "inconsolata 18";
+    font: "inconsolata 22";
 }
 #window {
     border:     0;

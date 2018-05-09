@@ -325,9 +325,6 @@ mode "$scratchpad_mode" {
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key 127
 
-# Loading xresource
-exec -no-startup-id xrdb -load ~/.Xresources
-
 ## Startup Daemouns
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
