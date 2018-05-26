@@ -132,10 +132,13 @@ for_window [title="^Task Manager"] floating enable, move container to workspace 
 
 ## Class
 for_window [class="Oblogout"] floating enable
-for_window [class="Firefox"] move container to workspace 3:Browser, layout tabbed
-for_window [class="Google-chrome"] move container to workspace 3:Browser, layout tabbed
+for_window [class="Chromium|Google-chrome|Firefox"] move container to workspace 3:Browser, layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
+for_window [class = "Filezilla"] move container to workspace $ws4
+
+for_window [class = "URxvt" workspace = "((?!1|2)[0-9])"] floating enable
+for_window [class = "mpv"] floating enable
 
 ## Scratchpad Mode Rules
 
@@ -205,15 +208,15 @@ mode "Normal Mode" {
     bindsym Super_R exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
     # switch to workspace
-    bindsym $mod+1 workspace $ws1 ; exec $script/get-workspacename
-    bindsym $mod+2 workspace $ws2 ; exec $script/get-workspacename
-    bindsym $mod+3 workspace $ws3 ; exec $script/get-workspacename
-    bindsym $mod+4 workspace $ws4 ; exec $script/get-workspacename
-    bindsym $mod+5 workspace $ws5 ; exec $script/get-workspacename
-    bindsym $mod+6 workspace $ws6 ; exec $script/get-workspacename
-    bindsym $mod+7 workspace number 7 ; exec $script/get-workspacename
-    bindsym $mod+8 workspace $ws8 ; exec $script/get-workspacename
-    bindsym $mod+9 workspace $ws9 ; exec $script/get-workspacename
+    bindsym $mod+1 workspace $ws1
+    bindsym $mod+2 workspace $ws2
+    bindsym $mod+3 workspace $ws3
+    bindsym $mod+4 workspace $ws4
+    bindsym $mod+5 workspace $ws5
+    bindsym $mod+6 workspace $ws6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace $ws8
+    bindsym $mod+9 workspace $ws9
 
     # Mode Toggle
     bindsym $mod+space focus mode_toggle
@@ -335,9 +338,9 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
 
 ## Startup Icons
+exec --no-startup-id unclutter -idle 10 &
 exec --no-startup-id nm-applet &
 exec --no-startup-id transmission-gtk -m &&
 exec --no-startup-id volumeicon &
-
 
 ### End Exec

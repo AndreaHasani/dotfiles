@@ -26,7 +26,7 @@ filextype *.wav,*.mp3,*.flac,*.ogg,*.m4a
 fileviewer *.mp3 mp3info
 fileviewer *.flac soxi
 
-filextype *.mkv
+filextype *.mkv,*.mp4
 	\ {Open with mpv}
         \ mpv %c %i &
 

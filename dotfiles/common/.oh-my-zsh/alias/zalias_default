@@ -87,3 +87,17 @@ dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
 
+## Default alias
+alias bc='bc -l'
+alias sha1='openssl sha1'
+alias ports='netstat -tulanp'
+
+## Virtual Alias
+alias virtual-windows7="qemu-system-x86_64 -drive format=raw,file=/home/strixx/data/virtual_os/hdd/windows_hdd -enable-kvm -m 1024 -cpu host"
+
+## System
+alias ps-p="ps ax -o pid,ni,cmd"
+alias ps-cpu="ps -eo pid,ppid,cmd,%mem,%cpu,ni --sort=-%cpu | head -n 20"
+alias ps-mem="ps -eo pid,ppid,cmd,%mem,%cpu,ni --sort=-%mem | head -n 20"
+
+alias \?="command_list"

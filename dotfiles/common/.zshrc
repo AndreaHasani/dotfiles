@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 export VISUAL=nvim
@@ -9,6 +10,27 @@ export LC_ALL="en_US.UTF-8"
 
 # Eval ssh
 # eval $(ssh-agent)
+
+## Colors
+
+export COLOR_NC='\e[0m' # No Color
+export COLOR_WHITE='\e[1;37m'
+export COLOR_BLACK='\e[0;30m'
+export COLOR_BLUE='\e[0;34m'
+export COLOR_LIGHT_BLUE='\e[1;34m'
+export COLOR_GREEN='\e[0;32m'
+export COLOR_LIGHT_GREEN='\e[1;32m'
+export COLOR_CYAN='\e[0;36m'
+export COLOR_LIGHT_CYAN='\e[1;36m'
+export COLOR_RED='\e[0;31m'
+export COLOR_LIGHT_RED='\e[1;31m'
+export COLOR_PURPLE='\e[0;35m'
+export COLOR_LIGHT_PURPLE='\e[1;35m'
+export COLOR_BROWN='\e[0;33m'
+export COLOR_YELLOW='\e[1;33m'
+export COLOR_GRAY='\e[0;30m'
+export COLOR_LIGHT_GRAY='\e[0;37m'
+
 
 # Exporting paths
 
@@ -23,7 +45,7 @@ export PATH=$PATH:$HOME/Scripts/i3-scripts/
 
 # Export vim path
 
-# Virtualenv 
+# Virtualenv
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/git
@@ -143,10 +165,10 @@ d() {
     dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
 }
 
- r() {
+ld() {
     [ $# -gt 0 ] && fasd_cd -d "$*" && return
     local dir
-    dir="$(fasd -tdl "$1" | fzf -1 -0 --tac --no-sort +m)" && cd "${dir}" || return 1
+    dir="$(fasd -tdlt "$1" | fzf -1 -0 --tac --no-sort +m)" && cd "${dir}" || return 1
 }
 
 f() {
@@ -154,6 +176,13 @@ f() {
     local dir
     local file
     file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && dir=$(dirname "$file") && cd $dir && Filex=$(echo $file | awk -F/ '{print $NF}' ) && echo $Filex
+}
+
+lf() {
+    [ $# -gt 0 ] && fasd_cd -d "$*" && return
+    local dir
+    local file
+    file="$(fasd -Rflt "$1" | fzf -1 -0 --no-sort +m)" && dir=$(dirname "$file") && cd $dir && Filex=$(echo $file | awk -F/ '{print $NF}' ) && echo $Filex
 }
 
 # MPD FZF Scripts
@@ -221,6 +250,12 @@ fmC() {
 
 alias n='nvim'
 alias nb='nvim /home/strixx/.config/nvim/bookmarks'
+
 nf() {
     nvim $(cat /home/strixx/.vifm/fzf-read/locate-file | fzf)
 }
+
+
+
+
+sh ~/Scripts/utility/screeninfo.sh

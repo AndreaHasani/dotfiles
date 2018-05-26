@@ -30,6 +30,7 @@ URxvt.keysym.C-Shift-space: perl:keyboard-select:activate
 URxvt.keyboard-select.clipboard: True
 
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:copy_clipboard
 
 URxvt.clipboard.autocopy: true
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard

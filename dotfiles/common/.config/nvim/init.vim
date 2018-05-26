@@ -76,11 +76,16 @@ endif
 
 " Code Completion Plugin
 Plug 'Shougo/echodoc.vim'
+
+" Code Completion Plugin
+Plug 'aserebryakov/vim-todo-lists'
+
 " Plug 'mattn/emmet-vim'
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'maralla/completor.vim'
+
 " Plug 'Shougo/deoplete.nvim'
 Plug 'metakirby5/codi.vim'
 " Plug 'ervandew/supertab'
@@ -192,7 +197,7 @@ inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Jedi Path
-let g:completor_python_binary = '/home/strixx/.local/lib/python3.6/site-packages'
+" let g:completor_python_binary = '/home/strixx/.local/lib/python3.6/site-packages'
 
 " BufTabline Config
 let g:buftabline_show = 1
@@ -647,8 +652,8 @@ let g:loaded_ruby_provider = 1
 if has ('win32')
     let g:python3_host_prog = 'C:\Program Files (x86)\Python36-32\python'
 elseif has ('unix')
-    let g:python3_host_prog = '/usr/bin/python3'
-    let g:python_host_prog = '/usr/bin/python'
+    let g:python3_host_prog = '/usr/bin/python'
+    let g:loaded_python_provider = 0
 endif
 
 
@@ -656,9 +661,12 @@ endif
 
 """ Custom Commands
 
+let g:cmdMenu = ['UndotreeToggle', "asdasd"]
+
 
 if has ('unix')
 
+    command! ShowCommand call fzf#run(fzf#wrap({'source': g:cmdMenu, 'sink': '', 'options': '-m +s'}))
     command! -range=% Share exe <line1>. ','.<line2>.'w !vpaste ft='.&ft
     command! FindAll call fzf#run(fzf#wrap({'source': 'cat ~/.vifm/fzf-read/locate-file', 'sink': 'e'}))
     command! FindSession call fzf#run(fzf#wrap({'source': 'cd ~/.config/nvim/session && readlink -f *', 'sink': function('s:LoadSession'), 'options': '-m +s'}))
@@ -677,7 +685,7 @@ if has ('unix')
     nnoremap <leader>fa :FindAll<cr>
     nnoremap <leader>fh :FindHome<cr>
     nnoremap <leader>fs :FindSession<cr>
-    nnoremap <leader>fr :Mru<cr>
+    nnoremap <leader>fr :rviminfo!<cr> :Mru<cr>
     nnoremap <leader>fb :FZFBookmark<cr>
     nnoremap <leader>p  :FZFProject<cr>
     nnoremap <leader>B :!echo %:~ >> ~/.config/nvim/bookmarks<cr>
@@ -723,3 +731,4 @@ if has('cscope')
 
   command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
+
