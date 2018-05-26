@@ -258,4 +258,4 @@ nf() {
 
 
 
-sh ~/Scripts/utility/screeninfo.sh
+~/Scripts/utility/screeninfo

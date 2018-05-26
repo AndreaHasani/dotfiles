@@ -3,7 +3,6 @@ let mapleader = " "
 let g:mapleader = " "
 
 set nocompatible
-set packpath+=~/.config/nvim/vivid/
 
 
 " Sane Defaults

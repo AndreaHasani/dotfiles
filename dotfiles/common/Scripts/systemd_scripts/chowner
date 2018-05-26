@@ -1,0 +1,3 @@
+#! /usr/bin/sh
+
+chown -R strixx:users /home/strixx/data/

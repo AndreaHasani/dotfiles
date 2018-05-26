@@ -1403,3 +1403,4 @@ May 21 01:03 : update: added mp3/Eric Clapton - Wonderful tonight (Cover Marina 
 May 21 01:03 : update: added mp3/Bioshock Rap LIVE by JT Music - 'Rapture Rising'-BL-QO0tJU3g.mp3
 May 21 10:46 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
 May 26 10:41 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 26 13:25 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
