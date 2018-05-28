@@ -54,10 +54,10 @@ if has ('unix')
     Plug 'junegunn/fzf'
 endif
 Plug 'Yggdroot/IndentLine'
-Plug 'ap/vim-buftabline' 
+Plug 'ap/vim-buftabline'
 Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
-Plug 'ferranpm/vim-isolate' 
+Plug 'ferranpm/vim-isolate'
 
 " Local Win Plugins
 if has ('win32')
@@ -80,7 +80,7 @@ Plug 'Shougo/echodoc.vim'
 Plug 'aserebryakov/vim-todo-lists'
 
 " Plug 'mattn/emmet-vim'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'maralla/completor.vim'
@@ -189,7 +189,7 @@ let base16colorspace=256
 let python_highlight_all = 1
 
 " Echodoc Config
-call echodoc#enable()
+let g:echodoc#enable_at_startup	= 1
 
 "" Completor Plugin Config
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -202,6 +202,16 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:buftabline_show = 1
 let g:buftabline_numbers = 1
 let g:buftabline_indicators = 1
+
+" Gutentags config
+let g:gutentags_generate_on_missing = 0
+let g:gutentags_generate_on_new = 0
+
+"Tag bar
+let g:tagbar_left = 1
+let g:tagbar_compact = 1
+let g:tagbar_indent = 1
+let g:tagbar_iconchars = ['+', '-']
 
 " Matchup Config
 let g:matchup_matchparen_status_offscreen = 1
@@ -229,7 +239,7 @@ let g:ale_lint_on_insert_leave = 1
 " Enable completion
 let g:ale_completion_enabled = 1
 
-" Set linter delay in ms 
+" Set linter delay in ms
 let g:ale_lint_delay = 50
 
 " if you don't want linters to run on opening a file
@@ -660,7 +670,7 @@ endif
 
 """ Custom Commands
 
-let g:cmdMenu = ['UndotreeToggle', "asdasd"]
+let g:cmdMenu = ['UndotreeToggle', "TagbarOpenAutoClose"]
 
 
 if has ('unix')
@@ -680,6 +690,7 @@ if has ('unix')
 		\  'down':    '40%'})
 
     " FZF Mappings
+    nnoremap <F5>       :ShowCommand<cr>
     nnoremap <leader>fp :ProjectFind<cr>
     nnoremap <leader>fa :FindAll<cr>
     nnoremap <leader>fh :FindHome<cr>
