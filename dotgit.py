@@ -195,9 +195,8 @@ def hash_md5(fname):
 def git_commit(workingPath):
     date = datetime.now()
     Popen(["git", "-C", os.path.dirname(workingPath), "add", "."])
-    time.sleep(5)
-    Popen(["git", "-C", os.path.dirname(workingPath), "commit", "-am", "'Script Commit: '" + date.strftime("%Y-%m-%d %H:%M") ])
-    return
+    time.sleep(2)
+    Popen(["git", "-C", os.path.dirname(workingPath), "commit", "-am", "Script Commit: " + date.strftime("%Y-%m-%d %H:%M") ])
 
 
 
