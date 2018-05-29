@@ -24,7 +24,7 @@ userHome = "/home/strixx/"
 dotfilesPath = "/home/strixx/.dotfiles/"
 verbose = 0
 debug = 0
-restore = 0
+restore = 1
 symlink = 1
 host = os.uname()[1]
 
@@ -64,20 +64,28 @@ def check_path(path, hostname=None, home=None):
         fullpath = "{}{}".format(userHome, path)
     if os.path.exists(fullpath):
         if os.path.isdir(fullpath):
+            names = []
             for root, _, files in os.walk(fullpath):
-                names = []
                 for name in files:
                     names.append(root + "/" + name)
-                return names
+            return names
         else:
             return fullpath
     return fullpath
 
 def symlink_files(src, hostname):
-    if userHome in src:
-        dest = src.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/")
-    else:
+    """Symlink function, use src to symlink to dest"""
+
+    workingPath = dotfilesPath + "dotfiles/" + hostname + "/"
+    if workingPath in src:
         dest = src.replace(dotfilesPath + "dotfiles/" + hostname + "/", userHome)
+    else:
+        dest = src.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/")
+
+    if verbose:
+        print("Symlink: {} | {}".format(src,dest))
+        return
+
     try:
         os.symlink(src, dest)
         if verbose:
@@ -95,7 +103,10 @@ def file_changes(localPath, workingPath, hostname="common"):
         exists_lPath = os.path.exists(localPath)
         exists_gPath = os.path.exists(localPath.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/"))
 
+
     if exists_lPath and exists_gPath and not symlink:
+
+
         # Making hash to compare
         git_hash = hash_md5(workingPath)
         local_hash = hash_md5(localPath)
