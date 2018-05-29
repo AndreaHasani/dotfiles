@@ -3,6 +3,8 @@ import os
 import sys
 from hashlib import md5
 import shutil
+import time
+
 from itertools import zip_longest
 from subprocess import Popen
 from datetime import datetime
@@ -192,7 +194,10 @@ def hash_md5(fname):
 
 def git_commit(workingPath):
     date = datetime.now()
+    Popen(["git", "-C", os.path.dirname(workingPath), "add", "."])
+    time.sleep(5)
     Popen(["git", "-C", os.path.dirname(workingPath), "commit", "-am", "'Script Commit: '" + date.strftime("%Y-%m-%d %H:%M") ])
+    return
 
 
 
