@@ -1,77 +1,59 @@
-import os
 import argparse
-from socket import gethostname
 import os
-from datetime import datetime
+import sys
 from hashlib import md5
 import shutil
-import pdb
 from itertools import zip_longest
+from subprocess import Popen
+from datetime import datetime
 
 
-# parser = argparse.ArgumentParser(description="Use arguments below.")
-# parser.add_argument("-f", "--file", required=True, dest="filename" )
-# parser.add_argument("-F", "--force", dest="force" )
-# parser.add_argument("-d", "--dir", required=True, dest="pathdir" )
 
-# args = parser.parse_args()
-
-# Variables
-
-# force, filename, pathdir =  args.force, args.filename, args.pathdir
-
-userHome = "/home/strixx/"
-dotfilesPath = "/home/strixx/.dotfiles/"
-verbose = 0
-debug = 0
-restore = 1
-symlink = 1
-host = os.uname()[1]
 
 def init_check():
     """Check if dotfilesPath tree is not empty and has correct folders"""
 
-    if not os.listdir(dotfilesPath):
-        print("Directory variable empty, are you sure this is the right directory if so, \n")
-        answer = input("Do you want to setup dotfiles in this directory? ")
+    if not os.path.exists(dotfilesPath + 'dotfiles'):
+
+        print("Directory variable empty or not found, are you sure this is the right directory? \n")
+        answer = input("=> Do you want to setup dotfiles in this directory? ")
         if "y" not in answer.lower():
             return False
 
-    if not verbose:
-        if not os.path.exists(dotfilesPath + 'filelist'):
-            with open(dotfilesPath + 'filelist', 'a'):
-                os.utime(dotfilesPath + 'filelist', None)
-
-        if not os.path.exists(dotfilesPath + 'dotfiles'):
-            os.makedirs(dotfilesPath + 'dotfilesPath')
-            os.makedirs(dotfilesPath + 'dotfilesPath/common')
-            os.makedirs(dotfilesPath + 'dotfilesPath/' + host)
+        if verbose:
+            print("Creating directory in: " + dotfilesPath + 'dotfiles')
+            print("Creating directory in: " + dotfilesPath + 'dotfiles/common')
+            print("Creating directory in: " + dotfilesPath + 'dotfiles/' + host)
         else:
-            if not os.path.exists(dotfilesPath + 'filelist'):
-                print("Creating file in: " + dotfilesPath + "filelist")
+            try:
+                reqDirs = [dotfilesPath + "dotfiles/common", dotfilesPath + "dotfiles/" + host]
+                for reqdir in reqDirs: os.makedirs(reqdir, exist_ok=False)
+                with open(dotfilesPath + 'filelist', 'a'):
+                    os.utime(dotfilesPath + 'filelist', None)
 
-        if not os.path.exists(dotfilesPath + 'dotfiles'):
-            print("Creating directory in: " + dotfilesPath + 'dotfilesPath')
-            print("Creating directory in: " + dotfilesPath + 'dotfilesPath/common')
-            print("Creating directory in: " + dotfilesPath + 'dotfilesPath/' + host)
+            except Exception:
+                return False
 
+    print("------------------------------------------------\n")
     return True
 
-def check_path(path, hostname=None, home=None):
+
+def get_filelist(path, hostname=None, home=None):
     if not home:
         fullpath = "{}{}/{}".format(dotfilesPath, hostname, path)
-    if home:
+    else:
         fullpath = "{}{}".format(userHome, path)
-    if os.path.exists(fullpath):
-        if os.path.isdir(fullpath):
-            names = []
-            for root, _, files in os.walk(fullpath):
-                for name in files:
-                    names.append(root + "/" + name)
-            return names
-        else:
-            return fullpath
-    return fullpath
+
+    if os.path.isdir(fullpath):
+        names = []
+        for root, _, files in os.walk(fullpath):
+            for name in files:
+                names.append(root + "/" + name)
+
+        return names
+    else:
+        return fullpath
+
 
 def symlink_files(src, hostname):
     """Symlink function, use src to symlink to dest"""
@@ -84,100 +66,118 @@ def symlink_files(src, hostname):
 
     if verbose:
         print("Symlink: {} | {}".format(src,dest))
-        return
-
-    try:
-        os.symlink(src, dest)
-        if verbose:
-            print("Making symbolic link: " + dest)
-
-    except Exception as e:
-        os.makedirs(os.path.dirname(dest))
-
-def file_changes(localPath, workingPath, hostname="common"):
-
-    if restore:
-        exists_gPath = os.path.exists(workingPath)
-        exists_lPath = os.path.exists(workingPath.replace(dotfilesPath + "dotfiles/" + hostname + "/", userHome))
     else:
-        exists_lPath = os.path.exists(localPath)
-        exists_gPath = os.path.exists(localPath.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/"))
+        try:
+            os.symlink(src, dest)
+            if verbose:
+                print("Making symbolic link: " + dest)
+
+        except Exception as e:
+            os.makedirs(os.path.dirname(dest))
 
 
-    if exists_lPath and exists_gPath and not symlink:
+def sync_files(localPath, workingPath):
+    if verbose:
+        print("Sync: {} : {}".format(workingPath, localPath))
+
+    working_hash = hash_md5(workingPath)
+    local_hash = hash_md5(localPath)
+
+    if restore and working_hash not in local_hash:
+        os.remove(localPath)
+        shutil.copy2(workingPath, localPath)
+    if not restore and working_hash not in local_hash:
+        os.remove(workingPath)
+        shutil.copy2(localPath, workingPath)
+
+    return
 
 
-        # Making hash to compare
-        git_hash = hash_md5(workingPath)
-        local_hash = hash_md5(localPath)
+def restore_files(localPath, workingPath, hostname):
 
-        if restore and git_hash not in local_hash:
-            os.remove(localPath)
-            shutil.copy2(workingPath, localPath)
-        if not restore and git_hash not in local_hash:
-            os.remove(workingPath)
-            shutil.copy2(localPath, workingPath)
-        return
+    if symlink:
+        symlink_files(workingPath, hostname)
 
+    if verbose:
+        print("Restoring: {} : {}".format(workingPath, localPath))
 
-    if restore and not exists_lPath and exists_gPath:
-        if symlink:
-            symlink_files(workingPath, hostname)
-            return
-
+    else:
         try:
             shutil.copy2(workingPath, localPath)
         except IOError as e:
             # try creating parent directories
             os.makedirs(os.path.dirname(localPath), exist_ok=True)
             shutil.copy2(workingPath, localPath)
-        return
+
+def add_files(localPath, workingPath):
+    if verbose:
+        print("Adding: {} : {}".format(localPath, workingPath))
+
+    else:
+        try:
+            shutil.copy2(localPath, workingPath)
+        except IOError as e:
+            os.makedirs(os.path.dirname(workingPath), exist_ok=True)
+            shutil.copy2(localPath, workingPath)
+
+
+def verify_paths(localPath, workingPath, hostname="common"):
+
+    if restore:
+        localPath = workingPath.replace(dotfilesPath + "dotfiles/" + hostname + "/", userHome)
+        exists_gPath = os.path.exists(workingPath)
+        exists_lPath = os.path.exists(localPath)
+    else:
+        workingPath = localPath.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/")
+        exists_lPath = os.path.exists(localPath)
+        exists_gPath = os.path.exists(workingPath)
+
+    if exists_lPath and exists_gPath and not symlink:
+        sync_files(workingPath, localPath)
+
+    if restore and not exists_lPath and exists_gPath:
+        restore_files(localPath, workingPath, hostname)
 
     if not restore and not exists_lPath and exists_gPath:
         os.remove(workingPath)
         return
 
     if exists_lPath and not exists_gPath:
+        add_files(localPath, workingPath)
 
-        try:
-            shutil.copy2(localPath, workingPath)
-        except IOError as e:
-            # try creating parent directories
-            os.makedirs(os.path.dirname(workingPath), exist_ok=True)
-            shutil.copy2(localPath, workingPath)
-        return
 
-    if not exists_lPath and not exists_gPath:
-        print("Path doesn't exist: '{}'".format(localPath))
-        return
+def read_filelist():
+    """Retrive file list from folder for both """
 
-def changes_check():
-    """Checking if there any any files changes via md5, if so return that file path"""
+    try:
+        with open(dotfilesPath + "filelist", mode='r') as f:
+            for path in f.readlines():
+                path = path.replace('\n', '')
+                if path:
+                    if ':' not in path:
+                        if os.path.exists(path):
+                            working_path = get_filelist(path, "dotfiles/common")
+                            local_path = get_filelist(path, home=1)
 
-    with open(dotfilesPath + "filelist", mode='r') as f:
-        for path in f.readlines():
-            path = path.replace('\n', '')
-            if path:
-                if ':' not in path:
+                            if type(working_path) == list:
+                                for l_path, w_path in zip_longest(local_path, working_path):
+                                    verify_paths(l_path, w_path)
+                            else:
+                                verify_paths(local_path, working_path)
 
-                    working_path = check_path(path, "dotfiles/common")
-                    local_path = check_path(path, home=1)
-                    if type(working_path) == list:
-                        for l_path, w_path in zip_longest(local_path, working_path):
-                            file_changes(l_path, w_path)
                     else:
-                        file_changes(local_path, working_path)
-
-                else:
-                    path, hostname = path.split(':')
-                    if hostname in host:
-                        working_path = check_path(path, "dotfiles/" + hostname)
-                        local_path = check_path(path, home=1)
-                        if type(working_path) == list or type(local_path) == list:
-                            for l_path, w_path in zip_longest(local_path, working_path):
-                                file_changes(l_path, w_path, hostname)
-                        else:
-                            file_changes(local_path, working_path, hostname)
+                        path, hostname = path.split(':')
+                        if hostname in host:
+                            if os.path.exists(path):
+                                working_path = get_filelist(path, "dotfiles/" + hostname)
+                                local_path = get_filelist(path, home=1)
+                                if type(working_path) == list or type(local_path) == list:
+                                    for l_path, w_path in zip_longest(local_path, working_path):
+                                        verify_paths(l_path, w_path, hostname)
+                                else:
+                                    verify_paths(local_path, working_path, hostname)
+    except FileNotFoundError:
+        print("File not found: {}filelist".format(dotfilesPath))
 
 
 def hash_md5(fname):
@@ -188,17 +188,36 @@ def hash_md5(fname):
     return hash_md5.hexdigest()
 
 
+def git_commit():
+    date = datetime.now()
+    date.now.strftime("%Y-%m-%d %H:%M")
+
+
+
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Python script for managing dotfiles in linux.")
+    parser.add_argument("-l", "--localDir", required=True, dest="userHome", default=False, help="Choosing local directory to put on workdir and keep in sync with github dir.", metavar='')
+    parser.add_argument("-w", "--workingDir", required=True, dest="dotfilesPath", default=False, help="Choosing work directory where to put dotfiles for sync in github.", metavar='')
+    parser.add_argument("-s", "--soft", dest="symlink", action='store_true', default=True, help="Using symbolic links from workdir to localdir, to keep them in sync")
+    parser.add_argument("-r", "--restore", dest="restore", action='store_true', default=False, help="Enable restore mode, will cleanup homedir and copy all files from workDir.")
+    parser.add_argument("-v", "--verbose", dest="verbose", action='store_true', default=False, help="Enable verbose mode, will print out what the script will do. Basically a dry run")
+    args = parser.parse_args()
+
+    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args.verbose, args.restore, args.symlink
+    host = os.uname()[1]
+
+
+    print("------------------------------------------------")
+    print("UserHome: '{}'".format(userHome))
+    print("DotfilesPath: '{}'".format(dotfilesPath))
+    print("Verbose: " + str(verbose))
+    print("Restore: " + str(restore))
+    print("Symlink: " + str(symlink))
+    print("Host: " + host)
+    print("------------------------------------------------")
+
     if init_check():
-
-        print("UserHome: '{}'".format(userHome))
-        print("DotfilesPath: '{}'".format(dotfilesPath))
-        print("Verbose: " + str(verbose))
-        print("Debug: " + str(debug))
-        print("Restore: " + str(restore))
-        print("Symlink: " + str(symlink))
-        print("Host: " + host)
-
-        answer = input("Do you want to contiunue? ")
+        answer = input("=> Do you want to contiunue? ")
         if "y" in answer.lower():
-            changes_check()
+            read_filelist()

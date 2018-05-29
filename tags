@@ -101,7 +101,9 @@ __init__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def __init__(sel
 __len__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def __len__(self):$/;"	m	class:Logger	file:
 __license__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^__license__ = "GNU General Public License version 3"$/;"	v
 __version__	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^__version__ = "0.15"$/;"	v
-answer	dotgit.py	/^        answer = input("Do you want to contiunue? ")$/;"	v
+add_files	dotgit.py	/^def add_files(localPath, workingPath):$/;"	f
+answer	dotgit.py	/^        answer = input("=> Do you want to contiunue? ")$/;"	v
+args	dotgit.py	/^    args = parser.parse_args()$/;"	v
 arguments	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    cfg.add_argument("config_file", help="config file to import arguments")$/;"	i
 arguments	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def arguments():$/;"	f
 argv	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from sys import argv, exit$/;"	i
@@ -113,9 +115,7 @@ buflist	dotfiles/common/.config/nvim/init.vim	/^function! s:buflist()$/;"	f
 bufopen	dotfiles/common/.config/nvim/init.vim	/^function! s:bufopen(e)$/;"	f
 ccd	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev ccd Ccd$/;"	m
 changeWallpaper	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^def changeWallpaper(unused):$/;"	f
-changes_check	dotgit.py	/^def changes_check():$/;"	f
 check_execs_posix_win	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def check_execs_posix_win(*progs):$/;"	f
-check_path	dotgit.py	/^def check_path(path, hostname=None, home=None):$/;"	f
 colors_name	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let colors_name = "NeoSolarized"$/;"	v
 colors_name	dotfiles/common/.config/nvim/colors/solarized8_dark.vim	/^let colors_name = "solarized8_dark"$/;"	v
 colors_name	dotfiles/common/.config/nvim/colors/solarized8_dark_flat.vim	/^let colors_name = "solarized8_dark_flat"$/;"	v
@@ -135,14 +135,12 @@ csk	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csk cs kill$/;"	m
 csr	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev csr cs reset$/;"	m
 css	dotfiles/common/.config/nvim/init.vim	/^  cnoreabbrev css cs show$/;"	m
 current_workspace	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^current_workspace = find_focused_work(scratchpad_workspace)$/;"	v
-debug	dotgit.py	/^debug = 0$/;"	v
 dirContents	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^    dirContents = listdir(runtime["path"])$/;"	v
-dotfilesPath	dotgit.py	/^dotfilesPath = "\/home\/strixx\/.dotfiles\/"$/;"	v
+dotfilesPath	dotgit.py	/^    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args./;"	v
 exists	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from os.path import isfile, join, exists$/;"	i
 exit	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from sys import argv, exit$/;"	i
 f	dotfiles/common/.config/nvim/init.vim	/^map f <Plug>Sneak_f$/;"	m
 filePath	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^        filePath = join(runtime["path"], fileName)$/;"	v
-file_changes	dotgit.py	/^def file_changes(localPath, workingPath, hostname="common"):$/;"	f
 find_focused_work	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def find_focused_work(workspace):$/;"	f
 formatdate	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    from email.utils import COMMASPACE, formatdate$/;"	i
 free	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def free(self, content):$/;"	m	class:Logger
@@ -2413,9 +2411,11 @@ g:zenburn_transparent	dotfiles/common/.config/nvim/colors/zenburn.vim	/^    let 
 g:zenburn_unified_CursorColumn	dotfiles/common/.config/nvim/colors/zenburn.vim	/^    let g:zenburn_unified_CursorColumn = 0$/;"	v
 gF	dotfiles/common/.config/nvim/init.vim	/^nnoremap gF :cd <c-r><c-f><cr>$/;"	m
 get	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def get(self):$/;"	m	class:Logger
+get_filelist	dotgit.py	/^def get_filelist(path, hostname=None, home=None):$/;"	f
 get_scratchpad_windows	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def get_scratchpad_windows():$/;"	f
 get_size	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def get_size(the_path):$/;"	f
 getpass	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import getpass$/;"	i
+git_commit	dotgit.py	/^def git_commit():$/;"	f
 glob	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import glob$/;"	i
 gtk	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^        import gtk$/;"	i
 h	dotfiles/common/.config/nvim/colors/off.vim	/^function! s:h(group, style)$/;"	f
@@ -2522,7 +2522,7 @@ hi	dotfiles/common/.config/nvim/colors/base16-unikitty-light.vim	/^fun <sid>hi(g
 hi	dotfiles/common/.config/nvim/colors/base16-woodland.vim	/^fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)$/;"	f
 hi	dotfiles/common/.config/nvim/colors/base16-zenburn.vim	/^fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)$/;"	f
 hi	dotfiles/common/.config/nvim/colors/seoul256.vim	/^function! s:hi(item, fg, bg)$/;"	f
-host	dotgit.py	/^host = os.uname()[1]$/;"	v
+host	dotgit.py	/^    host = os.uname()[1]$/;"	v
 hs_highlight_boolean	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let hs_highlight_boolean=1$/;"	v
 hs_highlight_delimiters	dotfiles/common/.config/nvim/colors/NeoSolarized.vim	/^let hs_highlight_delimiters=1$/;"	v
 i3	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^i3 = i3ipc.Connection()$/;"	v
@@ -2545,6 +2545,7 @@ notes	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev notes Notes$/;"	m
 notify	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def notify(msg, status):$/;"	f
 os	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import os$/;"	i
 parse_parms	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def parse_parms(*parms):$/;"	f
+parser	dotgit.py	/^    parser = argparse.ArgumentParser(description="Python script for managing dotfiles in linux."/;"	v
 passArguments	dotfiles/common/Scripts/ftpScript/ftpconnect	/^function passArguments () {$/;"	f
 platform	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import platform$/;"	i
 pynotify	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^        import pynotify$/;"	i
@@ -2552,7 +2553,9 @@ python_highlight_all	dotfiles/common/.config/nvim/init.vim	/^let python_highligh
 random	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from random import random$/;"	i
 re	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import re$/;"	i
 re	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^import re$/;"	i
-restore	dotgit.py	/^restore = 0$/;"	v
+read_filelist	dotgit.py	/^def read_filelist():$/;"	f
+restore	dotgit.py	/^    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args./;"	v
+restore_files	dotgit.py	/^def restore_files(localPath, workingPath, hostname):$/;"	f
 rofi_choose	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def rofi_choose(options):$/;"	f
 ruby_operators	dotfiles/common/.config/nvim/colors/seoul256.vim	/^let ruby_operators = 1$/;"	v
 run	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^from subprocess import run$/;"	i
@@ -6515,10 +6518,11 @@ smtplib	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import smtplib$/;
 socket	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import socket$/;"	i
 ss	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev ss SessionSave$/;"	m
 subprocess	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^import subprocess$/;"	i
-symlink	dotgit.py	/^symlink = 1$/;"	v
+symlink	dotgit.py	/^    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args./;"	v
 symlink_files	dotgit.py	/^def symlink_files(src, hostname):$/;"	f
 syn	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev syn call ToggleSyntax()<cr>:echom "Toggling Global Syntax"<cr>$/;"	m
 synL	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev synL call ToggleSyntaxLocal()<cr>:echom "Toggling Local Syntax"<cr>$/;"	m
+sync_files	dotgit.py	/^def sync_files(localPath, workingPath):$/;"	f
 sys	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import sys$/;"	i
 t	dotfiles/common/.config/nvim/init.vim	/^map t <Plug>Sneak_t$/;"	m
 tarfile	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import tarfile$/;"	i
@@ -6527,8 +6531,9 @@ time	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def time(self, title
 time	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import time$/;"	i
 tn	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev tn tabnew$/;"	m
 use_xprop	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def use_xprop(x):$/;"	f
-userHome	dotgit.py	/^userHome = "\/home\/strixx\/"$/;"	v
-verbose	dotgit.py	/^verbose = 0$/;"	v
+userHome	dotgit.py	/^    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args./;"	v
+verbose	dotgit.py	/^    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args./;"	v
+verify_paths	dotgit.py	/^def verify_paths(localPath, workingPath, hostname="common"):$/;"	f
 w	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev w w$/;"	m
 wQ	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev wQ wq$/;"	m
 write	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def write(self, append=False):$/;"	m	class:Logger
