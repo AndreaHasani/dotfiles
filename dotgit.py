@@ -24,6 +24,7 @@ def init_check():
             print("Creating directory in: " + dotfilesPath + 'dotfiles')
             print("Creating directory in: " + dotfilesPath + 'dotfiles/common')
             print("Creating directory in: " + dotfilesPath + 'dotfiles/' + host)
+            print("------------------------------------------------\n")
         else:
             try:
                 reqDirs = [dotfilesPath + "dotfiles/common", dotfilesPath + "dotfiles/" + host]
@@ -34,7 +35,6 @@ def init_check():
             except Exception:
                 return False
 
-    print("------------------------------------------------\n")
     return True
 
 
@@ -119,6 +119,7 @@ def add_files(localPath, workingPath):
         except IOError as e:
             os.makedirs(os.path.dirname(workingPath), exist_ok=True)
             shutil.copy2(localPath, workingPath)
+        git_commit(workingPath)
 
 
 def verify_paths(localPath, workingPath, hostname="common"):
@@ -134,9 +135,11 @@ def verify_paths(localPath, workingPath, hostname="common"):
 
     if exists_lPath and exists_gPath and not symlink:
         sync_files(workingPath, localPath)
+        return
 
     if restore and not exists_lPath and exists_gPath:
         restore_files(localPath, workingPath, hostname)
+        return
 
     if not restore and not exists_lPath and exists_gPath:
         os.remove(workingPath)
@@ -144,6 +147,7 @@ def verify_paths(localPath, workingPath, hostname="common"):
 
     if exists_lPath and not exists_gPath:
         add_files(localPath, workingPath)
+        return
 
 
 def read_filelist():
@@ -155,7 +159,6 @@ def read_filelist():
                 path = path.replace('\n', '')
                 if path:
                     if ':' not in path:
-                        if os.path.exists(path):
                             working_path = get_filelist(path, "dotfiles/common")
                             local_path = get_filelist(path, home=1)
 
@@ -168,7 +171,6 @@ def read_filelist():
                     else:
                         path, hostname = path.split(':')
                         if hostname in host:
-                            if os.path.exists(path):
                                 working_path = get_filelist(path, "dotfiles/" + hostname)
                                 local_path = get_filelist(path, home=1)
                                 if type(working_path) == list or type(local_path) == list:
@@ -188,9 +190,9 @@ def hash_md5(fname):
     return hash_md5.hexdigest()
 
 
-def git_commit():
+def git_commit(workingPath):
     date = datetime.now()
-    date.now.strftime("%Y-%m-%d %H:%M")
+    Popen(["git", "-C", os.path.dirname(workingPath), "commit", "-am", "'Script Commit: '" + date.strftime("%Y-%m-%d %H:%M") ])
 
 
 

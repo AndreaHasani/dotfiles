@@ -2415,7 +2415,7 @@ get_filelist	dotgit.py	/^def get_filelist(path, hostname=None, home=None):$/;"	f
 get_scratchpad_windows	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def get_scratchpad_windows():$/;"	f
 get_size	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^def get_size(the_path):$/;"	f
 getpass	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import getpass$/;"	i
-git_commit	dotgit.py	/^def git_commit():$/;"	f
+git_commit	dotgit.py	/^def git_commit(workingPath):$/;"	f
 glob	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import glob$/;"	i
 gtk	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^        import gtk$/;"	i
 h	dotfiles/common/.config/nvim/colors/off.vim	/^function! s:h(group, style)$/;"	f
