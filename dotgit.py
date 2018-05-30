@@ -57,17 +57,12 @@ def get_filelist(path, hostname=None, home=None):
         return fullpath
 
 
-def symlink_files(src, hostname):
+def symlink_files(src, dest):
     """Symlink function, use src to symlink to dest"""
-
-    workingPath = dotfilesPath + "dotfiles/" + hostname + "/"
-    if workingPath in src:
-        dest = src.replace(dotfilesPath + "dotfiles/" + hostname + "/", userHome)
-    else:
-        dest = src.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/")
 
     if verbose:
         print("Symlink: {} | {}".format(src,dest))
+
     else:
         try:
             os.symlink(src, dest)
@@ -76,6 +71,8 @@ def symlink_files(src, hostname):
 
         except Exception as e:
             os.makedirs(os.path.dirname(dest))
+
+
 
 
 def sync_files(localPath, workingPath):
@@ -98,7 +95,7 @@ def sync_files(localPath, workingPath):
 def restore_files(localPath, workingPath, hostname):
 
     if symlink:
-        symlink_files(workingPath, hostname)
+        symlink_files(workingPath, localPath)
 
     if verbose:
         print("Restoring: {} : {}".format(workingPath, localPath))
@@ -112,19 +109,26 @@ def restore_files(localPath, workingPath, hostname):
             shutil.copy2(workingPath, localPath)
 
 def add_files(localPath, workingPath):
+
     if verbose:
         print("Adding: {} : {}".format(localPath, workingPath))
 
     else:
         try:
             shutil.copy2(localPath, workingPath)
+
         except IOError as e:
             os.makedirs(os.path.dirname(workingPath), exist_ok=True)
             shutil.copy2(localPath, workingPath)
+
+        if symlink:
+            os.remove(localPath)
+            symlink_files(workingPath, localPath)
+
         git_commit(workingPath)
 
 
-def verify_paths(localPath, workingPath, hostname="common"):
+def hard_copy(localPath, workingPath, hostname="common"):
 
     if restore:
         localPath = workingPath.replace(dotfilesPath + "dotfiles/" + hostname + "/", userHome)
@@ -134,6 +138,11 @@ def verify_paths(localPath, workingPath, hostname="common"):
         workingPath = localPath.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/")
         exists_lPath = os.path.exists(localPath)
         exists_gPath = os.path.exists(workingPath)
+
+
+    if exists_lPath and not exists_gPath:
+        add_files(localPath, workingPath)
+        return
 
     if exists_lPath and exists_gPath and not symlink:
         sync_files(workingPath, localPath)
@@ -147,9 +156,6 @@ def verify_paths(localPath, workingPath, hostname="common"):
         os.remove(workingPath)
         return
 
-    if exists_lPath and not exists_gPath:
-        add_files(localPath, workingPath)
-        return
 
 
 def read_filelist():
@@ -166,9 +172,9 @@ def read_filelist():
 
                             if type(working_path) == list:
                                 for l_path, w_path in zip_longest(local_path, working_path):
-                                    verify_paths(l_path, w_path)
+                                    hard_copy(l_path, w_path)
                             else:
-                                verify_paths(local_path, working_path)
+                                hard_copy(local_path, working_path)
 
                     else:
                         path, hostname = path.split(':')
@@ -177,9 +183,9 @@ def read_filelist():
                                 local_path = get_filelist(path, home=1)
                                 if type(working_path) == list or type(local_path) == list:
                                     for l_path, w_path in zip_longest(local_path, working_path):
-                                        verify_paths(l_path, w_path, hostname)
+                                        hard_copy(l_path, w_path, hostname)
                                 else:
-                                    verify_paths(local_path, working_path, hostname)
+                                    hard_copy(local_path, working_path, hostname)
     except FileNotFoundError:
         print("File not found: {}filelist".format(dotfilesPath))
 

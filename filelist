@@ -13,6 +13,7 @@ Scripts
 .config/nvim/colors
 .config/nvim/ginit.vim
 .zshrc
+.todo
 .urxvt/ext
 
 .i3:Strixx_Desktop

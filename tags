@@ -2423,6 +2423,7 @@ h	dotfiles/common/.config/nvim/colors/paramount.vim	/^function! s:h(group, style
 h	dotfiles/common/.config/nvim/colors/vrunchbang-dark.vim	/^fun! <sid>h(x, gf, gb, cf, cb, a, s)$/;"	f
 h	dotfiles/common/.config/nvim/colors/vrunchbang-light.vim	/^fun! <sid>h(x, gf, gb, cf, cb, a, s)$/;"	f
 handleArguments	dotfiles/common/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py	/^def handleArguments():$/;"	f
+hard_copy	dotgit.py	/^def hard_copy(localPath, workingPath, hostname="common"):$/;"	f
 hash_md5	dotgit.py	/^def hash_md5(fname):$/;"	f
 header	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def header(self, url, msg):$/;"	m	class:Logger
 hi	dotfiles/common/.config/nvim/colors/base16-3024.vim	/^fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)$/;"	f
@@ -6519,7 +6520,7 @@ socket	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    import socket$/;"	
 ss	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev ss SessionSave$/;"	m
 subprocess	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^import subprocess$/;"	i
 symlink	dotgit.py	/^    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args./;"	v
-symlink_files	dotgit.py	/^def symlink_files(src, hostname):$/;"	f
+symlink_files	dotgit.py	/^def symlink_files(src, dest):$/;"	f
 syn	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev syn call ToggleSyntax()<cr>:echom "Toggling Global Syntax"<cr>$/;"	m
 synL	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev synL call ToggleSyntaxLocal()<cr>:echom "Toggling Local Syntax"<cr>$/;"	m
 sync_files	dotgit.py	/^def sync_files(localPath, workingPath):$/;"	f
@@ -6533,7 +6534,6 @@ tn	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev tn tabnew$/;"	m
 use_xprop	dotfiles/common/Scripts/i3-scripts/i3-scratchpad-rofi.py	/^def use_xprop(x):$/;"	f
 userHome	dotgit.py	/^    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args./;"	v
 verbose	dotgit.py	/^    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args./;"	v
-verify_paths	dotgit.py	/^def verify_paths(localPath, workingPath, hostname="common"):$/;"	f
 w	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev w w$/;"	m
 wQ	dotfiles/common/.config/nvim/init.vim	/^cnoreabbrev wQ wq$/;"	m
 write	dotfiles/common/Scripts/ftpScript/lftp_mirror.py	/^    def write(self, append=False):$/;"	m	class:Logger
