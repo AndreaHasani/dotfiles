@@ -391,7 +391,7 @@ nnoremap <C-k> :set ro!<cr> :echo 'Set Readonly Toggle'<cr>
 nnoremap <C-l> :bn<cr> :echo 'Buffer Next'<cr>
 
 " Access Buffers Faster With Numbers
-nnoremap <F2> :buffers<CR>:buffer<space>
+" nnoremap <F2> :buffers<CR>:buffer<space>
 
 " Map Shift-k to (split) a paragraph to complete shift j (join), also make J behave like gJ
 nnoremap K i<cr><Esc>

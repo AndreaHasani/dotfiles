@@ -37,7 +37,7 @@ def rofi_choose(options):
         stdoutdata, _ = rofi_process.communicate("\n".join(title).encode())
         return int(stdoutdata.decode('utf-8').replace("\n", '')) # We get the number output and make sure its a int
     except Exception:
-        return 
+        return
 
 def use_xprop(x):
     """Get property for our x(id)"""

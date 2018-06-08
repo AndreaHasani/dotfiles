@@ -93,6 +93,8 @@ bar {
     hidden_state hide
     modifier $mod
     strip_workspace_numbers no
+    bindsym button4 nop
+    bindsym button5 nop
     colors {
 
 	separator #757575
@@ -132,6 +134,7 @@ for_window [title="^Task Manager"] floating enable, move container to workspace 
 
 ## Class
 for_window [class="Oblogout"] floating enable
+for_window [class = "Deadbeef"] floating enable, resize set 500 500, move position center
 for_window [class="Chromium|Google-chrome|Firefox"] move container to workspace 3:Browser, layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
@@ -269,7 +272,7 @@ mode "$Resize_mode" {
 
     # Escape Mode
     bindsym Escape mode "Normal Mode"
-    bindsym n mode "Normal Mode"
+    bindsym Return mode "Normal Mode"
     bindsym m mode "$move_mode"
 
 }
@@ -288,7 +291,7 @@ mode "$move_mode" {
 
     # Escape Mode
     bindsym Escape mode "Normal Mode"
-    bindsym n mode "Normal Mode"
+    bindsym Return mode "Normal Mode"
     bindsym r mode "$Resize_mode"
 }
 
@@ -301,6 +304,7 @@ mode "$screenshot_mode" {
 
     # Exit Mode
     bindsym Escape mode "Normal Mode"
+    bindsym Enter mode "Normal Mode"
 
 }
 
@@ -327,6 +331,7 @@ mode "$scratchpad_mode" {
 
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key 127
+exec_always --no-startup-id xautolock -time 30  -locker "systemctl suspend"
 
 ## Startup Daemouns
 exec --no-startup-id dunst &
@@ -335,7 +340,7 @@ exec --no-startup-id compton -b &
 exec --no-startup-id redshift &
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
+# exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
 
 ## Startup Icons
 exec --no-startup-id unclutter -idle 10 &
