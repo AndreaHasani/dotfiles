@@ -21,4 +21,4 @@ set dotfiles
 set nu
 
 " Set highlighting
-highlight CurrLine cterm=bold,reverse ctermfg=white ctermbg=bold,reverse
+highlight CurrLine cterm=bold,reverse ctermfg=white
