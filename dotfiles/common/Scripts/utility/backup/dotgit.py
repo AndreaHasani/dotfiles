@@ -146,6 +146,7 @@ def hard_copy(localPath, workingPath, hostname="common"):
             exists_lPath = os.path.exists(localPath)
             exists_gPath = os.path.exists(workingPath)
         except Exception:
+            os.remove(workingPath)
             return
 
 
