@@ -19,14 +19,17 @@ filetype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
 
 " Audio
 
-filextype *.wav,*.mp3,*.flac,*.ogg,*.m4a
+filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a
 	\ {Open with deadbeef}
         \ deadbeef %f &
 
 fileviewer *.mp3 mp3info
 fileviewer *.flac soxi
 
-filextype *.mkv,*.mp4
+filetype *.mkv,*.mp4
 	\ {Open with mpv}
         \ mpv %c %i &
 
+filetype *.pdf,*.xls
+	\ {Find app with mimeo}
+        \ mimeo %c %i &

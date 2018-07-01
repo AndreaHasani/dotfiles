@@ -13,8 +13,8 @@ alias shutdown="poweroff"
 
 ### Youtube Download Alias ###
 
-alias yt-v='youtube-dl -f "bestvideo[height >=? 720][ext=webm]"' #Download youtube video 720p
-alias yt-a='youtube-dl --extract-audio -f bestaudio --audio-format mp3' #Download youtube music
+alias yt-v='youtube-dl --no-playlist -o "/home/strixx/Music/Low Quality Music/%(title)s.%(ext)s"-f "bestvideo[height >=? 720][ext=webm]"' #Download youtube video 720p
+alias yt-a='youtube-dl --no-playlist -o "/home/strixx/Music/Low Quality Music/%(title)s.%(ext)s" -i --extract-audio --audio-quality 0 --audio-format mp3' #Download youtube music
 
 # Normal Alias
 
@@ -101,3 +101,10 @@ alias ps-cpu="ps -eo pid,ppid,cmd,%mem,%cpu,ni --sort=-%cpu | head -n 20"
 alias ps-mem="ps -eo pid,ppid,cmd,%mem,%cpu,ni --sort=-%mem | head -n 20"
 
 alias \?="command_list"
+
+alias pwdc="pwd | copy"
+alias play="playsong"
+
+playsong() {
+    mpc --host=localhost clear && mpc --host=localhost insert "$@" && mpc --host=localhost play
+}

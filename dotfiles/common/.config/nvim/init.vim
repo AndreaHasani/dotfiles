@@ -45,6 +45,7 @@ Plug 'junegunn/vim-easy-align'
 
 " ColorScheme
 Plug 'owickstrom/vim-colors-paramount'
+Plug 'chriskempson/base16-vim'
 
 " Interface Plugins
 Plug 'itchyny/lightline.vim'
@@ -179,6 +180,7 @@ nmap <F5> :TagbarToggle<cr>
 " nnoremap <silent> gd :call LanguageClient_textDocument_hover()<CR>
 
 let base16colorspace=256
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 
 "" Deoplete
@@ -447,6 +449,8 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 " Fix for GUI ColorScheme
 if !has('gui_running')
     set t_Co=256
+    " set t_AB=^[[48;5;%dm
+    " set t_AF=^[[38;5;%dm
 endif
 
 " Re-Open Previously Opened File
@@ -695,7 +699,7 @@ if has ('unix')
     nnoremap <leader>fa :FindAll<cr>
     nnoremap <leader>fh :FindHome<cr>
     nnoremap <leader>fs :FindSession<cr>
-    nnoremap <leader>fr :rviminfo!<cr> :Mru<cr>
+    nnoremap <leader>fr :rviminfo!<cr>:Mru<cr>
     nnoremap <leader>fb :FZFBookmark<cr>
     nnoremap <leader>p  :FZFProject<cr>
     nnoremap <leader>B :!echo %:~ >> ~/.config/nvim/bookmarks<cr>

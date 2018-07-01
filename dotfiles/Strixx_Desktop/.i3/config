@@ -160,6 +160,11 @@ mode "Normal Mode" {
     # start a terminal
     bindsym $mod+Return exec /usr/bin/urxvt
 
+    # Incrase and decrase brightness
+
+    bindsym $mod+KP_Add exec transset-df --inc 0.2 -a
+    bindsym $mod+KP_Subtract exec transset-df --dec 0.2 -a
+
     # kill focused window
     bindsym $mod+Shift+q kill
 
@@ -272,6 +277,7 @@ mode "$Resize_mode" {
 
     # Escape Mode
     bindsym Escape mode "Normal Mode"
+    bindsym q mode "Normal Mode"
     bindsym Return mode "Normal Mode"
     bindsym m mode "$move_mode"
 
@@ -292,6 +298,7 @@ mode "$move_mode" {
     # Escape Mode
     bindsym Escape mode "Normal Mode"
     bindsym Return mode "Normal Mode"
+    bindsym q mode "Normal Mode"
     bindsym r mode "$Resize_mode"
 }
 
@@ -331,7 +338,6 @@ mode "$scratchpad_mode" {
 
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key 127
-exec_always --no-startup-id xautolock -time 30  -locker "systemctl suspend"
 
 ## Startup Daemouns
 exec --no-startup-id dunst &

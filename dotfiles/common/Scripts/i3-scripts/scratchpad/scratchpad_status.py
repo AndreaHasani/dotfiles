@@ -1,6 +1,4 @@
-import subprocess
 import i3ipc
-import re
 
 i3 = i3ipc.Connection()
 scratchpad_workspace = i3.get_workspaces()

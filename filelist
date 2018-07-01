@@ -21,11 +21,9 @@ Scripts
 .config/nvim/Project-Path:Strixx_Desktop
 .zprofile:Strixx_Desktop
 .mpd:Strixx_Desktop
-Scripts/utility/screeninfo:Strixx_Desktop
 
 
 .i3:Strixx_Laptop
 .config/nvim/bookmarks:Strixx_Laptop
 .config/nvim/Project-Path:Strixx_Laptop
 .mpd:Strixx_Laptop
-Scripts/utility/screeninfo:Strixx_Laptop

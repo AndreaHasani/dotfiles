@@ -1,6 +1,6 @@
 
 * {
-    foreground:                  #FFEAD49B;
+    foreground:                  #eceadfbb;
     normal-foreground:           @foreground;
     red:                         #DC322F;
     alternate-normal-background: #1E272B;
@@ -18,7 +18,7 @@
     normal-background:           #1E272B;
     lightfg:                     #586875;
     selected-normal-background:  #1E272B;
-    selected-normal-foreground:  #78824B;
+    selected-normal-foreground:  #e37262;
     separatorcolor:              #9D6A47;
     spacing:                     2;
     urgent-background:           #1E272B;
@@ -36,7 +36,7 @@
     location: north;
     width:      100%;
     height:      30%;
-    padding: 1%;
+    padding: 10px 10px 5px 10px;
     position: north west;
 }
 #message {
