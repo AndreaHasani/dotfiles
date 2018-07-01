@@ -119,7 +119,10 @@ def add_files(localPath, workingPath):
 
         except IOError as e:
             os.makedirs(os.path.dirname(workingPath), exist_ok=True)
-            shutil.copy2(localPath, workingPath)
+            try:
+                shutil.copy2(localPath, workingPath)
+            except:
+                pass
 
         if symlink:
             os.remove(localPath)
@@ -207,8 +210,6 @@ def hash_md5(fname):
 def git_commit(workingPath):
     date = datetime.now()
     Popen(["git", "-C", os.path.dirname(workingPath), "add", "."])
-    time.sleep(2)
-    Popen(["git", "-C", os.path.dirname(workingPath), "commit", "-am", "Script Commit: " + date.strftime("%Y-%m-%d %H:%M") ])
 
 
 

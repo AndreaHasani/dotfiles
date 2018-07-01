@@ -7,6 +7,7 @@ import subprocess
 
 backupDir = "/home/strixx/data/linux_backup/"
 tmpFolder = "/home/strixx/.tmp/tmpBackup/"
+scriptFolder = "/home/strixx/Scripts/utility/backup/"
 
 def sync():
 
@@ -16,7 +17,7 @@ def sync():
         pass
 
     print("Starting Sync")
-    with open("list.txt", "r") as f:
+    with open(scriptFolder + "list.txt", "r") as f:
         for num, path in enumerate(f.readlines()):
             path = path.strip()
             if os.path.exists(path):
