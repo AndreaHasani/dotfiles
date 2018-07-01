@@ -96,6 +96,7 @@ def restore_files(localPath, workingPath, hostname):
 
     if symlink:
         symlink_files(workingPath, localPath)
+        return
 
     if verbose:
         print("Restoring: {} : {}".format(workingPath, localPath))
