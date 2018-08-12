@@ -125,7 +125,7 @@ bindsym $mod+Shift+F5 mode "Normal Mode"
 mode "Normal Mode" {
 
     # start a terminal
-    bindsym $mod+Return exec /usr/bin/termite
+    bindsym $mod+Return exec /usr/bin/urxvt
 
     # kill focused window
     bindsym $mod+Shift+q kill

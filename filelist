@@ -22,7 +22,6 @@ Scripts
 .zprofile:Strixx_Desktop
 .mpd:Strixx_Desktop
 
-
 .i3:Strixx_Laptop
 .config/nvim/bookmarks:Strixx_Laptop
 .config/nvim/Project-Path:Strixx_Laptop

@@ -4,7 +4,6 @@ let g:mapleader = " "
 
 set nocompatible
 
-
 " Sane Defaults
 filetype on
 filetype plugin on
@@ -45,7 +44,6 @@ Plug 'junegunn/vim-easy-align'
 
 " ColorScheme
 Plug 'owickstrom/vim-colors-paramount'
-Plug 'chriskempson/base16-vim'
 
 " Interface Plugins
 Plug 'itchyny/lightline.vim'
@@ -81,12 +79,14 @@ Plug 'Shougo/echodoc.vim'
 Plug 'aserebryakov/vim-todo-lists'
 
 " Plug 'mattn/emmet-vim'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
-Plug 'maralla/completor.vim'
+" Plug 'ajh17/VimCompletesMe'
+" Plug 'maralla/completor.vim'
 
-" Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'Shougo/neco-syntax'
 Plug 'metakirby5/codi.vim'
 " Plug 'ervandew/supertab'
 
@@ -138,7 +138,7 @@ Plug '2072/PHP-Indenting-for-VIm'
 
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'kh3phr3n/python-syntax'
-" Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-jedi'
 
 
 
@@ -180,18 +180,17 @@ nmap <F5> :TagbarToggle<cr>
 " nnoremap <silent> gd :call LanguageClient_textDocument_hover()<CR>
 
 let base16colorspace=256
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 
 "" Deoplete
 " Enable
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 " Enable syntax plugins
 let python_highlight_all = 1
 
 " Echodoc Config
-let g:echodoc#enable_at_startup	= 1
+call echodoc#enable()
 
 "" Completor Plugin Config
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -204,16 +203,6 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:buftabline_show = 1
 let g:buftabline_numbers = 1
 let g:buftabline_indicators = 1
-
-" Gutentags config
-let g:gutentags_generate_on_missing = 0
-let g:gutentags_generate_on_new = 0
-
-"Tag bar
-let g:tagbar_left = 1
-let g:tagbar_compact = 1
-let g:tagbar_indent = 1
-let g:tagbar_iconchars = ['+', '-']
 
 " Matchup Config
 let g:matchup_matchparen_status_offscreen = 1
@@ -242,7 +231,7 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_completion_enabled = 1
 
 " Set linter delay in ms
-let g:ale_lint_delay = 50
+let g:ale_lint_delay = 500
 
 " if you don't want linters to run on opening a file
 " let g:ale_lint_on_enter = 1
@@ -303,7 +292,7 @@ let g:lightline = {
 	    \ 'active': {
 	    \   'left': [ ['mode', 'paste'],
 	    \             ['fugitive', 'readonly', 'absolutepath','bufnum', 'modified'] ],
-	    \   'right': [ [ 'lineinfo' ], ['percent'] ]
+	    \   'right': [ [ 'lineinfo' ], ['percent'], ['servername'] ]
 	    \ },
 	    \ 'component': {
 	    \   'readonly': '%{&filetype=="help"?"":&readonly?"??":""}',
@@ -314,6 +303,7 @@ let g:lightline = {
 	    \ 'paste': '%{&paste?"PASTE":""}',
 	    \ 'percent': '%3p%%',
 	    \ 'lineinfo': '%3l:%-2v',
+	    \ 'servername': v:servername,
 	    \ },
 	    \ 'component_visible_condition': {
 	    \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -393,7 +383,7 @@ nnoremap <C-k> :set ro!<cr> :echo 'Set Readonly Toggle'<cr>
 nnoremap <C-l> :bn<cr> :echo 'Buffer Next'<cr>
 
 " Access Buffers Faster With Numbers
-" nnoremap <F2> :buffers<CR>:buffer<space>
+nnoremap <F2> :buffers<CR>:buffer<space>
 
 " Map Shift-k to (split) a paragraph to complete shift j (join), also make J behave like gJ
 nnoremap K i<cr><Esc>
@@ -449,8 +439,6 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 " Fix for GUI ColorScheme
 if !has('gui_running')
     set t_Co=256
-    " set t_AB=^[[48;5;%dm
-    " set t_AF=^[[38;5;%dm
 endif
 
 " Re-Open Previously Opened File
@@ -562,6 +550,8 @@ function! DefaultColors()
     hi VertSplit cterm=None guibg=None
     hi foldcolumn guibg=bg ctermbg=bg
     hi LineNr guibg=bg ctermbg=bg
+    hi BufTabLineHidden ctermfg=1
+    hi BufTabLineCurrent ctermfg=2
 endfunction
 
 " Buffer
@@ -666,7 +656,6 @@ if has ('win32')
     let g:python3_host_prog = 'C:\Program Files (x86)\Python36-32\python'
 elseif has ('unix')
     let g:python3_host_prog = '/usr/bin/python'
-    let g:loaded_python_provider = 0
 endif
 
 
@@ -674,7 +663,7 @@ endif
 
 """ Custom Commands
 
-let g:cmdMenu = ['UndotreeToggle', "TagbarOpenAutoClose"]
+let g:cmdMenu = ['UndotreeToggle', "asdasd"]
 
 
 if has ('unix')
@@ -694,7 +683,6 @@ if has ('unix')
 		\  'down':    '40%'})
 
     " FZF Mappings
-    nnoremap <F5>       :ShowCommand<cr>
     nnoremap <leader>fp :ProjectFind<cr>
     nnoremap <leader>fa :FindAll<cr>
     nnoremap <leader>fh :FindHome<cr>
