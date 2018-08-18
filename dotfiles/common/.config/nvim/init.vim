@@ -138,7 +138,7 @@ Plug '2072/PHP-Indenting-for-VIm'
 
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'kh3phr3n/python-syntax'
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
 
 
 
@@ -550,7 +550,7 @@ function! DefaultColors()
     hi VertSplit cterm=None guibg=None
     hi foldcolumn guibg=bg ctermbg=bg
     hi LineNr guibg=bg ctermbg=bg
-    hi BufTabLineHidden ctermfg=1
+    hi BufTabLineHidden ctermfg=7
     hi BufTabLineCurrent ctermfg=2
 endfunction
 

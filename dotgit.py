@@ -8,16 +8,32 @@ import time
 from itertools import zip_longest
 from subprocess import Popen
 from datetime import datetime
+from docopt import docopt
 
+__doc__ = """dotgit: Dotfiles management made easy.
 
+Usage:
+    dotgit ( -h | --help )
+    dotgit (-l DIR) (-w DIR) [options]
 
+Options:
+  -h --help                 Show this screen.
+  -l DIR --local=DIR        Local Directory [default: /home/strixx/]
+  -w DIR --working=DIR      Folder to put dotfiles, example: dotgit folder [default: /home/strixx/.dotfiles/]
+  -v --verbose              Print operations to screen
+  -r --restore              Cleanup local and copy all files from working directory
+  -s --symlink              Use symbolic links insteed of copy mode.
+  --version                 Show version.
 
-def init_check():
+"""
+
+def folderCheck():
     """Check if dotfilesPath tree is not empty and has correct folders"""
 
     if not os.path.exists(dotfilesPath + 'dotfiles'):
 
-        print("Directory variable empty or not found, are you sure this is the right directory? \n")
+        print("""Directory variable empty or not found, are you sure this is the right directory?
+Make sure to end Local and dotfilesPath directory path with ''/""")
         answer = input("=> Do you want to setup dotfiles in this directory? ")
         if "y" not in answer.lower():
             return False
@@ -29,10 +45,10 @@ def init_check():
             print("------------------------------------------------\n")
         else:
             try:
-                reqDirs = [dotfilesPath + "dotfiles/common", dotfilesPath + "dotfiles/" + host]
+                reqDirs = [working + "dotfiles/common", working + "dotfiles/" + host]
                 for reqdir in reqDirs: os.makedirs(reqdir, exist_ok=False)
-                with open(dotfilesPath + 'filelist', 'a'):
-                    os.utime(dotfilesPath + 'filelist', None)
+                with open(working + 'filelist', 'a'):
+                    os.utime(working + 'filelist', None)
 
             except Exception:
                 return False
@@ -134,7 +150,6 @@ def add_files(localPath, workingPath):
 
 
 def hard_copy(localPath, workingPath, hostname="common"):
-
     if restore:
         try:
             localPath = workingPath.replace(dotfilesPath + "dotfiles/" + hostname + "/", userHome)
@@ -148,24 +163,19 @@ def hard_copy(localPath, workingPath, hostname="common"):
             exists_lPath = os.path.exists(localPath)
             exists_gPath = os.path.exists(workingPath)
         except AttributeError:
-            localPath = localPath[0]
             workingPath = localPath.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/")
             exists_lPath = os.path.exists(localPath)
             exists_gPath = os.path.exists(workingPath)
 
-            # try:
-            #     os.remove(workingPath)
-            # except:
-            #     pass
 
 
     if exists_lPath and not exists_gPath:
         add_files(localPath, workingPath)
         return
 
-    if exists_lPath and exists_gPath and not symlink:
-        sync_files(workingPath, localPath)
-        return
+    # if exists_lPath and exists_gPath and not symlink:
+    #     sync_files(workingPath, localPath)
+    #     return
 
     # if exists_lPath and exists_gPath and symlink:
     #     symlink_files(workingPath, localPath)
@@ -181,34 +191,34 @@ def hard_copy(localPath, workingPath, hostname="common"):
 
 
 
-def read_filelist():
-    """Retrive file list from folder for both """
+def readFilelist():
+    """Get filelist from filelist file"""
 
     try:
         with open("filelist", mode='r') as f:
-            for path in f.readlines():
-                path = path.replace('\n', '')
-                if path:
-                    if ':' not in path:
-                            working_path = get_filelist(path, "dotfiles/common")
-                            local_path = get_filelist(path, home=1)
+            for __ in f.readlines():
+                filePath = __.replace('\n', '')
+                if filePath:
+                    if ':' not in filePath:
+                            gitPath = get_filelist(filePath, "dotfiles/common")
+                            localPath = get_filelist(filePath, home=1)
 
-                            if type(working_path) == list:
-                                for l_path, w_path in zip_longest(local_path, working_path):
-                                    hard_copy(l_path, w_path)
+                            if type(gitPath) == list or type(localPath) == list:
+                                for localPath, gitPath in zip_longest(localPath, gitPath):
+                                    hard_copy(localPath, gitPath)
                             else:
-                                hard_copy(local_path, working_path)
+                                hard_copy(localPath, gitPath)
 
                     else:
-                        path, hostname = path.split(':')
+                        filePath, hostname = filePath.split(':')
                         if hostname in host:
-                                working_path = get_filelist(path, "dotfiles/" + hostname)
-                                local_path = get_filelist(path, home=1)
-                                if type(working_path) == list or type(local_path) == list:
-                                    for l_path, w_path in zip_longest(local_path, working_path):
-                                        hard_copy(l_path, w_path, hostname)
+                                gitPath = get_filelist(filePath, "dotfiles/" + hostname)
+                                localPath = get_filelist(filePath, home=1)
+                                if type(gitPath) == list or type(localPath) == list:
+                                    for localPath, gitPath in zip_longest(localPath, gitPath):
+                                        hard_copy(localPath, gitPath, hostname)
                                 else:
-                                    hard_copy(local_path, working_path, hostname)
+                                    hard_copy(localPath, gitPath, hostname)
 
     except FileNotFoundError:
         raise
@@ -228,31 +238,26 @@ def git_commit(workingPath):
     Popen(["git", "-C", os.path.dirname(workingPath), "add", "."])
 
 
-
-
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Python script for managing dotfiles in linux.")
-    parser.add_argument("-l", "--localDir",  dest="userHome", default="/home/strixx/", help="Choosing local directory to put on workdir and keep in sync with github dir.", metavar='')
-    parser.add_argument("-w", "--workingDir", dest="dotfilesPath", default="/home/strixx/.dotfiles/", help="Choosing work directory where to put dotfiles for sync in github.", metavar='')
-    parser.add_argument("-s", "--soft", dest="symlink", action='store_true', default=True, help="Using symbolic links from workdir to localdir, to keep them in sync")
-    parser.add_argument("-r", "--restore", dest="restore", action='store_true', default=False, help="Enable restore mode, will cleanup homedir and copy all files from workDir.")
-    parser.add_argument("-v", "--verbose", dest="verbose", action='store_true', default=False, help="Enable verbose mode, will print out what the script will do. Basically a dry run")
-    args = parser.parse_args()
+    args = docopt(__doc__, version="dotgit 0.1 alpha")
 
-    userHome, dotfilesPath, verbose, restore, symlink =  args.userHome, args.dotfilesPath, args.verbose, args.restore, args.symlink
+    userHome = args['--local']
+    dotfilesPath = args['--working']
+    verbose = args['--verbose']
+    restore = args['--restore']
+    symlink = args['--symlink']
     host = os.uname()[1]
 
-
     print("------------------------------------------------")
-    print("UserHome: '{}'".format(userHome))
-    print("DotfilesPath: '{}'".format(dotfilesPath))
+    print("Local  : '{}'".format(userHome))
+    print("Working: '{}'".format(dotfilesPath))
     print("Verbose: " + str(verbose))
     print("Restore: " + str(restore))
     print("Symlink: " + str(symlink))
-    print("Host: " + host)
+    print("Host   : " + host)
     print("------------------------------------------------")
 
-    if init_check():
+    if folderCheck():
         answer = input("=> Do you want to contiunue? ")
         if "y" in answer.lower():
-            read_filelist()
+            readFilelist()

@@ -1,0 +1,13 @@
+51561 / 2 =
+257805 / 10 = 25780.5
+
+ 51561 * 5 = 257805
+ 
+ Metoda per llogaritje te shpejta ne math
+ 
+ Pjestime me numra qe mund te shumezojm ne 10,100,1000 etc psh:
+ 51561 / 2 = ?
+ I shumezojm numrat me 5 qe 2 te na japi 10.
+ 257805 / 10 = 25780.5
+ 51561 / 2 = 25780.5
+ 

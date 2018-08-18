@@ -41,7 +41,6 @@ URxvt.keysym.C-Right:    \033[1;5C
 
 /* \e[3~ */
 
-
 ! Base16 Flat
 ! Scheme: Chris Kempson (http://chriskempson.com)
 

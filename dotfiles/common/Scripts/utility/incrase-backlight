@@ -2,7 +2,7 @@
 
 cd /sys/class/backlight/nv_backlight/
 i=$(< actual_brightness)
-i=$((i+5))
+i=$((i+2))
 echo $i > brightness
 b=$(< actual_brightness)
 notify-send.sh --replace-file=/tmp/backligh -a 'Brightness' $b

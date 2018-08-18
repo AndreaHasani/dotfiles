@@ -1,7 +1,8 @@
-from subprocess import Popen
-import subprocess
+#!/usr/bin/python
+
 import os
 from random import randint
+import sys
 
 try:
     os.makedirs("/tmp/nvim_servers")
@@ -23,5 +24,5 @@ def makename(servers):
 
 
 
-command = "NVIM_LISTEN_ADDRESS=/tmp/nvim_servers/{} nvim".format(makename(servers))
+command = "NVIM_LISTEN_ADDRESS=/tmp/nvim_servers/{} nvim {}".format(makename(servers), ' '.join(sys.argv[1:]))
 os.system(command)
