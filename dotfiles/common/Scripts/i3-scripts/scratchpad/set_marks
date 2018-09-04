@@ -15,7 +15,7 @@ except Exception:
     print('command error')
 
 for item in result:
-    if item['visible']:
+    if item['visible'] and item['focused']:
         set_mark = item['name'][2::]
 
 current_marks = sub.Popen(['i3-msg', '-t', 'get_marks'], stdout=sub.PIPE)

@@ -25,7 +25,7 @@ def get_scratchpad_windows():
     """Getting scratchpad Windows"""
 
     scratchpad_containers = i3.get_tree().scratchpad().descendents()
-    return filter(lambda c: c.type == 'con' and current_workspace in str(c.marks), scratchpad_containers) # return them in id
+    return filter(lambda c: c.type == 'con' and current_workspace.strip() in str(c.marks), scratchpad_containers) # return them in id
 
 def rofi_choose(options):
     # Show rofi in dmenu mode

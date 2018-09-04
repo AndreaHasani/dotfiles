@@ -82,11 +82,17 @@ Plug 'aserebryakov/vim-todo-lists'
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
+<<<<<<< Updated upstream
 " Plug 'ajh17/VimCompletesMe'
 " Plug 'maralla/completor.vim'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neco-syntax'
+=======
+" Plug 'maralla/completor.vim'
+
+Plug 'Shougo/deoplete.nvim'
+>>>>>>> Stashed changes
 Plug 'metakirby5/codi.vim'
 " Plug 'ervandew/supertab'
 
@@ -192,9 +198,9 @@ let python_highlight_all = 1
 " Echodoc Config
 call echodoc#enable()
 
-"" Completor Plugin Config
-inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" "" Completor Plugin Config
+" inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Jedi Path
 " let g:completor_python_binary = '/home/strixx/.local/lib/python3.6/site-packages'

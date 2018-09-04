@@ -8,9 +8,13 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+#Monitor setup
+set $firstMonitor DVI-D-1
+set $secondMonitor HDMI-1-2
+
+
 # Desktop Config
 set $mod Mod1
-set $super = Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -60,23 +64,36 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
 
 # Workspace Variables
-set $ws1 "1:Desktop"
-set $ws2 "2:Terminal"
-set $ws3 "3:Browser"
-set $ws4 "4:WebWork"
-set $ws5 "5:Docker"
-set $ws6 "6:"
-set $ws7 "7:"
-set $ws8 "8:Chat"
-set $ws9 "9:File Manager"
+set $ws1 "1: Terminal"
+set $ws2 "2: WebWork"
+set $ws3 "3: Docker"
+set $ws4 "4: Empty"
+set $ws5 "5: Empty"
+set $ws6 "6: Desktop"
+set $ws7 "7: Browser"
+set $ws8 "8: Empty"
+set $ws9 "9: Empty"
+
+# Workspace output
+
+workspace $ws1 output $firstMonitor
+workspace $ws2 output $firstMonitor
+workspace $ws3 output $firstMonitor
+workspace $ws4 output $firstMonitor
+workspace $ws5 output $firstMonitor
+
+workspace $ws6 output $secondMonitor
+workspace $ws7 output $secondMonitor
+workspace $ws8 output $secondMonitor
+workspace $ws9 output $secondMonitor
 
 #i3-gaps
 gaps inner 10
 gaps outer 5
 
 # Specific Workspace Gapps
-workspace $ws3 gaps inner 0
-workspace $ws3 gaps outer 0
+workspace $ws7 gaps inner 0
+workspace $ws7 gaps outer 0
 
 #Hide Borders and Title
 for_window [class="^.*"] border pixel 1, title_format "  %title  "
@@ -86,9 +103,32 @@ smart_borders on
 
 # Bar
 bar {
+    output $firstMonitor
     status_command py3status -c ~/.i3/i3status.conf
     height 30
-    font pango:inconsolata 12, Awesome 10
+    tray_output None
+    font pango:inconsolata 12, Awesome 12
+    separator_symbol " "
+    hidden_state hide
+    modifier $mod
+    strip_workspace_numbers no
+    bindsym button4 nop
+    bindsym button5 nop
+    colors {
+
+	separator #757575
+	#                  border             background         text
+	focused_workspace  $bg-color          $bg-color          $text-color
+	inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+	urgent_workspace   $urgent-bg-color   $urgent-bg-color   $urgent-fg-color
+}
+}
+
+bar {
+    output $secondMonitor
+    status_command py3status -c ~/.i3/i3status_secmonitor.conf
+    height 30
+    font pango:inconsolata 12, Awesome 12
     separator_symbol " "
     hidden_state hide
     modifier $mod
@@ -107,9 +147,6 @@ bar {
 
 # Disable Focus Follow Mouse
 focus_follows_mouse no
-
-# Disable marks on title
-show_marks no
 
 ### Start Rules
 
@@ -130,20 +167,23 @@ for_window [title="Set password for your browser"] floating enable
 for_window [title="mutt-specified"] move container to workspace 6:Email
 for_window [title="nvim_default"] move container to workspace 4:NVIM
 for_window [title="^Transmission"] floating enable. resize set 400 400, move position center
-for_window [title="^Task Manager"] floating enable, move container to workspace 3:Browser, resize set 800 600, move position center
+for_window [title="^Task Manager"] floating enable, move container to workspace $ws7, resize set 800 600, move position center
 
 ## Class
 for_window [class="Oblogout"] floating enable
 for_window [class = "Deadbeef"] floating enable, resize set 500 500, move position center
-for_window [class="Chromium|Google-chrome|Firefox"] move container to workspace 3:Browser, layout tabbed
+for_window [class="Chromium|Google-chrome|Firefox"] move container to workspace $ws7, layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
-for_window [class = "Filezilla"] move container to workspace $ws4
+for_window [class = "Filezilla"] move container to workspace $ws2
 
 for_window [class = "URxvt" workspace = "((?!1|2)[0-9])"] floating enable
 for_window [class = "mpv"] floating enable
 
 ## Scratchpad Mode Rules
+
+#Disable mouse wrapping
+# mouse_warping none
 
 
 ### End Rules
@@ -154,13 +194,13 @@ for_window [class = "mpv"] floating enable
 
 bindsym Pause mode "Normal Mode"
 
-
 mode "Normal Mode" {
 
     # start a terminal
     bindsym $mod+Return exec /usr/bin/urxvt
 
     # Incrase and decrase brightness
+
 
     bindsym $mod+KP_Add exec transset-df --inc 0.2 -a
     bindsym $mod+KP_Subtract exec transset-df --dec 0.2 -a
@@ -179,12 +219,6 @@ mode "Normal Mode" {
     bindsym $mod+j focus down
     bindsym $mod+k focus up
     bindsym $mod+l focus right
-
-    # alternatively, you can use the cursor keys:
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
 
     # split in horizontal orientation
     bindsym $mod+Shift+v split h
@@ -215,16 +249,17 @@ mode "Normal Mode" {
     bindsym Super_L exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
     bindsym Super_R exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
+
     # switch to workspace
-    bindsym $mod+1 workspace $ws1
-    bindsym $mod+2 workspace $ws2
-    bindsym $mod+3 workspace $ws3
-    bindsym $mod+4 workspace $ws4
-    bindsym $mod+5 workspace $ws5
-    bindsym $mod+6 workspace $ws6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace $ws8
-    bindsym $mod+9 workspace $ws9
+    bindsym $mod+1 workspace number $ws1
+    bindsym $mod+2 workspace number $ws2
+    bindsym $mod+3 workspace number $ws3
+    bindsym $mod+4 workspace number $ws4
+    bindsym $mod+5 workspace number $ws5
+    bindsym $mod+6 workspace number $ws6
+    bindsym $mod+7 workspace number $ws7
+    bindsym $mod+8 workspace number $ws8
+    bindsym $mod+9 workspace number $ws9
 
     # Mode Toggle
     bindsym $mod+space focus mode_toggle
@@ -338,8 +373,11 @@ mode "$scratchpad_mode" {
 
 # Making sure the default mode changes to Normal Mode
 exec_always --no-startup-id sleep 0.1 && xdotool key 127
+exec_always --no-startup-id xpointerbarrier 0 0 0 0
+exec_always --no-startup-id unclutter -idle 10 &
 
 ## Startup Daemouns
+exec_always --no-startup-id xrandr --auto --output $firstMonitor --mode 1920x1080 --panning 1920x1080 --pos 0x1080 --left-of $secondMonitor &&
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
 exec --no-startup-id compton -b &
@@ -349,7 +387,6 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
 
 ## Startup Icons
-exec --no-startup-id unclutter -idle 10 &
 exec --no-startup-id nm-applet &
 exec --no-startup-id transmission-gtk -m &&
 exec --no-startup-id volumeicon &

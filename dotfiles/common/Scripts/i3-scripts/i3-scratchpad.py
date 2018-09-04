@@ -12,7 +12,7 @@ def find_focused_work(workspace):
             return workspace[i]['name'].split(':')[1]
 current_workspace = find_focused_work(scratchpad_workspace)
 
-    
+
 def get_scratchpad_windows():
     """Getting scratchpad Windows"""
 
