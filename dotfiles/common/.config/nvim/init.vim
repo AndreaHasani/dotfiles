@@ -138,7 +138,7 @@ Plug '2072/PHP-Indenting-for-VIm'
 
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'kh3phr3n/python-syntax'
-" Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-jedi'
 
 
 
