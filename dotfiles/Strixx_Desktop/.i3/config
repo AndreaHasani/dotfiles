@@ -9,8 +9,8 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 #Monitor setup
-set $firstMonitor DVI-D-1
-set $secondMonitor HDMI-1-2
+set $secondMonitor DVI-D-0
+set $firstMonitor HDMI-1-2
 
 
 # Desktop Config
@@ -65,14 +65,15 @@ client.placeholder      #0077ff #0c0c0c #ffffff #0077ff   #0077ff
 
 # Workspace Variables
 set $ws1 "1: Terminal"
-set $ws2 "2: WebWork"
-set $ws3 "3: Docker"
+set $ws2 "2: Vim"
+set $ws3 "3: Empty"
 set $ws4 "4: Empty"
 set $ws5 "5: Empty"
-set $ws6 "6: Desktop"
+set $ws6 "6: Gui"
 set $ws7 "7: Browser"
 set $ws8 "8: Empty"
 set $ws9 "9: Empty"
+set $ws10 "0: Empty"
 
 # Workspace output
 
@@ -164,10 +165,7 @@ for_window [window_type="menu"] floating enable
 
 ## Title
 for_window [title="Set password for your browser"] floating enable
-for_window [title="mutt-specified"] move container to workspace 6:Email
-for_window [title="nvim_default"] move container to workspace 4:NVIM
-for_window [title="^Transmission"] floating enable. resize set 400 400, move position center
-for_window [title="^Task Manager"] floating enable, move container to workspace $ws7, resize set 800 600, move position center
+for_window [title="^Transmission"] floating enable. resize set 400 400, move position center, move container to workspace $ws7
 
 ## Class
 for_window [class="Oblogout"] floating enable
@@ -175,15 +173,15 @@ for_window [class = "Deadbeef"] floating enable, resize set 500 500, move positi
 for_window [class="Chromium|Google-chrome|Firefox"] move container to workspace $ws7, layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
-for_window [class = "Filezilla"] move container to workspace $ws2
+for_window [class = "Filezilla"] move container to workspace $ws6
 
-for_window [class = "URxvt" workspace = "((?!1|2)[0-9])"] floating enable
+for_window [class = "URxvt" workspace = "((?!1|2|3|4|5)[0-9])"] floating enable
 for_window [class = "mpv"] floating enable
 
 ## Scratchpad Mode Rules
 
 #Disable mouse wrapping
-# mouse_warping none
+mouse_warping none
 
 
 ### End Rules
@@ -193,8 +191,6 @@ for_window [class = "mpv"] floating enable
 # Setting up modes
 
 bindsym Pause mode "Normal Mode"
-
-mode "Normal Mode" {
 
     # start a terminal
     bindsym $mod+Return exec /usr/bin/urxvt
@@ -211,8 +207,8 @@ mode "Normal Mode" {
     # Rename Workspace With Dialog
     bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
     bindsym $mod+Shift+n exec i3-input -F \
-    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':%s"' \
-    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': '
+    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': %s"' \
+    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':'
 
     # change focus
     bindsym $mod+h focus left
@@ -246,8 +242,8 @@ mode "Normal Mode" {
 
     ## God Mode Commands
     bindsym $mod+f fullscreen toggle
-    bindsym Super_L exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
-    bindsym Super_R exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+    bindsym Super_L exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+    bindsym Super_R exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
 
     # switch to workspace
@@ -293,9 +289,8 @@ mode "Normal Mode" {
     # Other Modes
     bindsym $mod+r mode "$resize_mode"
     bindsym $mod+m mode "$move_mode"
-    bindsym Print mode "$screenshot_mode"
 
-}
+    bindsym Print mode "$screenshot_mode"
 
 mode "$Resize_mode" {
 
@@ -311,9 +306,9 @@ mode "$Resize_mode" {
     bindsym Right resize grow width 15 px or 5 ppt
 
     # Escape Mode
-    bindsym Escape mode "Normal Mode"
-    bindsym q mode "Normal Mode"
-    bindsym Return mode "Normal Mode"
+    bindsym Escape mode "default"
+    bindsym q mode "default"
+    bindsym return mode "default"
     bindsym m mode "$move_mode"
 
 }
@@ -331,9 +326,9 @@ mode "$move_mode" {
     bindsym space move position center
 
     # Escape Mode
-    bindsym Escape mode "Normal Mode"
-    bindsym Return mode "Normal Mode"
-    bindsym q mode "Normal Mode"
+    bindsym Escape mode "default"
+    bindsym q mode "default"
+    bindsym return mode "default"
     bindsym r mode "$Resize_mode"
 }
 
@@ -372,12 +367,10 @@ mode "$scratchpad_mode" {
 ### Start Exec
 
 # Making sure the default mode changes to Normal Mode
-exec_always --no-startup-id sleep 0.1 && xdotool key 127
-exec_always --no-startup-id xpointerbarrier 0 0 0 0
 exec_always --no-startup-id unclutter -idle 10 &
 
 ## Startup Daemouns
-exec_always --no-startup-id xrandr --auto --output $firstMonitor --mode 1920x1080 --panning 1920x1080 --pos 0x1080 --left-of $secondMonitor &&
+exec_always --no-startup-id xrandr --auto --output $firstMonitor --mode 1920x1080 --panning 1920x1080 --left-of $secondMonitor &
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
 exec --no-startup-id compton -b &

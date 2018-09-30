@@ -1,6 +1,7 @@
 " Map Leader <Has to be first line>
 let mapleader = " "
 let g:mapleader = " "
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 set nocompatible
 
@@ -13,17 +14,15 @@ set splitright
 set autoindent
 " set title
 set hidden
-set lazyredraw
 set history=5000
 set noswapfile
 set wrap
 set gdefault
-set re=1
-set mouse=
 set viewdir=~/.vim/view/
 set viewoptions=cursor,folds,slash,unix
+set cursorline
+set number
 set foldmethod=manual
-set ignorecase
 set linebreak
 set smartcase
 set noshowmode
@@ -81,18 +80,12 @@ Plug 'aserebryakov/vim-todo-lists'
 " Plug 'mattn/emmet-vim'
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Raimondi/delimitMate'
-Plug 'jiangmiao/auto-pairs'
-<<<<<<< Updated upstream
-" Plug 'ajh17/VimCompletesMe'
-" Plug 'maralla/completor.vim'
+" Plug 'jiangmiao/auto-pairs'
+Plug 'rstacruz/vim-closer'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'maralla/completor.vim'
 Plug 'Shougo/neco-syntax'
-=======
-" Plug 'maralla/completor.vim'
-
-Plug 'Shougo/deoplete.nvim'
->>>>>>> Stashed changes
 Plug 'metakirby5/codi.vim'
 " Plug 'ervandew/supertab'
 
@@ -108,12 +101,14 @@ Plug 'tweekmonster/startuptime.vim'
 
 " Tags
 Plug 'majutsushi/tagbar'
-" Plug 'jsfaint/gen_tags.vim'
+Plug 'jsfaint/gen_tags.vim'
 
 " Commands Plugin
 if has ('unix')
     Plug 'mhinz/vim-grepper'
 endif
+
+Plug 'thinca/vim-quickrun'
 Plug 'sbdchd/neoformat'
 Plug 'ntpeters/vim-better-whitespace'
 " Plug 'andrewradev/splitjoin.vim'
@@ -121,6 +116,7 @@ Plug 'wellle/targets.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
+Plug 'liuchengxu/vim-which-key'
 
 " Intergrations Plugin
 Plug 'tpope/vim-commentary'
@@ -144,7 +140,7 @@ Plug '2072/PHP-Indenting-for-VIm'
 
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'kh3phr3n/python-syntax'
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
 
 
 
@@ -198,6 +194,10 @@ let python_highlight_all = 1
 " Echodoc Config
 call echodoc#enable()
 
+" Quickrun config
+
+let g:quickrun_config = {'outputter/buffer/split': ':10' }
+
 " "" Completor Plugin Config
 " inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -213,10 +213,13 @@ let g:buftabline_indicators = 1
 " Matchup Config
 let g:matchup_matchparen_status_offscreen = 1
 let g:matchup_transmute_enabled = 1
-let g:matchup_matchparen_stopline = 200
+let g:matchup_matchparen_stopline = 400
 let g:matchup_matchparen_deferred = 1
 let g:matchup_matchparen_timeout = 60
 let g:matchup_motion_enabled = 0
+
+" Which key config
+set timeoutlen=200
 
 " Undotree Config
 nmap <leader>u :UndotreeToggle<cr>
@@ -230,11 +233,6 @@ nmap <leader>u :UndotreeToggle<cr>
 " let g:neomake_echo_current_error = 0
 
 """ Ale Config
-" let g:ale_lint_on_save = 1
-let g:ale_lint_on_insert_leave = 1
-
-" Enable completion
-let g:ale_completion_enabled = 1
 
 " Set linter delay in ms
 let g:ale_lint_delay = 500
@@ -324,6 +322,11 @@ let g:lightline = {
 	    \ }
 " let g:lightline.component = {'filetype': 'FileType: %{&ft!=#""?&ft:"Null"}'}
 
+" Tagbar
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_iconchars = ['>', '-']
+
 " UndoTree Plugin
 let g:undotree_DiffAutoOpen = 0
 
@@ -389,7 +392,7 @@ nnoremap <C-k> :set ro!<cr> :echo 'Set Readonly Toggle'<cr>
 nnoremap <C-l> :bn<cr> :echo 'Buffer Next'<cr>
 
 " Access Buffers Faster With Numbers
-nnoremap <F2> :buffers<CR>:buffer<space>
+nnoremap <buffer> <F2> :exec '!python' shellescape(@%, 1)<cr>
 
 " Map Shift-k to (split) a paragraph to complete shift j (join), also make J behave like gJ
 nnoremap K i<cr><Esc>
@@ -476,8 +479,6 @@ cnoreabbrev tn tabnew
 cnoreabbrev tc tabclose
 cnoreabbrev ss SessionSave
 cnoreabbrev sc SessionClose
-cnoreabbrev syn call ToggleSyntax()<cr>:echom "Toggling Global Syntax"<cr>
-cnoreabbrev synL call ToggleSyntaxLocal()<cr>:echom "Toggling Local Syntax"<cr>
 cnoreabbrev notes Notes
 
 """ Vim Config End
@@ -582,29 +583,6 @@ function! ExecuteMacroOverVisualRange()
     execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-" Toggle Syntax Function
-let g:syntaxLocalON = 1
-function! ToggleSyntaxLocal()
-    if g:syntaxLocalON == 0
-	set syntax=on
-	let g:syntaxLocalON = 1
-    else
-	set syntax=off
-	let g:syntaxLocalON = 0
-    endif
-endfunction
-
-let g:syntaxON = 1
-function! ToggleSyntax()
-    if g:syntaxON == 0
-	syntax on
-	let g:syntaxON = 1
-    else
-	syntax off
-	let g:syntaxON = 0
-    endif
-endfunction
-
 function! s:LoadSession(session)
     if v:this_session!=""
 	if confirm('Save to session to ' . v:this_session . '?', "&Yes\n&No", 1)==1
@@ -649,9 +627,6 @@ augroup END
 
 """ Speed Config
 
-" Toggle Numbers
-nnoremap <F3> :let [&nu, &rnu] = [!&rnu, &nu+&rnu==1]<cr>
-
 " Disable Ruby
 let g:loaded_ruby_provider = 1
 
@@ -663,7 +638,6 @@ if has ('win32')
 elseif has ('unix')
     let g:python3_host_prog = '/usr/bin/python'
 endif
-
 
 """ Speed Config End
 
@@ -710,6 +684,7 @@ endif
 " Mappings
 
 cnoreabbrev ccd Ccd
+cnoreabbrev fix ALEFix
 
 
 """ Custom Commands End

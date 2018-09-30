@@ -250,6 +250,10 @@ fmC() {
     fm
 }
 
+cdup() {
+  zle reset-prompt
+}
+
 alias n='nvim'
 alias nb='nvim /home/strixx/.config/nvim/bookmarks'
 

@@ -27,6 +27,7 @@ Options:
 
 """
 
+
 def folderCheck():
     """Check if dotfilesPath tree is not empty and has correct folders"""
 
@@ -41,14 +42,17 @@ Make sure to end Local and dotfilesPath directory path with ''/""")
         if verbose:
             print("Creating directory in: " + dotfilesPath + 'dotfiles')
             print("Creating directory in: " + dotfilesPath + 'dotfiles/common')
-            print("Creating directory in: " + dotfilesPath + 'dotfiles/' + host)
+            print("Creating directory in: " +
+                  dotfilesPath + 'dotfiles/' + host)
             print("------------------------------------------------\n")
         else:
             try:
-                reqDirs = [working + "dotfiles/common", working + "dotfiles/" + host]
-                for reqdir in reqDirs: os.makedirs(reqdir, exist_ok=False)
-                with open(working + 'filelist', 'a'):
-                    os.utime(working + 'filelist', None)
+                reqDirs = [dotfilesPath + "dotfiles/common",
+                           dotfilesPath + "dotfiles/" + host]
+                for reqdir in reqDirs:
+                    os.makedirs(reqdir, exist_ok=False)
+                with open(dotfilesPath + 'filelist', 'a'):
+                    os.utime(dotfilesPath + 'filelist', None)
 
             except Exception:
                 return False
@@ -77,7 +81,7 @@ def symlink_files(src, dest):
     """Symlink function, use src to symlink to dest"""
 
     if verbose:
-        print("Symlink: {} | {}".format(src,dest))
+        print("Symlink: {} | {}".format(src, dest))
 
     else:
         try:
@@ -88,8 +92,6 @@ def symlink_files(src, dest):
         except Exception as e:
             raise
             os.makedirs(os.path.dirname(dest))
-
-
 
 
 def sync_files(localPath, workingPath):
@@ -126,6 +128,7 @@ def restore_files(localPath, workingPath, hostname):
             os.makedirs(os.path.dirname(localPath), exist_ok=True)
             shutil.copy2(workingPath, localPath)
 
+
 def add_files(localPath, workingPath):
 
     if verbose:
@@ -146,28 +149,27 @@ def add_files(localPath, workingPath):
             os.remove(localPath)
             symlink_files(workingPath, localPath)
 
-        git_commit(workingPath)
-
 
 def hard_copy(localPath, workingPath, hostname="common"):
     if restore:
         try:
-            localPath = workingPath.replace(dotfilesPath + "dotfiles/" + hostname + "/", userHome)
+            localPath = workingPath.replace(
+                dotfilesPath + "dotfiles/" + hostname + "/", userHome)
             exists_gPath = os.path.exists(workingPath)
             exists_lPath = os.path.exists(localPath)
         except Exception:
             return
     else:
         try:
-            workingPath = localPath.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/")
+            workingPath = localPath.replace(
+                userHome, dotfilesPath + "dotfiles/" + hostname + "/")
             exists_lPath = os.path.exists(localPath)
             exists_gPath = os.path.exists(workingPath)
         except AttributeError:
-            workingPath = localPath.replace(userHome, dotfilesPath + "dotfiles/" + hostname + "/")
+            workingPath = localPath.replace(
+                userHome, dotfilesPath + "dotfiles/" + hostname + "/")
             exists_lPath = os.path.exists(localPath)
             exists_gPath = os.path.exists(workingPath)
-
-
 
     if exists_lPath and not exists_gPath:
         add_files(localPath, workingPath)
@@ -190,7 +192,6 @@ def hard_copy(localPath, workingPath, hostname="common"):
         return
 
 
-
 def readFilelist():
     """Get filelist from filelist file"""
 
@@ -200,25 +201,26 @@ def readFilelist():
                 filePath = __.replace('\n', '')
                 if filePath:
                     if ':' not in filePath:
-                            gitPath = get_filelist(filePath, "dotfiles/common")
-                            localPath = get_filelist(filePath, home=1)
+                        gitPath = get_filelist(filePath, "dotfiles/common")
+                        localPath = get_filelist(filePath, home=1)
 
-                            if type(gitPath) == list or type(localPath) == list:
-                                for localPath, gitPath in zip_longest(localPath, gitPath):
-                                    hard_copy(localPath, gitPath)
-                            else:
+                        if type(gitPath) == list or type(localPath) == list:
+                            for localPath, gitPath in zip_longest(localPath, gitPath):
                                 hard_copy(localPath, gitPath)
+                        else:
+                            hard_copy(localPath, gitPath)
 
                     else:
                         filePath, hostname = filePath.split(':')
                         if hostname in host:
-                                gitPath = get_filelist(filePath, "dotfiles/" + hostname)
-                                localPath = get_filelist(filePath, home=1)
-                                if type(gitPath) == list or type(localPath) == list:
-                                    for localPath, gitPath in zip_longest(localPath, gitPath):
-                                        hard_copy(localPath, gitPath, hostname)
-                                else:
+                            gitPath = get_filelist(
+                                filePath, "dotfiles/" + hostname)
+                            localPath = get_filelist(filePath, home=1)
+                            if type(gitPath) == list or type(localPath) == list:
+                                for localPath, gitPath in zip_longest(localPath, gitPath):
                                     hard_copy(localPath, gitPath, hostname)
+                            else:
+                                hard_copy(localPath, gitPath, hostname)
 
     except FileNotFoundError:
         raise
@@ -231,11 +233,6 @@ def hash_md5(fname):
         for chunk in iter(lambda: f.read(4096), b""):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
-
-
-def git_commit(workingPath):
-    date = datetime.now()
-    Popen(["git", "-C", os.path.dirname(workingPath), "add", "."])
 
 
 if __name__ == "__main__":
