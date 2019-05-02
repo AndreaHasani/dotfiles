@@ -10,7 +10,8 @@ from subprocess import Popen
 from datetime import datetime
 from docopt import docopt
 
-__doc__ = """dotgit: Dotfiles management made easy.
+__doc__ = """
+dotgit: Dotfiles management made easy.
 
 Usage:
     dotgit ( -h | --help )
@@ -33,7 +34,8 @@ def folderCheck():
 
     if not os.path.exists(dotfilesPath + 'dotfiles'):
 
-        print("""Directory variable empty or not found, are you sure this is the right directory?
+        print("""
+Directory variable empty or not found, are you sure this is the right directory?
 Make sure to end Local and dotfilesPath directory path with ''/""")
         answer = input("=> Do you want to setup dotfiles in this directory? ")
         if "y" not in answer.lower():
@@ -142,7 +144,7 @@ def add_files(localPath, workingPath):
             os.makedirs(os.path.dirname(workingPath), exist_ok=True)
             try:
                 shutil.copy2(localPath, workingPath)
-            except:
+            except Exception:
                 pass
 
         if symlink:

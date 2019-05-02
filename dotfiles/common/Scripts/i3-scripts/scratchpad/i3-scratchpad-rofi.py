@@ -14,34 +14,45 @@ import re
 i3 = i3ipc.Connection()
 
 scratchpad_workspace = i3.get_workspaces()
+
+
 def find_focused_work(workspace):
     for i, item in enumerate(workspace):
         if item['focused']:
             return workspace[i]['name'].split(':')[1]
 
+
 current_workspace = find_focused_work(scratchpad_workspace)
+
 
 def get_scratchpad_windows():
     """Getting scratchpad Windows"""
 
     scratchpad_containers = i3.get_tree().scratchpad().descendents()
-    return filter(lambda c: c.type == 'con' and current_workspace.strip() in str(c.marks), scratchpad_containers) # return them in id
+    # return them in id
+    return filter(lambda c: c.type == 'con' and current_workspace.strip() in str(c.marks), scratchpad_containers)
+
 
 def rofi_choose(options):
     # Show rofi in dmenu mode
-    title, _id = map(list, zip(*options)) # we split the nested list into 2 and use the title list on rofi
-    rofi_process = subprocess.Popen(["rofi", "-dmenu", "-format", "i", "-p", "App: ", "-theme", "/home/strixx/Scripts/Rofi-Scripts/Rofi.rasi"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    # we split the nested list into 2 and use the title list on rofi
+    title, _id = map(list, zip(*options))
+    rofi_process = subprocess.Popen(["rofi", "-dmenu", "-format", "i", "-p", "App: ", "-theme",
+                                     "/home/strixx/Scripts/Rofi-Scripts/Rofi.rasi"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 
     try:
-    # Pipe our windows through rofi, rofi will always output a order number for the list
+        # Pipe our windows through rofi, rofi will always output a order number for the list
         stdoutdata, _ = rofi_process.communicate("\n".join(title).encode())
-        return int(stdoutdata.decode('utf-8').replace("\n", '')) # We get the number output and make sure its a int
+        # We get the number output and make sure its a int, return the choose int 1, 2, 4 x
+        return int(stdoutdata.decode('utf-8').replace("\n", ''))
     except Exception:
         return
 
-def use_xprop(x):
+
+def use_xprop(x, get_id=False):
     """Get property for our x(id)"""
-    process = subprocess.Popen(["xprop", "-id", " {}".format(x) ], stdout=subprocess.PIPE)
+    process = subprocess.Popen(
+        ["xprop", "-id", " {}".format(x)], stdout=subprocess.PIPE)
     proc_stdout = process.communicate()[0].strip()
 
     # Name
@@ -51,25 +62,38 @@ def use_xprop(x):
     app = re.search('(?:WM_CLASS.+?,)(.+?.")', str(proc_stdout))
     app = re.search('".*', app.group(1))
 
+    # Id
+
     string = "{} | {}".format(app.group().strip('"'), name.group(1).strip('"'))
-    return string
+    if get_id:
+        _id = re.search('(?:_NET_WM_PID.+? = )(\d+)',
+                        str(proc_stdout), re.MULTILINE)
+        return _id.group(1)
+    else:
+        return string
+
 
 def main():
     """Main function"""
     window_titles = []
+    window_action_id = []
     for x in get_scratchpad_windows():
-        y = []
-        y.extend((use_xprop(x.window), x.id))
-        window_titles.append(y)
+        window_titles.append([use_xprop(x.window), x.id])
+        window_action_id.append([use_xprop(x.window, get_id=True), x.id])
 
-    if window_titles: # If there are windows in scratchpad , run rofi_choose
+    if window_titles:  # If there are windows in scratchpad , run rofi_choose
         window_to_restore = rofi_choose(window_titles)
         try:
-            i3.command('[con_id="{}"] scratchpad show'.format(window_titles[window_to_restore][1])) # use rofi int output so we can slice the list
+            # use rofi int output so we can slice the list
+            i3.command('[con_id="{}"] scratchpad show'.format(
+                window_titles[window_to_restore][1]))
+            subprocess.Popen(['kill', '-CONT', ' %s' %
+                              window_action_id[window_to_restore][0]], stdout=subprocess.PIPE)
         except Exception:
             print("Error, i3 command didn't execute")
     else:
-        subprocess.Popen(["notify-send.sh", "--replace-file=/tmp/workspacename", "Empty", "-a","Scratchpad", "-t", "1000"],stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+        subprocess.Popen(["notify-send.sh", "--replace-file=/tmp/workspacename", "Empty",
+                          "-a", "Scratchpad", "-t", "1000"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 
 
 if __name__ == '__main__':

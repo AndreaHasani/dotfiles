@@ -1,4 +1,17 @@
 
+## Fzf
+# Use FZF to switch Tmux sessions:
+# bind-key s run "tmux new-window 'bash -ci fs'"
+fs() {
+	local -r fmt='#{session_id}:|#S|(#{session_attached} attached)'
+	{ tmux display-message -p -F "$fmt" && tmux list-sessions -F "$fmt"; } \
+		| awk '!seen[$1]++' \
+		| column -t -s'|' \
+		| fzf -q '$' --reverse --prompt 'switch session: ' -1 \
+		| cut -d':' -f1 \
+		| xargs tmux switch-client -t
+}
+
 ## Alias
 
 alias lfa="ls -la | egrep -v '^d' --color=auto"
@@ -25,6 +38,7 @@ alias nr="nvim-remote"
 alias v="vifm"
 alias network="nmtui"
 alias pacaur="trizen"
+alias ramuse="ps aux  | awk '{print \$6/1024 \" MB\t\t\" \$11}'  | sort -n"
 
 ## Unalias
 
@@ -101,3 +115,17 @@ alias ps-cpu="ps -eo pid,ppid,cmd,%mem,%cpu,ni --sort=-%cpu | head -n 20"
 alias ps-mem="ps -eo pid,ppid,cmd,%mem,%cpu,ni --sort=-%mem | head -n 20"
 
 alias \?="zsh_help"
+unset ex
+alias ex="cht.sh "
+
+
+## Flask Init (Make new project from template)
+flaskInit() {
+    dir=`pwd`
+    echo dir
+    rsync -av "/home/strixx/projects/websites/Flask Bare Template/" $dir --exclude ".git*" --exclude ".gitignore" --exclude "README" &&
+}
+alias flask init="flaskInit"
+
+
+alias lbg="find / -xdev -type f -size +500M -exec ls -lah {} \; | sort -nk 5"

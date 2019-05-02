@@ -9,8 +9,8 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 #Monitor setup
-set $secondMonitor DVI-D-0
-set $firstMonitor HDMI-1-2
+set $firstMonitor DVI-D-0
+set $secondMonitor HDMI-1-2
 
 
 # Desktop Config
@@ -71,8 +71,8 @@ set $ws4 "4: Empty"
 set $ws5 "5: Empty"
 set $ws6 "6: Gui"
 set $ws7 "7: Browser"
-set $ws8 "8: Empty"
-set $ws9 "9: Empty"
+set $ws8 "8: Social"
+set $ws9 "9: Games"
 set $ws10 "0: Empty"
 
 # Workspace output
@@ -101,6 +101,14 @@ for_window [class="^.*"] border pixel 1, title_format "  %title  "
 
 # Enable smart border
 smart_borders on
+
+## Default for popout windows
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable 
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable 
+for_window [window_type="menu"]                         floating enable
 
 # Bar
 bar {
@@ -159,6 +167,11 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move position center
 for_window [window_role="toolbox"] floating enable. resize set 400 400, move position center
 
+## Instace
+for_window [instance="leagueclientux.exe"] move container to workspace $ws9
+for_window [class="wine"] move container to workspace $ws9
+for_window [instance="league of legends.exe"] move container to workspace $ws9
+
 ## Type
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
@@ -171,6 +184,7 @@ for_window [title="^Transmission"] floating enable. resize set 400 400, move pos
 for_window [class="Oblogout"] floating enable
 for_window [class = "Deadbeef"] floating enable, resize set 500 500, move position center
 for_window [class="Chromium|Google-chrome|Firefox"] move container to workspace $ws7, layout tabbed
+for_window [class="Skype|Claws-mail"] move container to workspace $ws8, layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
 for_window [class = "Filezilla"] move container to workspace $ws6
@@ -190,8 +204,6 @@ mouse_warping none
 
 # Setting up modes
 
-bindsym Pause mode "Normal Mode"
-
     # start a terminal
     bindsym $mod+Return exec /usr/bin/urxvt
 
@@ -210,6 +222,10 @@ bindsym Pause mode "Normal Mode"
     'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': %s"' \
     -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':'
 
+    # bindsym $mod+Shift+t exec $script/i3-window-title-change $(zenity --entry --title 'Window' --text 'Rename App')
+    bindsym $mod+Shift+t exec "i3-msg mark 'change-title' && i3-msg title_format $(zenity --entry --title 'Window' --text 'Rename App') \
+    && i3-msg unmark 'change-title'"
+
     # change focus
     bindsym $mod+h focus left
     bindsym $mod+j focus down
@@ -226,8 +242,6 @@ bindsym Pause mode "Normal Mode"
     bindsym $mod+minus exec $script/scratchpad/set_marks
     bindsym $mod+plus exec $script/scratchpad/i3-scratchpad-rofi.py
 
-    # Drop down terminal
-    bindsym $mod+Shift+t [title="dropdown_terminal"] scratchpad show
     # toggle tiling / floating
     bindsym $mod+Shift+space floating toggle
 
@@ -245,6 +259,10 @@ bindsym Pause mode "Normal Mode"
     bindsym Super_L exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
     bindsym Super_R exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
+    bindsym $mod+p exec --no-startup-id rofi-pass
+    # bindsym Super_L exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+    # bindsym Super_R exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+
 
     # switch to workspace
     bindsym $mod+1 workspace number $ws1
@@ -261,16 +279,16 @@ bindsym Pause mode "Normal Mode"
     bindsym $mod+space focus mode_toggle
 
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace $ws1
-    bindsym $mod+Shift+2 move container to workspace $ws2
-    bindsym $mod+Shift+3 move container to workspace $ws3
-    bindsym $mod+Shift+4 move container to workspace $ws4
-    bindsym $mod+Shift+5 move container to workspace $ws5
-    bindsym $mod+Shift+6 move container to workspace $ws6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace $ws8
-    bindsym $mod+Shift+9 move container to workspace $ws9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+Shift+1 move container to workspace number$ws1
+    bindsym $mod+Shift+2 move container to workspace number$ws2
+    bindsym $mod+Shift+3 move container to workspace number$ws3
+    bindsym $mod+Shift+4 move container to workspace number$ws4
+    bindsym $mod+Shift+5 move container to workspace number$ws5
+    bindsym $mod+Shift+6 move container to workspace number$ws6
+    bindsym $mod+Shift+7 move container to workspace number$ws7
+    bindsym $mod+Shift+8 move container to workspace number$ws8
+    bindsym $mod+Shift+9 move container to workspace number$ws9
+    bindsym $mod+Shift+0 move container to workspace number $ws10
 
 
     # Sticky Window
@@ -335,13 +353,13 @@ mode "$move_mode" {
 mode "$screenshot_mode" {
 
     # Screenshot
-    bindsym c exec "maim -i $(xdotool getactivewindow) /tmp/screenshot.png;imgur /tmp/screenshot.png";, mode "Normal Mode"
-    bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "Normal Mode"
-    bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "Normal Mode"
+    bindsym c exec "maim -i $(xdotool getactivewindow) /tmp/screenshot.png;imgur /tmp/screenshot.png";, mode "default"
+    bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "default"
+    bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "default"
 
     # Exit Mode
-    bindsym Escape mode "Normal Mode"
-    bindsym Enter mode "Normal Mode"
+    bindsym Escape mode "default"
+    bindsym Enter mode "default"
 
 }
 
@@ -367,13 +385,17 @@ mode "$scratchpad_mode" {
 ### Start Exec
 
 # Making sure the default mode changes to Normal Mode
-exec_always --no-startup-id unclutter -idle 10 &
+# exec_always --no-startup-id unclutter -idle 10 &
 
 ## Startup Daemouns
-exec_always --no-startup-id xrandr --auto --output $firstMonitor --mode 1920x1080 --panning 1920x1080 --left-of $secondMonitor &
+exec_always --no-startup-id xrandr --auto --output $secondMonitor --mode 1920x1080 --right-of $firstMonitor &
+exec --no-startup-id dunst &&
+exec --no-startup-id dispwin -d 1 ~/Downloads/hp_e231i_user.icc && dispwin -d 2 ~/Downloads/hp_e231i_user.icc &
+
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
 exec --no-startup-id compton -b &
+exec --no-startup-id xset r rate 200 20 &
 exec --no-startup-id redshift &
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

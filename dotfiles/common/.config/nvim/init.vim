@@ -13,10 +13,14 @@ set splitbelow
 set splitright
 set autoindent
 " set title
+
+" set timeoutlen=200
+set timeoutlen=200
 set hidden
 set history=5000
 set noswapfile
 set wrap
+set sidescroll=1
 set gdefault
 set viewdir=~/.vim/view/
 set viewoptions=cursor,folds,slash,unix
@@ -24,7 +28,7 @@ set cursorline
 set number
 set foldmethod=manual
 set linebreak
-set smartcase
+set ignorecase
 set noshowmode
 " set nu
 set rnu
@@ -37,6 +41,7 @@ call plug#begin('~/.config/nvim/plugins')
 
 " Window Split Plugins
 Plug 'simeji/winresizer'
+Plug 'wellle/visual-split.vim'
 
 " Align Plugins
 Plug 'junegunn/vim-easy-align'
@@ -54,8 +59,10 @@ endif
 Plug 'Yggdroot/IndentLine'
 Plug 'ap/vim-buftabline'
 Plug 'justinmk/vim-dirvish'
+Plug 'bounceme/remote-viewer'
 Plug 'mbbill/undotree'
 Plug 'ferranpm/vim-isolate'
+Plug 'brooth/far.vim'
 
 " Local Win Plugins
 if has ('win32')
@@ -73,25 +80,30 @@ endif
 
 " Code Completion Plugin
 Plug 'Shougo/echodoc.vim'
-
-" Code Completion Plugin
+" Plug 'Shougo/denite.nvim'
 Plug 'aserebryakov/vim-todo-lists'
-
 " Plug 'mattn/emmet-vim'
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Raimondi/delimitMate'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'rstacruz/vim-closer'
-
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'maralla/completor.vim'
-Plug 'Shougo/neco-syntax'
+" Plug 'maralla/completor.vim'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Plug 'Shougo/neco-syntax'
 Plug 'metakirby5/codi.vim'
+Plug 'sheerun/vim-polyglot'
+
 " Plug 'ervandew/supertab'
+
+"Completion Plugins
+" Plug 'wokalski/autocomplete-flow'
 
 
 " Automaticly Features Plugin
 Plug 'jamessan/vim-gnupg'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 " Plug 'tmhedberg/SimpylFold'
 " Plug 'b4b4r07/vim-sunset'
 Plug 'pgdouyon/vim-evanesco'
@@ -122,6 +134,7 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'tpope/vim-commentary'
 " Plug 'mileszs/ack.vim'
 Plug 'keith/gist.vim'
+Plug 'szw/vim-maximizer'
 Plug 'javier-lopez/sprunge.vim'
 
 " Language Plugin
@@ -138,9 +151,10 @@ Plug '2072/PHP-Indenting-for-VIm'
 
 " Python
 
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'kh3phr3n/python-syntax'
-" Plug 'zchee/deoplete-jedi'
+" Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'kh3phr3n/python-syntax'
+Plug 'zchee/deoplete-jedi'
+Plug 'tmhedberg/SimpylFold'
 
 
 
@@ -157,7 +171,7 @@ Plug 'seavan/BufOnly.vim'
 
 
 " Syntax Check Plugin
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 " call dein#add('neomake/neomake')
 
 " call vivid#enable()
@@ -167,10 +181,20 @@ call plug#end()
 
 """ Plugins Config
 
+
+
 " Tagbar config
+nmap <leader>wt :TagbarToggle<cr>
 
-nmap <F5> :TagbarToggle<cr>
 
+" Session
+set sessionoptions-=options
+let g:session_directory = '/home/strixx/.config/nvim/session/files'
+let g:session_lock_directory = '/home/strixx/.config/nvim/session/locks'
+let g:session_autosave_periodic = 15
+let g:session_persist_colors = 0
+let g:session_autosave = 'yes'
+let g:session_autoload = 'no'
 
 " Config Tags
 " let g:gutentags_cache_dir="/home/strixx/hdd/"
@@ -183,6 +207,16 @@ nmap <F5> :TagbarToggle<cr>
 
 let base16colorspace=256
 
+" Maximizer Toggle config
+nnoremap <C-W>o <Nop>
+nnoremap <C-W>f :MaximizerToggle<cr>
+
+" Visual Split mappings
+
+xmap <C-W>r  <Plug>(Visual-Split-VSResize)
+xmap <C-W>s <Plug>(Visual-Split-VSSplit)
+xmap <C-W>sa <Plug>(Visual-Split-VSSplitAbove)
+xmap <C-W>sb <Plug>(Visual-Split-VSSplitBelow)
 
 "" Deoplete
 " Enable
@@ -197,10 +231,6 @@ call echodoc#enable()
 " Quickrun config
 
 let g:quickrun_config = {'outputter/buffer/split': ':10' }
-
-" "" Completor Plugin Config
-" inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Jedi Path
 " let g:completor_python_binary = '/home/strixx/.local/lib/python3.6/site-packages'
@@ -218,11 +248,15 @@ let g:matchup_matchparen_deferred = 1
 let g:matchup_matchparen_timeout = 60
 let g:matchup_motion_enabled = 0
 
-" Which key config
-set timeoutlen=200
+
+" Simple Fold Config
+
+let g:SimpylFold_docstring_preview = 1
+let g:SimpylFold_fold_import = 0
+let b:SimpylFold_fold_import = 0
 
 " Undotree Config
-nmap <leader>u :UndotreeToggle<cr>
+nnoremap <leader>wu :UndotreeToggle<cr>
 
 """ Code Linters
 
@@ -231,6 +265,22 @@ nmap <leader>u :UndotreeToggle<cr>
 " let g:neomake_highlight_columns = 0
 " let g:neomake_open_list = 2
 " let g:neomake_echo_current_error = 0
+
+""" Coc Config
+" Some server have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+
 
 """ Ale Config
 
@@ -276,6 +326,7 @@ nmap _ :Dirvish<cr>
 function! DirvishMapping()
     nmap <buffer> l <cr>
     nmap <buffer> h -
+    nmap <buffer> c :cd %<cr> :echo "Changing"
 endfunction
 
 """ Fancy statusbar
@@ -308,6 +359,10 @@ let g:lightline = {
 	    \ 'percent': '%3p%%',
 	    \ 'lineinfo': '%3l:%-2v',
 	    \ 'servername': v:servername,
+	    \ },
+	    \ 'component_function': {
+	    \   'cocstatus': 'coc#status',
+	    \   'currentfunction': 'CocCurrentFunction'
 	    \ },
 	    \ 'component_visible_condition': {
 	    \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -477,8 +532,9 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 cnoreabbrev tn tabnew
 cnoreabbrev tc tabclose
-cnoreabbrev ss SessionSave
-cnoreabbrev sc SessionClose
+cnoreabbrev ss SaveSession
+cnoreabbrev sc CloseSession
+cnoreabbrev so OpenSession
 cnoreabbrev notes Notes
 
 """ Vim Config End
@@ -584,12 +640,8 @@ function! ExecuteMacroOverVisualRange()
 endfunction
 
 function! s:LoadSession(session)
-    if v:this_session!=""
-	if confirm('Save to session to ' . v:this_session . '?', "&Yes\n&No", 1)==1
-	    SessionSave
-	endif
-    endif
-    %bd
+    SaveSession
+    CloseSession
     exec "source " a:session
 endfunction
 
@@ -609,7 +661,7 @@ augroup END
 augroup Type
     au!
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-    autocmd FileType python setlocal completeopt-=preview
+    " autocmd FileType python setlocal completeopt-=preview
 augroup END
 
 augroup EnterVim
@@ -617,6 +669,12 @@ augroup EnterVim
     autocmd VimEnter * call DefaultColors()
     autocmd VimEnter * let g:grepper.tools = ['rg', 'ack', 'grep', 'findstr', 'ag', 'pt', 'sift', 'git']
 augroup END
+
+ augroup vimrc
+   autocmd!
+   autocmd BufWinEnter,Syntax * syn sync minlines=500 maxlines=500
+ augroup END
+
 
 " augroup LeavingVim
 "     au!
@@ -642,19 +700,37 @@ endif
 """ Speed Config End
 
 """ Custom Commands
-
 let g:cmdMenu = ['UndotreeToggle', "asdasd"]
 
+"""" YCM config
+
+let g:ycm_add_preview_to_completeopt = 1
+""" Goto Commands
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gD <Plug>(coc-type-definition)
+nnoremap <silent> gr :call CocActionAsync('jumpReferences')<cr>
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+nnoremap <silent> gi <Plug>(coc-implementation)
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 if has ('unix')
 
     command! ShowCommand call fzf#run(fzf#wrap({'source': g:cmdMenu, 'sink': '', 'options': '-m +s'}))
     command! -range=% Share exe <line1>. ','.<line2>.'w !vpaste ft='.&ft
     command! FindAll call fzf#run(fzf#wrap({'source': 'cat ~/.vifm/fzf-read/locate-file', 'sink': 'e'}))
-    command! FindSession call fzf#run(fzf#wrap({'source': 'cd ~/.config/nvim/session && readlink -f *', 'sink': function('s:LoadSession'), 'options': '-m +s'}))
+    command! FindSession call fzf#run(fzf#wrap({'source': 'cd ~/.config/nvim/session/files && readlink -f *', 'sink': function('s:LoadSession'), 'options': '-m +s'}))
     command! ProjectFind call fzf#run(fzf#wrap({'source': 'find . -type f', 'sink': 'e'}))
     command! FindHome call fzf#run(fzf#wrap({'source': 'find /home/strixx/ -type f  ! \( -path "*cache*" -o -path "*fonts*" -o -path "*icons*" -o -path "*help*" -o -path "*log*" -o -path "afs" -o -path "var*" -o -path "lib*" -o -path "tmp*" -o -path "proc*" -o -path "*deps*" -o -path "*node*" -o -path "*/src/*" -o -path "*gem*" -o -path "*/ruby/*" \) 2>&1 | grep -v "Permission denied"', 'sink': 'e'}))
     command! FZFProject call fzf#run(fzf#wrap({'source': 'cat ~/.config/nvim/Project-Path ', 'sink': 'cd'}))
+    command! FZFBuffers call fzf#run({'source':  reverse(<sid>buflist()),'sink':    function('<sid>bufopen'), 'options': '+m',  'down':    len(<sid>buflist()) + 2 })
+
     command! FZFBookmark call fzf#run(fzf#wrap({'source': "cat ~/.config/nvim/bookmarks | cut -d ' ' -f 1", 'sink': 'e'}))
     command! Mru call fzf#run({
 		\  'source':  v:oldfiles,
@@ -672,12 +748,7 @@ if has ('unix')
     nnoremap <leader>p  :FZFProject<cr>
     nnoremap <leader>B :!echo %:~ >> ~/.config/nvim/bookmarks<cr>
     nnoremap <leader>P :!pwd >> ~/.config/nvim/Project-Path<cr>
-    nnoremap <silent> <Leader>b :call fzf#run({
-		\   'source':  reverse(<sid>buflist()),
-		\   'sink':    function('<sid>bufopen'),
-		\   'options': '+m',
-		\   'down':    len(<sid>buflist()) + 2
-		\ })<CR>
+    nnoremap <silent> <Leader>b :FZFBuffers<cr>
     command! Notes :10new ~/Documents/notes
 endif
 
@@ -687,7 +758,41 @@ cnoreabbrev ccd Ccd
 cnoreabbrev fix ALEFix
 
 
+
 """ Custom Commands End
+
+"" Mappings Order
+let g:sprunge_map = '<Leader>ss'
+
+
+" Which Key config for desc
+let g:which_key_timeout = 10
+let g:which_key_map =  {
+	    \ 'name' : 'Leader Key',
+	    \ '#' : 'Search cursor on buffers with grep',
+	    \}
+
+let g:which_key_map.t = {
+	    \ 'name' : 'Cursor GoTo' ,
+	    \}
+
+let g:which_key_map.f = {
+	    \ 'name' : 'Fzf Find' ,
+	    \}
+
+
+let g:which_key_map.w = {
+	    \ 'name' : 'Window Menu' ,
+	    \}
+
+let g:which_key_map.s = {
+	    \ 'name' : 'Share' ,
+	    \ 's' : 'Share to sprunge' ,
+	    \}
+
+call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 
 """ Gui Special Configs
 
@@ -709,7 +814,6 @@ if has('cscope')
   cnoreabbrev csf cs find
   cnoreabbrev csk cs kill
   cnoreabbrev csr cs reset
-  cnoreabbrev css cs show
   cnoreabbrev csh cs help
 
   command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
