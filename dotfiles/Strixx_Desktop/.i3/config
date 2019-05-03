@@ -96,19 +96,6 @@ gaps outer 5
 workspace $ws7 gaps inner 0
 workspace $ws7 gaps outer 0
 
-#Hide Borders and Title
-for_window [class="^.*"] border pixel 1, title_format "  %title  "
-
-# Enable smart border
-smart_borders on
-
-## Default for popout windows
-for_window [window_role="pop-up"]                       floating enable
-for_window [window_role="bubble"]                       floating enable 
-for_window [window_role="task_dialog"]                  floating enable
-for_window [window_role="Preferences"]                  floating enable
-for_window [window_type="dialog"]                       floating enable 
-for_window [window_type="menu"]                         floating enable
 
 # Bar
 bar {
@@ -192,191 +179,204 @@ for_window [class = "Filezilla"] move container to workspace $ws6
 for_window [class = "URxvt" workspace = "((?!1|2|3|4|5)[0-9])"] floating enable
 for_window [class = "mpv"] floating enable
 
+
+#Hide Borders and Title
+for_window [class="^.*"] border pixel 1, title_format "  %title  "
+
+
+## Default for popout windows
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable 
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable 
+for_window [window_type="menu"]                         floating enable
+
 ## Scratchpad Mode Rules
 
 #Disable mouse wrapping
 mouse_warping none
 
+# Enable smart border
+smart_borders on
 
 ### End Rules
 
 ### Starting Modes
 
-# Setting up modes
+# start a terminal
+bindsym $mod+Return exec /usr/bin/urxvt
 
-    # start a terminal
-    bindsym $mod+Return exec /usr/bin/urxvt
-
-    # Incrase and decrase brightness
+# Incrase and decrase brightness
 
 
-    bindsym $mod+KP_Add exec transset-df --inc 0.2 -a
-    bindsym $mod+KP_Subtract exec transset-df --dec 0.2 -a
+bindsym $mod+KP_Add exec transset-df --inc 0.2 -a
+bindsym $mod+KP_Subtract exec transset-df --dec 0.2 -a
 
-    # kill focused window
-    bindsym $mod+Shift+q kill
+# kill focused window
+bindsym $mod+Shift+q kill
 
-    # Rename Workspace With Dialog
-    bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
-    bindsym $mod+Shift+n exec i3-input -F \
-    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': %s"' \
-    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':'
+# Rename Workspace With Dialog
+bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
+bindsym $mod+Shift+n exec i3-input -F \
+	    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': %s"' \
+	    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':'
 
-    # bindsym $mod+Shift+t exec $script/i3-window-title-change $(zenity --entry --title 'Window' --text 'Rename App')
-    bindsym $mod+Shift+t exec "i3-msg mark 'change-title' && i3-msg title_format $(zenity --entry --title 'Window' --text 'Rename App') \
-    && i3-msg unmark 'change-title'"
+# bindsym $mod+Shift+t exec $script/i3-window-title-change $(zenity --entry --title 'Window' --text 'Rename App')
+	    bindsym $mod+Shift+t exec "i3-msg mark 'change-title' && i3-msg title_format $(zenity --entry --title 'Window' --text 'Rename App') \
+		&& i3-msg unmark 'change-title'"
 
-    # change focus
-    bindsym $mod+h focus left
-    bindsym $mod+j focus down
-    bindsym $mod+k focus up
-    bindsym $mod+l focus right
+# change focus
+		bindsym $mod+h focus left
+		bindsym $mod+j focus down
+		bindsym $mod+k focus up
+		bindsym $mod+l focus right
 
-    # split in horizontal orientation
-    bindsym $mod+Shift+v split h
+# split in horizontal orientation
+		bindsym $mod+Shift+v split h
 
-    # split in vertical orientation
-    bindsym $mod+v split v
+# split in vertical orientation
+		bindsym $mod+v split v
 
-    # Scrachpad Settings
-    bindsym $mod+minus exec $script/scratchpad/set_marks
-    bindsym $mod+plus exec $script/scratchpad/i3-scratchpad-rofi.py
+# Scrachpad Settings
+		bindsym $mod+minus exec $script/scratchpad/set_marks
+		bindsym $mod+plus exec $script/scratchpad/i3-scratchpad-rofi.py
 
-    # toggle tiling / floating
-    bindsym $mod+Shift+space floating toggle
+# toggle tiling / floating
+		bindsym $mod+Shift+space floating toggle
 
-    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-    bindsym $mod+Shift+r restart
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+		bindsym $mod+Shift+r restart
 
-    # Exec oblogout
-    bindsym $mod+Shift+e exec oblogout
+# Exec oblogout
+		bindsym $mod+Shift+e exec oblogout
 
-    # Hide Bar
-    bindsym $mod+b bar mode toggle
+# Hide Bar
+		bindsym $mod+b bar mode toggle
 
-    ## God Mode Commands
-    bindsym $mod+f fullscreen toggle
-    bindsym Super_L exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
-    bindsym Super_R exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+## God Mode Commands
+		bindsym $mod+f fullscreen toggle
+		bindsym Super_L exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+		bindsym Super_R exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
-    bindsym $mod+p exec --no-startup-id rofi-pass
-    # bindsym Super_L exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
-    # bindsym Super_R exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
-
-
-    # switch to workspace
-    bindsym $mod+1 workspace number $ws1
-    bindsym $mod+2 workspace number $ws2
-    bindsym $mod+3 workspace number $ws3
-    bindsym $mod+4 workspace number $ws4
-    bindsym $mod+5 workspace number $ws5
-    bindsym $mod+6 workspace number $ws6
-    bindsym $mod+7 workspace number $ws7
-    bindsym $mod+8 workspace number $ws8
-    bindsym $mod+9 workspace number $ws9
-
-    # Mode Toggle
-    bindsym $mod+space focus mode_toggle
-
-    # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number$ws1
-    bindsym $mod+Shift+2 move container to workspace number$ws2
-    bindsym $mod+Shift+3 move container to workspace number$ws3
-    bindsym $mod+Shift+4 move container to workspace number$ws4
-    bindsym $mod+Shift+5 move container to workspace number$ws5
-    bindsym $mod+Shift+6 move container to workspace number$ws6
-    bindsym $mod+Shift+7 move container to workspace number$ws7
-    bindsym $mod+Shift+8 move container to workspace number$ws8
-    bindsym $mod+Shift+9 move container to workspace number$ws9
-    bindsym $mod+Shift+0 move container to workspace number $ws10
+		bindsym $mod+p exec --no-startup-id rofi-pass
+# bindsym Super_L exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+# bindsym Super_R exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
 
-    # Sticky Window
-    bindsym $mod+s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
+# switch to workspace
+		bindsym $mod+1 workspace number $ws1
+		bindsym $mod+2 workspace number $ws2
+		bindsym $mod+3 workspace number $ws3
+		bindsym $mod+4 workspace number $ws4
+		bindsym $mod+5 workspace number $ws5
+		bindsym $mod+6 workspace number $ws6
+		bindsym $mod+7 workspace number $ws7
+		bindsym $mod+8 workspace number $ws8
+		bindsym $mod+9 workspace number $ws9
 
-    # Move
-    bindsym $mod+Shift+h move left 25px
-    bindsym $mod+Shift+j move down 25px
-    bindsym $mod+Shift+k move up 25px
-    bindsym $mod+Shift+l move right 25px
+# Mode Toggle
+		bindsym $mod+space focus mode_toggle
 
-    # change container layout (stacked, tabbed, toggle split)
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+# move focused container to workspace
+		bindsym $mod+Shift+1 move container to workspace number$ws1
+		bindsym $mod+Shift+2 move container to workspace number$ws2
+		bindsym $mod+Shift+3 move container to workspace number$ws3
+		bindsym $mod+Shift+4 move container to workspace number$ws4
+		bindsym $mod+Shift+5 move container to workspace number$ws5
+		bindsym $mod+Shift+6 move container to workspace number$ws6
+		bindsym $mod+Shift+7 move container to workspace number$ws7
+		bindsym $mod+Shift+8 move container to workspace number$ws8
+		bindsym $mod+Shift+9 move container to workspace number$ws9
+		bindsym $mod+Shift+0 move container to workspace number $ws10
 
-    # Other Modes
-    bindsym $mod+r mode "$resize_mode"
-    bindsym $mod+m mode "$move_mode"
 
-    bindsym Print mode "$screenshot_mode"
+# Sticky Window
+		bindsym $mod+s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
 
-mode "$Resize_mode" {
+# Move
+		bindsym $mod+Shift+h move left 25px
+		bindsym $mod+Shift+j move down 25px
+		bindsym $mod+Shift+k move up 25px
+		bindsym $mod+Shift+l move right 25px
 
-    # Resize
-    bindsym h resize shrink width 15 px or 5 ppt
-    bindsym j resize shrink height 15 px or 5 ppt
-    bindsym k resize grow height 15 px or 5 ppt
-    bindsym l resize grow width 15 px or 5 ppt
+# change container layout (stacked, tabbed, toggle split)
+		bindsym $mod+w layout tabbed
+		bindsym $mod+e layout toggle split
 
-    bindsym Left resize shrink width 15 px or 5 ppt
-    bindsym Down resize grow height 15 px or 5 ppt
-    bindsym Up resize shrink height 15 px or 5 ppt
-    bindsym Right resize grow width 15 px or 5 ppt
+# Other Modes
+		bindsym $mod+r mode "$resize_mode"
+		bindsym $mod+m mode "$move_mode"
 
-    # Escape Mode
-    bindsym Escape mode "default"
-    bindsym q mode "default"
-    bindsym return mode "default"
-    bindsym m mode "$move_mode"
+		bindsym Print mode "$screenshot_mode"
 
-}
+		mode "$Resize_mode" {
+
+# Resize
+		    bindsym h resize shrink width 15 px or 5 ppt
+			bindsym j resize shrink height 15 px or 5 ppt
+			bindsym k resize grow height 15 px or 5 ppt
+			bindsym l resize grow width 15 px or 5 ppt
+
+			bindsym Left resize shrink width 15 px or 5 ppt
+			bindsym Down resize grow height 15 px or 5 ppt
+			bindsym Up resize shrink height 15 px or 5 ppt
+			bindsym Right resize grow width 15 px or 5 ppt
+
+# Escape Mode
+			bindsym Escape mode "default"
+			bindsym q mode "default"
+			bindsym return mode "default"
+			bindsym m mode "$move_mode"
+
+		}
 
 mode "$move_mode" {
 
-    # Move
+# Move
     bindsym h move left 25px
-    bindsym j move down 25px
-    bindsym k move up 25px
-    bindsym l move right 25px
+	bindsym j move down 25px
+	bindsym k move up 25px
+	bindsym l move right 25px
 
 
-    # Move Center
-    bindsym space move position center
+# Move Center
+	bindsym space move position center
 
-    # Escape Mode
-    bindsym Escape mode "default"
-    bindsym q mode "default"
-    bindsym return mode "default"
-    bindsym r mode "$Resize_mode"
+# Escape Mode
+	bindsym Escape mode "default"
+	bindsym q mode "default"
+	bindsym return mode "default"
+	bindsym r mode "$Resize_mode"
 }
 
 mode "$screenshot_mode" {
 
-    # Screenshot
+# Screenshot
     bindsym c exec "maim -i $(xdotool getactivewindow) /tmp/screenshot.png;imgur /tmp/screenshot.png";, mode "default"
-    bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "default"
-    bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "default"
+	bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "default"
+	bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "default"
 
-    # Exit Mode
-    bindsym Escape mode "default"
-    bindsym Enter mode "default"
+# Exit Mode
+	bindsym Escape mode "default"
+	bindsym Enter mode "default"
 
 }
 
 mode "$scratchpad_mode" {
 
     bindsym 1 [con_mark="^Desktop_"] scratchpad show
-    bindsym 2 [con_mark="^Terminal_"] scratchpad show
-    bindsym 3 [con_mark="^Browser_"] scratchpad show
-    bindsym 4 [con_mark="^WebWork_"] scratchpad show
-    bindsym 5 [con_mark="^Docker_"] scratchpad show
-    bindsym 6 [con_mark="^_"] scratchpad show
-    bindsym 7 [con_mark="^_"] scratchpad show
-    bindsym 8 [con_mark="^Chat_"] scratchpad show
-    bindsym 9 [con_mark="^File Manager_"] scratchpad show
+	bindsym 2 [con_mark="^Terminal_"] scratchpad show
+	bindsym 3 [con_mark="^Browser_"] scratchpad show
+	bindsym 4 [con_mark="^WebWork_"] scratchpad show
+	bindsym 5 [con_mark="^Docker_"] scratchpad show
+	bindsym 6 [con_mark="^_"] scratchpad show
+	bindsym 7 [con_mark="^_"] scratchpad show
+	bindsym 8 [con_mark="^Chat_"] scratchpad show
+	bindsym 9 [con_mark="^File Manager_"] scratchpad show
 
 
-    bindsym Escape mode "Normal Mode"
+	bindsym Escape mode "Normal Mode"
 
 }
 

@@ -75,8 +75,6 @@ bar {
     font pango:inconsolata 12, Awesome 10
     separator_symbol " "
     hidden_state hide
-    mode hide
-    modifier Mod1
     strip_workspace_numbers no
     bindsym button4 nop
     bindsym button5 nop
@@ -92,246 +90,233 @@ bar {
 # Disable Focus Follow Mouse
 focus_follows_mouse no
 
-### Window role
+### Start Rules
 
-# Role
+## Role
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
-for_window [window_role="browser"] move container to workspace $ws3
 for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move position center
 for_window [window_role="toolbox"] floating enable. resize set 400 400, move position center
 
-# Type
+## Instace
+for_window [instance="leagueclientux.exe"] move container to workspace $ws9
+for_window [class="wine"] move container to workspace $ws9
+for_window [instance="league of legends.exe"] move container to workspace $ws9
+
+## Type
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-#Title
+## Title
 for_window [title="Set password for your browser"] floating enable
-for_window [title="mutt-specified"] move container to workspace 6:Email
-for_window [title="nvim_default"] move container to workspace 4:NVIM
-for_window [title="^Transmission"] floating enable. resize set 400 400, move position center
-for_window [title="^Task Manager"] floating enable, move container to workspace $ws3, resize set 800 600, move position center
-for_window [title="Library"] floating enable, resize set 800 600, move position center
-for_window [title = "dropdown_terminal"] move scratchpad, move position 270 0, resize set 800 300,sticky toggle, scratchpad show
-for_window [title = "vifm_startup"] move container to workspace $ws9
+for_window [title="^Transmission"] floating enable. resize set 400 400, move position center, move container to workspace $ws7
 
-
-#Class
+## Class
 for_window [class="Oblogout"] floating enable
 for_window [class = "Deadbeef"] floating enable, resize set 500 500, move position center
-for_window [class="Chromium|Google-chrome|Firefox"] move container to workspace $ws3, layout tabbed
-for_window [class="Lxappearance"] floating enable
-for_window [class="^.*"] border pixel 0
-for_window [class = "feh"] floating enable, resize set 600 600, move position center
+for_window [class="Chromium|Google-chrome|Firefox"] move container to workspace $ws7, layout tabbed
+for_window [class="Skype|Claws-mail"] move container to workspace $ws8, layout tabbed
 for_window [class = "Polkit-gnome-authentication-agent-1"] focus, sticky enable
 for_window [class = "feh"] floating enable, resize set 500 500, move position center
-for_window [class = "Filezilla"] move container to workspace $ws4
+for_window [class = "Filezilla"] move container to workspace $ws6
 
-for_window [class = "URxvt" workspace = "(3)"] floating enable
+for_window [class = "URxvt" workspace = "((?!1|2|3|4|5)[0-9])"] floating enable
 for_window [class = "mpv"] floating enable
 
-## Scratchpad Mode Rules
 
-#Instance
-for_window [instance="Devtools"] floating enable, resize set 1000 400, move position center
+#Hide Borders and Title
+for_window [class="^.*"] border pixel 1, title_format "  %title  "
+
+
+## Default for popout windows
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable 
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable 
+for_window [window_type="menu"]                         floating enable
 
 ### End Rules
 
-### Setting up modes
+# start a terminal
+bindsym $mod+Return exec /usr/bin/urxvt
 
-bindsym $mod+Shift+F5 mode "Normal Mode"
+# Incrase and decrase brightness
 
-mode "Normal Mode" {
 
-    # start a terminal
-    bindsym $mod+Return exec /usr/bin/urxvt
+bindsym $mod+KP_Add exec transset-df --inc 0.2 -a
+bindsym $mod+KP_Subtract exec transset-df --dec 0.2 -a
 
-    # kill focused window
-    bindsym $mod+Shift+q kill
+# kill focused window
+bindsym $mod+Shift+q kill
 
-    # Rename Workspace With Dialog
-    bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
-    bindsym $mod+Shift+n exec i3-input -F \
-    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': %s"' \
-    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': '
+# Rename Workspace With Dialog
+bindsym $mod+Shift+g exec ~/Scripts/i3-scripts/i3-toggle
+bindsym $mod+Shift+n exec i3-input -F \
+	    'rename workspace to "'$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')': %s"' \
+	    -P 'Rename workspace to '$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')':'
 
-    # change focus
-    bindsym $mod+h focus left
-    bindsym $mod+j focus down
-    bindsym $mod+k focus up
-    bindsym $mod+l focus right
+# bindsym $mod+Shift+t exec $script/i3-window-title-change $(zenity --entry --title 'Window' --text 'Rename App')
+	    bindsym $mod+Shift+t exec "i3-msg mark 'change-title' && i3-msg title_format $(zenity --entry --title 'Window' --text 'Rename App') \
+		&& i3-msg unmark 'change-title'"
 
-    ## Laptop Only Bind
-    #Bind Control+F4 To Mode Change "Battery-Performance"
-    bindsym XF86LaunchB exec --no-startup-id "disableCore && i=$(< /sys/devices/system/cpu/cpu1/online) && if [ $i -eq 0 ]; then  notify-send.sh --replace-file=/tmp/mode 'PowerSave' -a 'Mode'; else notify-send.sh --replace-file=/tmp/mode 'Performance' -a 'Mode' ;fi &"
+# change focus
+		bindsym $mod+h focus left
+		bindsym $mod+j focus down
+		bindsym $mod+k focus up
+		bindsym $mod+l focus right
 
-    # Brightness Control Keys
-    bindsym XF86MonBrightnessUp exec --no-startup-id ~/Scripts/utility/incrase-backlight
-    bindsym XF86MonBrightnessDown exec --no-startup-id ~/Scripts/utility/decrase-backlight
+# split in horizontal orientation
+		bindsym $mod+Shift+v split h
 
-    # Audio Bind
-    bindsym XF86AudioRaiseVolume exec --no-startup-id notify-send.sh --replace-file=/tmp/volumenotification -a "Volume" "$(amixer sset Master 5%+ | awk '/[0-9]+%/ {print $5}' | cut -c 2-4 | head -n1 | tr -d ] | tr -d % )%"
-    bindsym XF86AudioLowerVolume exec --no-startup-id notify-send.sh --replace-file=/tmp/volumenotification -a "Volume" "$(amixer sset Master 5%- | awk '/[0-9]+%/ {print $5}' | cut -c 2-4 | head -n1 | tr -d ] | tr -d % )%"
-    bindsym XF86AudioMute exec --no-startup-id $script/mute
+# split in vertical orientation
+		bindsym $mod+v split v
 
-    # Player Control
-    bindsym XF86AudioPlay exec --no-startup-id mpc -p 6699 toggle
-    bindsym XF86AudioNext exec --no-startup-id mpc -p 6699 next
-    bindsym XF86AudioPrev exec --no-startup-id mpc -p 6699 prev
+# Scrachpad Settings
+		bindsym $mod+minus exec $script/scratchpad/set_marks
+		bindsym $mod+plus exec $script/scratchpad/i3-scratchpad-rofi.py
 
-    # alternatively, you can use the cursor keys:
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+# toggle tiling / floating
+		bindsym $mod+Shift+space floating toggle
 
-    # split in horizontal orientation
-    bindsym $mod+Shift+v split h
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+		bindsym $mod+Shift+r restart
 
-    # split in vertical orientation
-    bindsym $mod+v split v
+# Exec oblogout
+		bindsym $mod+Shift+e exec oblogout
 
-    # Scrachpad Settings
-    bindsym $mod+minus move scratchpad
+# Hide Bar
+		bindsym $mod+b bar mode toggle
 
-    # Drop down terminal
-    bindsym $mod+Shift+t [title="dropdown_terminal"] scratchpad show
+## God Mode Commands
+		bindsym $mod+f fullscreen toggle
+		bindsym Super_L exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+		bindsym Super_R exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
-    # toggle tiling / floating
-    bindsym $mod+Shift+space floating toggle
+		bindsym $mod+p exec --no-startup-id rofi-pass
+# bindsym Super_L exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+# bindsym Super_R exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
-    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-    bindsym $mod+Shift+r restart
 
-    # Exec oblogout
-    bindsym $mod+Shift+e exec oblogout
+# switch to workspace
+		bindsym $mod+1 workspace number $ws1
+		bindsym $mod+2 workspace number $ws2
+		bindsym $mod+3 workspace number $ws3
+		bindsym $mod+4 workspace number $ws4
+		bindsym $mod+5 workspace number $ws5
+		bindsym $mod+6 workspace number $ws6
+		bindsym $mod+7 workspace number $ws7
+		bindsym $mod+8 workspace number $ws8
+		bindsym $mod+9 workspace number $ws9
 
-    # Hide Bar
-    bindsym $mod+b bar mode toggle
+# Mode Toggle
+		bindsym $mod+space focus mode_toggle
 
-    # Setting Full Screen
-    bindsym $mod+f fullscreen toggle
+# move focused container to workspace
+		bindsym $mod+Shift+1 move container to workspace number$ws1
+		bindsym $mod+Shift+2 move container to workspace number$ws2
+		bindsym $mod+Shift+3 move container to workspace number$ws3
+		bindsym $mod+Shift+4 move container to workspace number$ws4
+		bindsym $mod+Shift+5 move container to workspace number$ws5
+		bindsym $mod+Shift+6 move container to workspace number$ws6
+		bindsym $mod+Shift+7 move container to workspace number$ws7
+		bindsym $mod+Shift+8 move container to workspace number$ws8
+		bindsym $mod+Shift+9 move container to workspace number$ws9
+		bindsym $mod+Shift+0 move container to workspace number $ws10
 
-    #Launch apps
-    bindsym $mod+Shift+Return exec --no-startup-id rofi -show drun  -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
 
-    # switch to workspace
-    bindsym $mod+1 workspace number $ws1 ; exec $script/get-workspacename
-    bindsym $mod+2 workspace number $ws2 ; exec $script/get-workspacename
-    bindsym $mod+3 workspace number $ws3 ; exec $script/get-workspacename
-    bindsym $mod+4 workspace number $ws4 ; exec $script/get-workspacename
-    bindsym $mod+5 workspace number $ws5 ; exec $script/get-workspacename
-    bindsym $mod+6 workspace number $ws6 ; exec $script/get-workspacename
-    bindsym $mod+7 workspace number $ws7 ; exec $script/get-workspacename
-    bindsym $mod+8 workspace number $ws8 ; exec $script/get-workspacename
-    bindsym $mod+9 workspace number $ws9 ; exec $script/get-workspacename
+# Sticky Window
+		bindsym $mod+s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
 
-    # Mode Toggle
-    bindsym $mod+space focus mode_toggle
+# Move
+		bindsym $mod+Shift+h move left 25px
+		bindsym $mod+Shift+j move down 25px
+		bindsym $mod+Shift+k move up 25px
+		bindsym $mod+Shift+l move right 25px
 
-    # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace $ws1
-    bindsym $mod+Shift+2 move container to workspace $ws2
-    bindsym $mod+Shift+3 move container to workspace $ws3
-    bindsym $mod+Shift+4 move container to workspace $ws4
-    bindsym $mod+Shift+5 move container to workspace $ws5
-    bindsym $mod+Shift+6 move container to workspace $ws6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace $ws8
-    bindsym $mod+Shift+9 move container to workspace $ws9
-    bindsym $mod+Shift+0 move container to workspace number 10
-    # Sticky Window
-    bindsym $mod+s sticky toggle ; exec notify-send.sh --replace-file=/tmp/workspacename Sticky -a 'Toggle' -t 1000
+# change container layout (stacked, tabbed, toggle split)
+		bindsym $mod+w layout tabbed
+		bindsym $mod+e layout toggle split
 
-    # Move
-    bindsym $mod+Shift+h move left 25px
-    bindsym $mod+Shift+j move down 25px
-    bindsym $mod+Shift+k move up 25px
-    bindsym $mod+Shift+l move right 25px
+# Other Modes
+		bindsym $mod+r mode "$resize_mode"
+		bindsym $mod+m mode "$move_mode"
 
-    # Other Modes
-    bindsym $mod+r mode "$resize_mode"
-    bindsym $mod+m mode "$move_mode"
-    bindsym $mod+q mode "$quick_mode"
-    bindsym $mod+Delete mode "$screenshot_mode"
-    bindsym $mod+plus mode "$scratchpad_mode"
+		bindsym Print mode "$screenshot_mode"
 
-}
+		mode "$Resize_mode" {
 
-mode "$resize_mode" {
+# Resize
+		    bindsym h resize shrink width 15 px or 5 ppt
+			bindsym j resize shrink height 15 px or 5 ppt
+			bindsym k resize grow height 15 px or 5 ppt
+			bindsym l resize grow width 15 px or 5 ppt
 
-    # Resize
-    bindsym h resize shrink width 15 px or 5 ppt
-    bindsym j resize grow height 15 px or 5 ppt
-    bindsym k resize shrink height 15 px or 5 ppt
-    bindsym l resize grow width 15 px or 5 ppt
+			bindsym Left resize shrink width 15 px or 5 ppt
+			bindsym Down resize grow height 15 px or 5 ppt
+			bindsym Up resize shrink height 15 px or 5 ppt
+			bindsym Right resize grow width 15 px or 5 ppt
 
-    bindsym Left resize shrink width 15 px or 5 ppt
-    bindsym Down resize grow height 15 px or 5 ppt
-    bindsym Up resize shrink height 15 px or 5 ppt
-    bindsym Right resize grow width 15 px or 5 ppt
+# Escape Mode
+			bindsym Escape mode "default"
+			bindsym q mode "default"
+			bindsym return mode "default"
+			bindsym m mode "$move_mode"
 
-    # Escape Mode
-    bindsym Escape mode "Normal Mode"
-    bindsym n mode "Normal Mode"
-    bindsym q mode "$quick_mode"
-    bindsym m mode "$move_mode"
-
-}
+		}
 
 mode "$move_mode" {
 
-    # Move
+# Move
     bindsym h move left 25px
-    bindsym j move down 25px
-    bindsym k move up 25px
-    bindsym l move right 25px
+	bindsym j move down 25px
+	bindsym k move up 25px
+	bindsym l move right 25px
 
-    # Move Center
-    bindsym space move position center
 
-    # Escape Mode
-    bindsym Escape mode "Normal Mode"
-    bindsym n mode "Normal Mode"
-    bindsym q mode "$quick_mode"
-    bindsym r mode "$resize_mode"
+# Move Center
+	bindsym space move position center
+
+# Escape Mode
+	bindsym Escape mode "default"
+	bindsym q mode "default"
+	bindsym return mode "default"
+	bindsym r mode "$Resize_mode"
 }
 
 mode "$screenshot_mode" {
 
-    # Screenshot
-    bindsym c exec "maim -i $(xdotool getactivewindow) /tmp/screenshot.png;imgur /tmp/screenshot.png";, mode "Normal Mode"
-    bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "Normal Mode"
-    bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "Normal Mode"
+# Screenshot
+    bindsym c exec "maim -i $(xdotool getactivewindow) /tmp/screenshot.png;imgur /tmp/screenshot.png";, mode "default"
+	bindsym r exec "maim -s /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "default"
+	bindsym f exec "maim /tmp/screenshot.png; imgur /tmp/screenshot.png";, mode "default"
 
-    # Exit Mode
-    bindsym Escape mode "Normal Mode"
-    bindsym Enter mode "Normal Mode"
+# Exit Mode
+	bindsym Escape mode "default"
+	bindsym Enter mode "default"
 
 }
 
 mode "$scratchpad_mode" {
 
     bindsym 1 [con_mark="^Desktop_"] scratchpad show
-    bindsym 2 [con_mark="^Terminal_"] scratchpad show
-    bindsym 3 [con_mark="^Browser_"] scratchpad show
-    bindsym 4 [con_mark="^WebWork_"] scratchpad show
-    bindsym 5 [con_mark="^Docker_"] scratchpad show
-    bindsym 6 [con_mark="^_"] scratchpad show
-    bindsym 7 [con_mark="^_"] scratchpad show
-    bindsym 8 [con_mark="^Chat_"] scratchpad show
-    bindsym 9 [con_mark="^File Manager_"] scratchpad show
+	bindsym 2 [con_mark="^Terminal_"] scratchpad show
+	bindsym 3 [con_mark="^Browser_"] scratchpad show
+	bindsym 4 [con_mark="^WebWork_"] scratchpad show
+	bindsym 5 [con_mark="^Docker_"] scratchpad show
+	bindsym 6 [con_mark="^_"] scratchpad show
+	bindsym 7 [con_mark="^_"] scratchpad show
+	bindsym 8 [con_mark="^Chat_"] scratchpad show
+	bindsym 9 [con_mark="^File Manager_"] scratchpad show
 
 
-    bindsym Escape mode "Normal Mode"
+	bindsym Escape mode "Normal Mode"
 
 }
 
 ### End Modes
-
-### Ending Mode
 
 ### Exec
 
