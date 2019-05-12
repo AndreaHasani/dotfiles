@@ -39,6 +39,9 @@ URxvt.clipboard.pastecmd: xclip -o -selection clipboard
 URxvt.keysym.C-Left:    \033[1;5D
 URxvt.keysym.C-Right:    \033[1;5C
 
+## Unbind
+URxvt.keysym.C-R: command:\000
+
 /* \e[3~ */
 
 ! Base16 Flat

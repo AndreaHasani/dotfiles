@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+## Bind key
+
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -53,7 +55,9 @@ export PATH=$PATH:$HOME/Scripts/i3-scripts/
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/git
 export VIRTUALENVWRAPPER_SCRIPT=~/.local/bin/virtualenvwrapper.sh
+
 source ~/.local/bin/virtualenvwrapper_lazy.sh
+source ~/.fzf.zsh
 
 
 # Set name of the theme to load. Optionally, if you set this to "random"

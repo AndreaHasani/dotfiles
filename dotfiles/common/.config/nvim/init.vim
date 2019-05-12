@@ -83,7 +83,7 @@ Plug 'Shougo/echodoc.vim'
 " Plug 'Shougo/denite.nvim'
 Plug 'aserebryakov/vim-todo-lists'
 " Plug 'mattn/emmet-vim'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Raimondi/delimitMate'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'rstacruz/vim-closer'
@@ -197,7 +197,7 @@ let g:session_autosave = 'yes'
 let g:session_autoload = 'no'
 
 " Config Tags
-" let g:gutentags_cache_dir="/home/strixx/hdd/"
+let g:gutentags_cache_dir="/home/strixx/.ctags_cache/"
 
 " let g:LanguageClient_serverCommands = {
 "     \ 'python': ['pyls'],
@@ -437,8 +437,6 @@ nnoremap <up> <c-w>k
 nnoremap <right> <c-w>l
 
 " Grap the current word and seach it on buffers
-
-noremap <leader># :Grepper -tool rg -cword -buffers -noprompt<cr>
 
 " Map ctrl hjkl to buffer navigation, toggle readonly and delete buffer
 nnoremap <c-h> :bp<cr> :echo 'Buffer Previous'<cr>
@@ -706,11 +704,11 @@ let g:cmdMenu = ['UndotreeToggle', "asdasd"]
 
 let g:ycm_add_preview_to_completeopt = 1
 """ Goto Commands
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gD <Plug>(coc-type-definition)
-nnoremap <silent> gr :call CocActionAsync('jumpReferences')<cr>
-nnoremap <silent> gh :call <SID>show_documentation()<CR>
-nnoremap <silent> gi <Plug>(coc-implementation)
+map <silent> gd :call CocActionAsync('jumpDefinition')<cr>
+map <silent> gD :call CocActionAsync('jumpDeclaration')<cr>
+map <silent> gr :call CocActionAsync('jumpReferences')<cr>
+map <silent> gh :call <SID>show_documentation()<CR>
+map <silent> gi :call CocActionAsync('jumpImplementation')<cr>
 
 function! s:show_documentation()
   if &filetype == 'vim'
@@ -738,7 +736,7 @@ if has ('unix')
 		\  'options': '-m -x +s',
 		\  'down':    '40%'})
 
-    " FZF Mappings
+    " FZF Mappings, find mappings
     nnoremap <leader>fp :ProjectFind<cr>
     nnoremap <leader>fa :FindAll<cr>
     nnoremap <leader>fh :FindHome<cr>
@@ -749,6 +747,11 @@ if has ('unix')
     nnoremap <leader>B :!echo %:~ >> ~/.config/nvim/bookmarks<cr>
     nnoremap <leader>P :!pwd >> ~/.config/nvim/Project-Path<cr>
     nnoremap <silent> <Leader>b :FZFBuffers<cr>
+
+
+    " Find mappings
+    noremap <leader>fgc :Grepper -tool rg -cword -noprompt<cr>
+    noremap <leader>fg :Grepper -tool rg <cr>
     command! Notes :10new ~/Documents/notes
 endif
 
@@ -777,7 +780,8 @@ let g:which_key_map.t = {
 	    \}
 
 let g:which_key_map.f = {
-	    \ 'name' : 'Fzf Find' ,
+	    \ 'name' : 'Find' ,
+	    \ 'g' : 'Grep' ,
 	    \}
 
 
