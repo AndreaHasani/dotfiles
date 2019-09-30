@@ -24,7 +24,7 @@ set sidescroll=1
 set gdefault
 set viewdir=~/.vim/view/
 set viewoptions=cursor,folds,slash,unix
-set cursorline
+set nocursorline
 set number
 set foldmethod=manual
 set linebreak
@@ -55,6 +55,7 @@ Plug 'itchyny/lightline.vim'
 " Plug 'vim-airline/vim-airline-themes'
 if has ('unix')
     Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim'
 endif
 Plug 'Yggdroot/IndentLine'
 Plug 'ap/vim-buftabline'
@@ -63,6 +64,9 @@ Plug 'bounceme/remote-viewer'
 Plug 'mbbill/undotree'
 Plug 'ferranpm/vim-isolate'
 Plug 'brooth/far.vim'
+
+" Debugger
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
 " Local Win Plugins
 if has ('win32')
@@ -153,7 +157,7 @@ Plug '2072/PHP-Indenting-for-VIm'
 
 " Plug 'Vimjas/vim-python-pep8-indent'
 " Plug 'kh3phr3n/python-syntax'
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
 Plug 'tmhedberg/SimpylFold'
 
 
@@ -206,6 +210,12 @@ let g:gutentags_cache_dir="/home/strixx/.ctags_cache/"
 " nnoremap <silent> gd :call LanguageClient_textDocument_hover()<CR>
 
 let base16colorspace=256
+let g:nvimgdb_disable_start_keymaps = 1
+
+" Debbugger Configuration
+nnoremap <leader>dp :GdbStartPDB python -m pdb <C-R>=expand('%:t')<CR>
+nnoremap <leader>dl :CocList diagnostics<CR>
+nnoremap <leader>dl <Plug>(coc-format-selected)
 
 " Maximizer Toggle config
 nnoremap <C-W>o <Nop>
@@ -465,7 +475,6 @@ syntax on
 colorscheme base16-flat
 
 " Syntax fix
-" set syntax synmaxcol=256
 
 " GUI Vim , Make it look like terminal
 
@@ -478,7 +487,9 @@ endif
 
 " Tabs
 set softtabstop=0
-set noexpandtab
+set expandtab
+set ts=4
+set smartindent
 set shiftwidth=4
 
 " Undo History Fixes
@@ -703,6 +714,7 @@ let g:cmdMenu = ['UndotreeToggle', "asdasd"]
 """" YCM config
 
 let g:ycm_add_preview_to_completeopt = 1
+
 """ Goto Commands
 map <silent> gd :call CocActionAsync('jumpDefinition')<cr>
 map <silent> gD :call CocActionAsync('jumpDeclaration')<cr>
@@ -742,16 +754,16 @@ if has ('unix')
     nnoremap <leader>fh :FindHome<cr>
     nnoremap <leader>fs :FindSession<cr>
     nnoremap <leader>fr :rviminfo!<cr>:Mru<cr>
-    nnoremap <leader>fb :FZFBookmark<cr>
-    nnoremap <leader>p  :FZFProject<cr>
-    nnoremap <leader>B :!echo %:~ >> ~/.config/nvim/bookmarks<cr>
-    nnoremap <leader>P :!pwd >> ~/.config/nvim/Project-Path<cr>
-    nnoremap <silent> <Leader>b :FZFBuffers<cr>
+    nnoremap <leader>fB :FZFBookmark<cr>
+    nnoremap <leader>fm :Marks<cr>
+    nnoremap <leader>fg :Rg<cr>
+    nnoremap <leader>ft :Tags<cr>
+    nnoremap <silent> <Leader>fb :FZFBuffers<cr>
 
 
     " Find mappings
-    noremap <leader>fgc :Grepper -tool rg -cword -noprompt<cr>
-    noremap <leader>fg :Grepper -tool rg <cr>
+    " noremap <leader>fgc :Grepper -tool rg -cword -noprompt<cr>
+    " noremap <leader>fg :Grepper -tool rg <cr>
     command! Notes :10new ~/Documents/notes
 endif
 
@@ -759,6 +771,7 @@ endif
 
 cnoreabbrev ccd Ccd
 cnoreabbrev fix ALEFix
+cnoreabbrev lsyn setlocal syn
 
 
 
@@ -773,17 +786,20 @@ let g:which_key_timeout = 10
 let g:which_key_map =  {
 	    \ 'name' : 'Leader Key',
 	    \ '#' : 'Search cursor on buffers with grep',
-	    \}
-
-let g:which_key_map.t = {
-	    \ 'name' : 'Cursor GoTo' ,
+	    \ 'r' : 'Reload nvim/vim config',
+	    \ 'd' : 'Diagnostic/Debugging',
 	    \}
 
 let g:which_key_map.f = {
-	    \ 'name' : 'Find' ,
-	    \ 'g' : 'Grep' ,
+	    \ 'name' : 'FzF Search' ,
+	    \ 'g' : 'RipGrep' ,
 	    \}
 
+let g:which_key_map.d = {
+	    \ 'name' : 'Diagnostic/Debugging' ,
+	    \ 'p' : 'Python pbd debugger (current_file)' ,
+	    \ 'l' : 'Formatting' ,
+	    \}
 
 let g:which_key_map.w = {
 	    \ 'name' : 'Window Menu' ,
@@ -818,6 +834,7 @@ if has('cscope')
   cnoreabbrev csf cs find
   cnoreabbrev csk cs kill
   cnoreabbrev csr cs reset
+  cnoreabbrev csh cs help
   cnoreabbrev csh cs help
 
   command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src

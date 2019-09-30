@@ -394,7 +394,7 @@ exec --no-startup-id dispwin -d 1 ~/Downloads/hp_e231i_user.icc && dispwin -d 2 
 
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
-exec --no-startup-id compton -b &
+# exec --no-startup-id compton -b &
 exec --no-startup-id xset r rate 200 20 &
 exec --no-startup-id redshift &
 exec --no-startup-id sleep 1 && $script/Wallpaper-Change/execute
@@ -405,5 +405,6 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id nm-applet &
 exec --no-startup-id transmission-gtk -m &&
 exec --no-startup-id volumeicon &
+exec --no-startup-id safeeyes &
 
 ### End Exec
