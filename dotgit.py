@@ -66,7 +66,7 @@ def get_filelist(path, hostname=None, home=None):
     if not home:
         fullpath = "{}{}/{}".format(dotfilesPath, hostname, path)
     else:
-        fullpath = "{}{}".format(userHome, path)
+        fullpath = "{}/{}".format(userHome, path)
 
     if os.path.isdir(fullpath):
         _files = []
