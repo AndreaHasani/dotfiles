@@ -9,4 +9,5 @@ Scripts
 .config/nvim/init.lua
 .config/nvim/lua
 .zshrc
+.i3
 .tmux.conf
