@@ -64,9 +64,9 @@ Make sure to end Local and dotfilesPath directory path with ''/""")
 
 def get_filelist(path, hostname=None, home=None):
     if not home:
-        fullpath = "{}{}/{}".format(dotfilesPath, hostname, path)
+        fullpath = os.path.join(dotfilesPath, hostname, path)
     else:
-        fullpath = "{}/{}".format(userHome, path)
+        fullpath = os.path.join(userHome, path)
 
     if os.path.isdir(fullpath):
         _files = []
