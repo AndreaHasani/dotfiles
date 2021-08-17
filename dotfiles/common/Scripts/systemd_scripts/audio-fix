@@ -1,4 +1,0 @@
-#! /usr/bin/sh
-
-sleep 10;
-/usr/bin/pasuspender /bin/true

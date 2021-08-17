@@ -1,1 +1,0 @@
-chmod -R 766 /sys/class/backlight/nv_backlight

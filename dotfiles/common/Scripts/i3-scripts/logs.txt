@@ -1,2 +1,0 @@
-
-(termite:2380): GLib-WARNING **: 01:47:01.425: GChildWatchSource: Exit status of a child process was requested but ECHILD was received by waitpid(). See the documentation of g_child_watch_source_new() for possible causes.

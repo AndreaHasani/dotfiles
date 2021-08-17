@@ -168,6 +168,9 @@ def hard_copy(localPath, workingPath, hostname="common"):
             exists_lPath = os.path.exists(localPath)
             exists_gPath = os.path.exists(workingPath)
         except AttributeError:
+            if not localPath:
+                return None
+
             workingPath = localPath.replace(
                 userHome, dotfilesPath + "dotfiles/" + hostname + "/")
             exists_lPath = os.path.exists(localPath)
@@ -175,7 +178,7 @@ def hard_copy(localPath, workingPath, hostname="common"):
 
     if exists_lPath and not exists_gPath:
         add_files(localPath, workingPath)
-        return
+        return None
 
     # if exists_lPath and exists_gPath and not symlink:
     #     sync_files(workingPath, localPath)

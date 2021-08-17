@@ -1,3 +1,0 @@
-#! /bin/sh
-
-python ~/Scripts/i3-scripts/Wallpaper-Change/i3-background-change.py -t 30 ~/Pictures/wallpapers
