@@ -1,4 +1,5 @@
 Scripts
+.tmux
 .config/dunst
 .oh-my-zsh/alias/zalias_default
 .Xresources
