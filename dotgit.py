@@ -95,9 +95,9 @@ def symlink_files(src, dest):
             if verbose:
                 print("Making symbolic link: " + dest)
 
-        except Exception as e:
-            raise
+        except Exception:
             os.makedirs(os.path.dirname(dest))
+            raise
 
 
 def sync_files(localPath, workingPath, restore=False):
@@ -109,14 +109,15 @@ def sync_files(localPath, workingPath, restore=False):
         print("Sync: {} : {}".format(workingPath, localPath))
         return None
 
-    if restore and working_hash not in local_hash:
-        os.remove(localPath)
-        shutil.copy2(workingPath, localPath)
-    if not restore and working_hash not in local_hash:
-        os.remove(workingPath)
-        shutil.copy2(localPath, workingPath)
+    if working_hash not in local_hash:
+        if restore:
+            os.remove(localPath)
+            shutil.copy2(workingPath, localPath)
+        else:
+            os.remove(workingPath)
+            shutil.copy2(localPath, workingPath)
 
-    return
+    return False
 
 
 def restore_files(localPath, workingPath):
