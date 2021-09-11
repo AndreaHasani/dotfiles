@@ -1,4 +1,3 @@
-import argparse
 import os
 import sys
 from hashlib import md5
@@ -8,28 +7,32 @@ import time
 from itertools import zip_longest
 from subprocess import Popen
 from datetime import datetime
-from docopt import docopt
 
-__doc__ = """
-dotgit: Dotfiles management made easy.
+import argparse
 
-Usage:
-    dotgit ( -h | --help )
-    dotgit (-l DIR) (-w DIR) [options]
+from dotenv import load_dotenv
 
-Options:
-  -h --help                 Show this screen.
-  -l DIR --local=DIR        Local Directory [default: /home/strixx/]
-  -w DIR --working=DIR      Folder to put dotfiles, example: dotgit folder [default: /home/strixx/.dotfiles/]
-  -v --verbose              Print operations to screen
-  -r --restore              Cleanup local and copy all files from working directory
-  -s --symlink              Use symbolic links insteed of copy mode.
-  --version                 Show version.
+load_dotenv()
 
-"""
+parser = argparse.ArgumentParser(description='Backup and restore configuration.')
+parser.add_argument('--restore', '-r', help='Restore configuration, default False, which backups configuration', default=False, dest="restore", action="store_true")
+
+userHome = os.getenv("LOCAL")
+dotfilesPath = os.getenv("WORKING")
+verbose = int(os.getenv("VERBOSE", 1))
+symlink = int(os.getenv("SYMLINK", 0))
+restore = parser.parse_args().restore
+host = os.uname()[1]
+
+def hash_md5(fname):
+    hash_md5 = md5()
+    with open(fname, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
 
 
-def folderCheck():
+def folderCheck(dotfilesPath, host):
     """Check if dotfilesPath tree is not empty and has correct folders"""
 
     if not os.path.exists(dotfilesPath + 'dotfiles'):
@@ -84,6 +87,7 @@ def symlink_files(src, dest):
 
     if verbose:
         print("Symlink: {} | {}".format(src, dest))
+        return None
 
     else:
         try:
@@ -96,12 +100,14 @@ def symlink_files(src, dest):
             os.makedirs(os.path.dirname(dest))
 
 
-def sync_files(localPath, workingPath):
-    if verbose:
-        print("Sync: {} : {}".format(workingPath, localPath))
+def sync_files(localPath, workingPath, restore=False):
 
     working_hash = hash_md5(workingPath)
     local_hash = hash_md5(localPath)
+
+    if verbose and (local_hash not in working_hash):
+        print("Sync: {} : {}".format(workingPath, localPath))
+        return None
 
     if restore and working_hash not in local_hash:
         os.remove(localPath)
@@ -113,14 +119,16 @@ def sync_files(localPath, workingPath):
     return
 
 
-def restore_files(localPath, workingPath, hostname):
-
-    if symlink:
-        symlink_files(workingPath, localPath)
-        return
+def restore_files(localPath, workingPath):
 
     if verbose:
         print("Restoring: {} : {}".format(workingPath, localPath))
+        return None
+
+    if symlink:
+        symlink_files(workingPath, localPath)
+        return None
+
 
     else:
         try:
@@ -135,6 +143,7 @@ def add_files(localPath, workingPath):
 
     if verbose:
         print("Adding: {} : {}".format(localPath, workingPath))
+        return None
 
     else:
         try:
@@ -153,7 +162,11 @@ def add_files(localPath, workingPath):
 
 
 def hard_copy(localPath, workingPath, hostname="common"):
+
     if not localPath:
+        return None
+
+    if any([f in localPath for f in ["cache", ".git", "undoHistory"]]):
         return None
 
     if restore:
@@ -183,9 +196,9 @@ def hard_copy(localPath, workingPath, hostname="common"):
         add_files(localPath, workingPath)
         return None
 
-    # if exists_lPath and exists_gPath and not symlink:
-    #     sync_files(workingPath, localPath)
-    #     return
+    if exists_lPath and exists_gPath and not symlink:
+        sync_files(workingPath, localPath)
+        return
 
     # if exists_lPath and exists_gPath and symlink:
     #     symlink_files(workingPath, localPath)
@@ -208,6 +221,7 @@ def readFilelist():
             for __ in f.readlines():
                 filePath = __.replace('\n', '')
                 if filePath:
+
                     if ':' not in filePath:
                         gitPath = get_filelist(filePath, "dotfiles/common")
                         localPath = get_filelist(filePath, home=1)
@@ -231,38 +245,28 @@ def readFilelist():
                                 hard_copy(localPath, gitPath, hostname)
 
     except FileNotFoundError:
-        raise
         print("File not found: {}filelist".format(dotfilesPath))
+        raise
 
-
-def hash_md5(fname):
-    hash_md5 = md5()
-    with open(fname, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
 
 
 if __name__ == "__main__":
-    args = docopt(__doc__, version="dotgit 0.1 alpha")
 
-    userHome = args['--local']
-    dotfilesPath = args['--working']
-    verbose = args['--verbose']
-    restore = args['--restore']
-    symlink = args['--symlink']
-    host = os.uname()[1]
+    if restore:
+        action = "Restore"
+    else:
+        action = "Backup"
 
     print("------------------------------------------------")
     print("Local  : '{}'".format(userHome))
     print("Working: '{}'".format(dotfilesPath))
     print("Verbose: " + str(verbose))
-    print("Restore: " + str(restore))
     print("Symlink: " + str(symlink))
+    print(f"Action: {action}")
     print("Host   : " + host)
     print("------------------------------------------------")
 
-    if folderCheck():
+    if folderCheck(dotfilesPath, host):
         answer = input("=> Do you want to contiunue? ")
         if "y" in answer.lower():
             readFilelist()
