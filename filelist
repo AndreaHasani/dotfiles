@@ -1,10 +1,6 @@
-Scripts
 .config/dunst
 .oh-my-zsh/alias/zalias_default
 .Xresources
-.ncmpcpp/config
-.config/gtk-2.0
-.config/gtk-3.0
 .config/alacritty
 .config/nvim/init.lua
 .config/nvim/lua

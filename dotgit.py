@@ -209,7 +209,7 @@ def hard_copy(localPath, workingPath, hostname="common"):
     #     return
 
     if restore and not exists_lPath and exists_gPath:
-        restore_files(localPath, workingPath, hostname)
+        restore_files(localPath, workingPath)
         return
 
     if not restore and not exists_lPath and exists_gPath:
@@ -242,6 +242,7 @@ def readFilelist():
                             gitPath = get_filelist(
                                 filePath, "dotfiles/" + hostname)
                             localPath = get_filelist(filePath, home=1)
+
                             if type(gitPath) == list or type(localPath) == list:
                                 for localPath, gitPath in zip_longest(localPath, gitPath):
                                     hard_copy(localPath, gitPath, hostname)
