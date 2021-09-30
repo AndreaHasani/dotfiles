@@ -4,6 +4,7 @@
 .config/alacritty
 .config/nvim/init.lua
 .config/nvim/lua
+.config/rofi_theme.rasi
 .zshrc
 .i3
 .tmux.conf
