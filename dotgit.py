@@ -176,7 +176,7 @@ def hard_copy(localPath, workingPath, hostname="common"):
     if restore:
         try:
             localPath = workingPath.replace(
-                dotfilesPath + "dotfiles/" + hostname + "/", userHome + "/")
+                dotfilesPath + "dotfiles/" + hostname + "/", userHome)
             exists_gPath = os.path.exists(workingPath)
             exists_lPath = os.path.exists(localPath)
         except Exception:
