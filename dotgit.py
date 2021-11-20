@@ -25,11 +25,12 @@ restore = parser.parse_args().restore
 host = os.uname()[1]
 
 def hash_md5(fname):
-    hash_md5 = md5()
+    _hash = md5()
     with open(fname, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
+        data = f.read()
+        _hash.update(data)
+
+    return _hash.hexdigest()
 
 
 def folderCheck(dotfilesPath, host):
@@ -104,7 +105,6 @@ def sync_files(localPath, workingPath, restore=False):
 
     working_hash = hash_md5(workingPath)
     local_hash = hash_md5(localPath)
-
 
     if working_hash not in local_hash:
         if restore:
@@ -201,7 +201,7 @@ def hard_copy(localPath, workingPath, hostname="common"):
         return None
 
     if exists_lPath and exists_gPath and not symlink:
-        sync_files(workingPath, localPath)
+        sync_files(localPath, workingPath)
         return
 
     # if exists_lPath and exists_gPath and symlink:

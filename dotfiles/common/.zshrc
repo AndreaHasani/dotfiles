@@ -267,9 +267,3 @@ alias nb='nvim /home/strixx/.config/nvim/bookmarks'
 nf() {
     nvim $(cat /home/strixx/.vifm/fzf-read/locate-file | fzf)
 }
-
-
-
-
-~/Scripts/utility/screeninfo
-task minimal

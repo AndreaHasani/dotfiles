@@ -21,7 +21,7 @@ use 'liuchengxu/vista.vim'
 use 'rhysd/reply.vim'
 use 'hoob3rt/lualine.nvim'
 use 'mbbill/undotree'
-use 'ludovicchabant/vim-gutentags'
+-- use 'ludovicchabant/vim-gutentags'
 use "steelsojka/pears.nvim"
 use 'tweekmonster/startuptime.vim'
 use 'thinca/vim-quickrun'
@@ -44,5 +44,5 @@ use { 'michaelb/sniprun', run = 'bash install.sh'}
 use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
 use {'sakhnik/nvim-gdb', run=':!./install.sh'}
 use {'kkoomen/vim-doge', run=function() vim.fn['doge#install()'](0) end}
-use {'lukas-reineke/indent-blankline.nvim', branch='lua'}
+use {'lukas-reineke/indent-blankline.nvim'}
 end)

@@ -9,8 +9,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 #Monitor setup
-set $firstMonitor DVI-D-0
-set $secondMonitor HDMI-1-2
+set $firstMonitor eDP-1
 
 
 # Desktop Config
@@ -83,10 +82,10 @@ workspace $ws3 output $firstMonitor
 workspace $ws4 output $firstMonitor
 workspace $ws5 output $firstMonitor
 
-workspace $ws6 output $secondMonitor
-workspace $ws7 output $secondMonitor
-workspace $ws8 output $secondMonitor
-workspace $ws9 output $secondMonitor
+workspace $ws6 output $firstMonitor
+workspace $ws7 output $firstMonitor
+workspace $ws8 output $firstMonitor
+workspace $ws9 output $firstMonitor
 
 #i3-gaps
 gaps inner 10
@@ -99,31 +98,9 @@ workspace $ws7 gaps outer 0
 
 # Bar
 bar {
-    output $firstMonitor
-    status_command py3status -c ~/.i3/i3status.conf
+    status_command /home/strixx/.virtualenvs/system-base/bin/py3status -c /home/strixx/.i3/py3status.conf
     height 30
     tray_output None
-    font pango:inconsolata 12, Awesome 12
-    separator_symbol " "
-    hidden_state hide
-    modifier $mod
-    strip_workspace_numbers no
-    bindsym button4 nop
-    bindsym button5 nop
-    colors {
-
-	separator #757575
-	#                  border             background         text
-	focused_workspace  $bg-color          $bg-color          $text-color
-	inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-	urgent_workspace   $urgent-bg-color   $urgent-bg-color   $urgent-fg-color
-}
-}
-
-bar {
-    output $secondMonitor
-    status_command py3status -c ~/.i3/i3status_secmonitor.conf
-    height 30
     font pango:inconsolata 12, Awesome 12
     separator_symbol " "
     hidden_state hide
@@ -205,7 +182,7 @@ smart_borders on
 ### Starting Modes
 
 # start a terminal
-bindsym $mod+Return exec /usr/bin/urxvt
+bindsym $mod+Return exec /usr/bin/alacritty
 
 # Incrase and decrase brightness
 
@@ -256,8 +233,8 @@ bindsym $mod+Shift+n exec i3-input -F \
 
 ## God Mode Commands
 		bindsym $mod+f fullscreen toggle
-		bindsym Super_L exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
-		bindsym Super_R exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
+		bindsym Super_L exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme /home/strixx/.config/rofi_theme.rasi
+		bindsym Super_R exec --no-startup-id rofi -show drun  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme /home/strixx/.config/rofi_theme.rasi
 
 		bindsym $mod+p exec --no-startup-id rofi-pass
 # bindsym Super_L exec --no-startup-id rofi -show window  -m -1 -display-drun 'App: ' -window-format '{n}' -lines 10 -fake-transparency -theme ~/Scripts/Rofi-Scripts/Rofi.rasi
@@ -388,14 +365,14 @@ mode "$scratchpad_mode" {
 # exec_always --no-startup-id unclutter -idle 10 &
 
 ## Startup Daemouns
-exec_always --no-startup-id xrandr --auto --output $secondMonitor --mode 1920x1080 --right-of $firstMonitor &
+exec_always --no-startup-id xrandr --auto --output $firstMonitor --mode 1920x1080 --right-of $firstMonitor &
 exec --no-startup-id dunst &&
 exec --no-startup-id dispwin -d 1 ~/Downloads/hp_e231i_user.icc && dispwin -d 2 ~/Downloads/hp_e231i_user.icc &
 
 exec --no-startup-id dunst &
 exec --no-startup-id mpd &
 # exec --no-startup-id compton -b &
-exec --no-startup-id xset r rate 200 20 &
+exec --no-startup-id xset r rate 220 60 &
 exec --no-startup-id redshift &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # exec --no-startup-id i3lock -eli ~/.i3lock/background.png &
