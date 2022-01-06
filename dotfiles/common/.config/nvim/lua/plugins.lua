@@ -35,9 +35,10 @@ use 'szw/vim-maximizer'
 use 'chaoren/vim-wordmotion'
 use 'tpope/vim-sensible'
 use 'mhartington/formatter.nvim'
-use { 'kassio/neoterm'}
-use { "ray-x/lsp_signature.nvim"}
-use {"lambdalisue/fern.vim"}
+use 'kassio/neoterm'
+use "ray-x/lsp_signature.nvim"
+use "lambdalisue/fern.vim"
+use "akinsho/toggleterm.nvim"
 
 use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 use { 'michaelb/sniprun', run = 'bash install.sh'}

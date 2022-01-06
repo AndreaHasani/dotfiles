@@ -157,8 +157,6 @@ for_window [class = "URxvt" workspace = "((?!1|2|3|4|5)[0-9])"] floating enable
 for_window [class = "mpv"] floating enable
 
 
-#Hide Borders and Title
-for_window [class="^.*"] border pixel 1, title_format "  %title  "
 
 
 ## Default for popout windows
@@ -174,8 +172,14 @@ for_window [window_type="menu"]                         floating enable
 #Disable mouse wrapping
 mouse_warping none
 
+## Border for active 
+for_window [class="^.*"] border pixel 1
+
 # Enable smart border
 smart_borders on
+
+#Hide Borders and Title
+default_border pixel
 
 ### End Rules
 
@@ -225,7 +229,7 @@ bindsym $mod+Shift+n exec i3-input -F \
 		bindsym $mod+Shift+space floating toggle
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-		bindsym $mod+Shift+r restart
+		bindsym $mod+Shift+r reload
 
 # Exec oblogout
 		bindsym $mod+Shift+e exec oblogout
@@ -287,7 +291,7 @@ bindsym $mod+Shift+n exec i3-input -F \
 
 		bindsym Print mode "$screenshot_mode"
 
-		mode "$Resize_mode" {
+		mode "$resize_mode" {
 
 # Resize
 		    bindsym h resize shrink width 15 px or 5 ppt
@@ -317,6 +321,7 @@ mode "$move_mode" {
 	bindsym l move right 25px
 
 
+
 # Move Center
 	bindsym space move position center
 
@@ -325,6 +330,11 @@ mode "$move_mode" {
 	bindsym q mode "default"
 	bindsym return mode "default"
 	bindsym r mode "$Resize_mode"
+}
+
+input "1:1:AT_Translated_Set_2_keyboard" {
+    repeat_delay 220
+        repeat_rate 60
 }
 
 mode "$screenshot_mode" {
@@ -336,7 +346,7 @@ mode "$screenshot_mode" {
 
 # Exit Mode
 	bindsym Escape mode "default"
-	bindsym Enter mode "default"
+	bindsym Return mode "default"
 
 }
 

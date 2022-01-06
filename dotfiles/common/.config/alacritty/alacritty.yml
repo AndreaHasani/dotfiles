@@ -148,7 +148,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 10.0
+  size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -173,6 +173,8 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
+
+# TokyoNight Alacritty Colors
 colors:
   # Default colors
   primary:
@@ -205,7 +207,6 @@ colors:
     - { index: 16, color: '0xff9e64' }
     - { index: 17, color: '0xdb4b4b' }
     
-  
 
   # Cursor colors
   #
@@ -735,7 +736,9 @@ colors:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
+
+  - { key: T,        mods: Control|Shift, chars: "\x1b[84;5u"                }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -866,3 +869,6 @@ colors:
 
   # Print all received window events.
   #print_events: false
+  #
+
+  # Fix for nvim not getting ctrl-shift-\
